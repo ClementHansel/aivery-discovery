@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualization | AVRY Discovery</title>
+    <script src="assets/lib/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="assets/lib/prism.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        :root {
+            --bg-dark: #0a0b10; --panel: #0f111a; --accent: #00f2ff; --accent-dim: rgba(0, 242, 255, 0.15);
+            --text: #e0e0e0; --text-dim: #9090a0; --border: rgba(255, 255, 255, 0.08);
+        }
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background: var(--bg-dark); color: var(--text); font-family: 'Inter', sans-serif; overflow: hidden; }
+        #app-container { display: flex; width: 100%; height: 100%; }
+        .sidebar { width: 400px; height: 100%; background: var(--panel); border-right: 1px solid var(--border); display: flex; flex-direction: column; z-index: 100; box-shadow: 10px 0 30px rgba(0,0,0,0.5); }
+        .sidebar-fixed-top { padding: 24px; border-bottom: 1px solid var(--border); }
+        .sidebar-scrollable { flex: 1; overflow-y: auto; padding: 24px; }
+        .sidebar-fixed-bottom { padding: 16px 24px; border-top: 1px solid var(--border); background: rgba(0,0,0,0.3); }
+
+        .toggle-btn { flex: 1; padding: 8px; border: none; background: transparent; color: var(--text-dim); cursor: pointer; font-size: 12px; border-radius: 6px; }
+        .toggle-btn.active { background: var(--accent); color: var(--bg-dark); font-weight: 600; }
+        .lens-btn { background: rgba(255,255,255,0.03); border: 1px solid var(--border); color: var(--text-dim); padding: 10px; border-radius: 8px; cursor: pointer; font-size: 11px; text-align: left; }
+        .lens-btn.active { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); font-weight: 600; }
+
+        .path-box { font-family: 'Fira Code', monospace; background: rgba(0,0,0,0.4); padding: 10px; border-radius: 6px; font-size: 11px; border: 1px solid var(--border); word-break: break-all; }
+        details { background: rgba(255,255,255,0.03); border-radius: 6px; margin-bottom: 8px; border: 1px solid var(--border); }
+        summary { padding: 12px; cursor: pointer; font-size: 13px; font-weight: 500; list-style: none; display: flex; justify-content: space-between; }
+        .details-content { padding: 0 12px 12px; font-size: 12px; color: #ccc; line-height: 1.5; white-space: pre-wrap; }
+
+        #view-container { flex: 1; position: relative; }
+        #canvas, #tree-view { width: 100%; height: 100%; position: absolute; }
+        #tree-view { overflow: auto; padding: 40px; display: none; box-sizing: border-box; }
+        .tree-node { cursor: pointer; padding: 6px; border-radius: 4px; font-size: 14px; display: flex; align-items: center; }
+        .tree-node:hover { background: rgba(255,255,255,0.05); }
+        .tree-indent { border-left: 1px solid var(--border); margin-left: 10px; padding-left: 10px; }
+
+        .node { stroke-width: 1.5px; transition: 0.3s; }
+        .link { stroke-opacity: 0.15; }
+        .node-label { fill: var(--text-dim); font-size: 9px; pointer-events: none; }
+        .cluster-label { fill: var(--accent); font-size: 12px; font-weight: 600; opacity: 0.3; pointer-events: none; text-transform: uppercase; letter-spacing: 2px; }
+
+        /* Code Modal */
+        #code-modal { position: fixed; top: 0; right: 0; width: 60%; height: 100%; background: #050608; border-left: 1px solid var(--accent); transform: translateX(100%); transition: 0.4s cubic-bezier(0.4,0,0.2,1); z-index: 2000; box-shadow: -20px 0 60px rgba(0,0,0,0.8); }
+        #code-modal.open { transform: translateX(0); }
+        .modal-header { padding: 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    </style>
+</head>
+<body>
+    <div id="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-fixed-top">
+                <a href="index.html" style="text-decoration: none;"><h1 style="margin:0; color:var(--accent); font-weight:300; letter-spacing:2px; font-size:22px;">AVRY</h1></a>
+                <p style="margin:4px 0 0; font-size:10px; color:var(--text-dim); letter-spacing:1px; text-transform:uppercase;">Architecture Explorer</p>
+                <div style="display:flex; margin-top:20px; background:rgba(255,255,255,0.05); padding:4px; border-radius:8px;">
+                    <button class="toggle-btn active" onclick="switchView('visual')">Visual Graph</button>
+                    <button class="toggle-btn" onclick="switchView('tree')">Tree Structure</button>
+                </div>
+                <div style="margin-top:20px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px;">
+                    <button class="lens-btn active" onclick="setLens('File')">Files</button>
+                    <button class="lens-btn" onclick="setLens('Feature')">Pages</button>
+                    <button class="lens-btn" onclick="setLens('API')">Flows</button>
+                </div>
+            </div>
+            <div class="sidebar-scrollable" id="inspector">
+                <div id="welcome-msg" style="text-align:center; color:var(--text-dim); margin-top:100px;">Select a node to inspect architecture logic.</div>
+                <div id="node-details" style="display:none;">
+                    <h2 id="det-name" style="margin:0 0 15px; color:var(--accent); font-size:18px;"></h2>
+                    <div class="path-box" id="det-path" style="margin-bottom:20px;"></div>
+                    <details open><summary>Functional Purpose</summary><div class="details-content" id="det-purpose"></div></details>
+                    <details><summary>Architectural Logic</summary><div class="details-content" id="det-logic" style="font-family:'Fira Code'; font-size:11px;"></div></details>
+                    <button class="lens-btn" style="width:100%; margin-top:20px; text-align:center; border-color:var(--accent); color:var(--accent);" id="btn-open-code">Open Code & AI Insights</button>
+                </div>
+            </div>
+            <div class="sidebar-fixed-bottom"><input type="text" id="search-input" placeholder="🔍 Search components..." style="width:100%; background:#000; border:1px solid var(--border); color:white; padding:10px; border-radius:8px; outline:none;"></div>
+        </aside>
+        <main id="view-container">
+            <div id="canvas"></div>
+            <div id="tree-view"></div>
+        </main>
+    </div>
+
+    <div id="code-modal">
+        <div class="modal-header">
+            <h3 id="modal-title" style="margin:0; font-size:14px; font-family:'Fira Code';"></h3>
+            <button onclick="closeCode()" style="background:none; border:none; color:#666; cursor:pointer;"><i data-feather="x"></i></button>
+        </div>
+        <div style="height:calc(100% - 60px); overflow:auto; padding:20px;">
+            <pre><code id="code-box" class="language-python"></code></pre>
+        </div>
+    </div>
+
+    <script src="assets/lib/prism.js"></script>
+    <script src="assets/lib/prism-python.min.js"></script>
+    <script>
+        let graphData = null, simulation, link, node, label, clusterLabels, primaryIds = new Set();
+        const width = window.innerWidth - 400, height = window.innerHeight;
+        const svg = d3.select("#canvas").append("svg").attr("width", width).attr("height", height);
+        const g = svg.append("g");
+        svg.call(d3.zoom().scaleExtent([0.05, 5]).on("zoom", (e) => g.attr("transform", e.transform)));
+
+        async function init() {
+            const resp = await fetch('data/graph.json');
+            graphData = await resp.json();
+            renderVisual();
+            renderTree(graphData.tree || {name:"Root", children:[]}, document.getElementById('tree-view'));
+            feather.replace();
+        }
+
+        function switchView(v) {
+            d3.selectAll(".toggle-btn").classed("active", false);
+            d3.select(`.toggle-btn[onclick*="${v}"]`).classed("active", true);
+            document.getElementById('canvas').style.display = v === 'visual' ? 'block' : 'none';
+            document.getElementById('tree-view').style.display = v === 'tree' ? 'block' : 'none';
+        }
+
+        function renderVisual() {
+            const nodes = graphData.nodes.filter(n => activeLens === 'File' || n.category === activeLens);
+            primaryIds = new Set(nodes.map(n => n.id));
+            const visibleNodes = graphData.nodes.filter(n => primaryIds.has(n.id) || graphData.links.some(l => (l.source === n.id && primaryIds.has(l.target)) || (l.target === n.id && primaryIds.has(l.source))));
+            const visibleIds = new Set(visibleNodes.map(n => n.id));
+            const visibleLinks = graphData.links.filter(l => visibleIds.has(l.source) && visibleIds.has(l.target));
+
+            g.selectAll("*").remove();
+            simulation = d3.forceSimulation(visibleNodes)
+                .force("link", d3.forceLink(visibleLinks).id(d => d.id).distance(70))
+                .force("charge", d3.forceManyBody().strength(-150))
+                .force("center", d3.forceCenter(width/2, height/2))
+                .force("collision", d3.forceCollide().radius(20));
+
+            link = g.append("g").selectAll("line").data(visibleLinks).join("line").attr("stroke", "#555").attr("stroke-width", 1).style("stroke-opacity", 0.1);
+            node = g.append("g").selectAll("circle").data(visibleNodes).join("circle").attr("r", d => primaryIds.has(d.id)?7:4).attr("fill", d => d.layer==='FE'?'#61dafb':d.layer==='BE'?'#3c873a':'#f29111').style("opacity", d => primaryIds.has(d.id)?1:0.2);
+            label = g.append("g").selectAll("text").data(visibleNodes.filter(n => primaryIds.has(n.id))).join("text").attr("class", "node-label").attr("dy", 14).attr("text-anchor", "middle").text(d => d.label);
+
+            node.on("click", (e, d) => selectNode(d));
+            simulation.on("tick", () => {
+                link.attr("x1", d => d.source.x).attr("y1", d => d.source.y).attr("x2", d => d.target.x).attr("y2", d => d.target.y);
+                node.attr("cx", d => d.x).attr("cy", d => d.y);
+                label.attr("x", d => d.x).attr("y", d => d.y);
+            });
+        }
+
+        function renderTree(item, container, depth=0) {
+            const div = document.createElement('div');
+            div.className = 'tree-node';
+            div.innerHTML = `<span style="opacity:0.5; margin-right:8px;">${item.children&&item.children.length?'⊞':'📄'}</span> ${item.name}`;
+            if (item.id) {
+                div.style.color = 'var(--accent)';
+                div.onclick = (e) => { e.stopPropagation(); selectNode(graphData.nodes.find(n => n.id === item.id)); };
+            }
+            container.appendChild(div);
+            if (item.children && item.children.length) {
+                const indent = document.createElement('div');
+                indent.className = 'tree-indent';
+                indent.style.display = depth < 1 ? 'block' : 'none';
+                item.children.forEach(c => renderTree(c, indent, depth + 1));
+                container.appendChild(indent);
+                div.onclick = () => {
+                    const h = indent.style.display === 'none';
+                    indent.style.display = h ? 'block' : 'none';
+                    div.querySelector('span').innerText = h ? '⊟' : '⊞';
+                };
+            }
+        }
+
+        function selectNode(d) {
+            document.getElementById('welcome-msg').style.display = 'none';
+            document.getElementById('node-details').style.display = 'block';
+            document.getElementById('det-name').innerText = d.label;
+            document.getElementById('det-path').innerText = d.source_file || 'N/A';
+            document.getElementById('det-purpose').innerText = d.functionDesc;
+            document.getElementById('det-logic').innerText = d.detailedLogic || "Standard implementation.";
+            document.getElementById('btn-open-code').onclick = () => openCode(d.source_file);
+        }
+
+        async function openCode(p) {
+            if (!p) return;
+            const resp = await fetch(`data/vault/${p}`);
+            const code = await resp.text();
+            document.getElementById('modal-title').innerText = p;
+            const codeBox = document.getElementById('code-box');
+            codeBox.textContent = code;
+            document.getElementById('code-modal').classList.add('open');
+            Prism.highlightElement(codeBox);
+        }
+
+        function closeCode() { document.getElementById('code-modal').classList.remove('open'); }
+        let activeLens = 'File';
+        function setLens(l) { activeLens = l; d3.selectAll(".lens-btn").classed("active", false); d3.select(`button[onclick*="'${l}'"]`).classed("active", true); renderVisual(); }
+
+        init();
+    </script>
+</body>
+</html>

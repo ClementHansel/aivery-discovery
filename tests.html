@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tests | AVRY Discovery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/lib/prism.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        :root {
+            --bg: #0a0b10;
+            --panel: #14161e;
+            --accent: #00f2ff;
+            --text: #e0e0e0;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 240px;
+            background: var(--panel);
+            border-right: 1px solid var(--border);
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main {
+            flex: 1;
+            padding: 60px;
+            overflow-y: auto;
+        }
+
+        .nav-item {
+            padding: 12px;
+            color: #888;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+
+        .nav-item.active { background: rgba(0, 242, 255, 0.1); color: var(--accent); }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 40px; }
+        th { text-align: left; padding: 15px; color: #666; font-size: 11px; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+        td { padding: 20px 15px; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 14px; }
+
+        .test-link { color: var(--accent); cursor: pointer; text-decoration: none; font-weight: 600; }
+        .test-link:hover { text-decoration: underline; }
+
+        .status-pill { padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 600; background: rgba(0, 255, 127, 0.1); color: #00ff7f; }
+
+        /* Modal */
+        #modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(8px);
+            display: none; z-index: 1000;
+        }
+        .modal-content {
+            width: 80%; height: 80%; margin: 5% auto;
+            background: var(--panel); border-radius: 12px;
+            display: flex; flex-direction: column;
+            border: 1px solid var(--border);
+        }
+        .modal-header { padding: 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .modal-body { flex: 1; overflow: auto; padding: 20px; }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2 style="color: var(--accent); font-weight: 300; letter-spacing: 2px;">AVRY</h2>
+        <nav style="margin-top: 40px;">
+            <a href="index.html" class="nav-item"><i data-feather="grid"></i> Dashboard</a>
+            <a href="reports.html" class="nav-item"><i data-feather="file-text"></i> Reports</a>
+            <a href="analysis.html" class="nav-item"><i data-feather="zap"></i> Analysis</a>
+            <a href="tests.html" class="nav-item active"><i data-feather="check-circle"></i> Tests</a>
+            <a href="visualization.html" class="nav-item"><i data-feather="map"></i> Visualization</a>
+        </nav>
+    </div>
+
+    <div class="main">
+        <h1>Test Verification Suite</h1>
+        <p style="color: #666;">Comprehensive catalog of system tests with AI-annotated architectural explanations.</p>
+
+        <table id="test-table">
+            <thead>
+                <tr>
+                    <th>Test Name</th>
+                    <th>Description</th>
+                    <th>Result</th>
+                    <th>Timestamp</th>
+                </tr>
+            </thead>
+            <tbody id="test-body"></tbody>
+        </table>
+    </div>
+
+    <div id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title"></h3>
+                <button onclick="closeModal()" style="background: none; border: none; color: #666; cursor: pointer;"><i data-feather="x"></i></button>
+            </div>
+            <div class="modal-body">
+                <pre><code id="code-box" class="language-python"></code></pre>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/lib/prism.js"></script>
+    <script src="assets/lib/prism-python.min.js"></script>
+    <script>
+        async function loadTests() {
+            const resp = await fetch('data/tests.json');
+            const tests = await resp.json();
+            const body = document.getElementById('test-body');
+            
+            tests.forEach(t => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><a class="test-link" onclick="openCode('${t.name}')">${t.name}</a></td>
+                    <td style="color: #999;">${t.description}</td>
+                    <td><a class="status-pill" href="data/vault/${t.result_path}" target="_blank">SUCCESS</a></td>
+                    <td style="color: #666; font-size: 12px;">${t.timestamp}</td>
+                `;
+                body.appendChild(tr);
+            });
+            feather.replace();
+        }
+
+        async function openCode(path) {
+            const resp = await fetch(`data/vault/${path}`);
+            const code = await resp.text();
+            document.getElementById('modal-title').innerText = path;
+            const codeBox = document.getElementById('code-box');
+            codeBox.textContent = code;
+            document.getElementById('modal').style.display = 'block';
+            Prism.highlightElement(codeBox);
+            feather.replace();
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        loadTests();
+        feather.replace();
+    </script>
+</body>
+</html>

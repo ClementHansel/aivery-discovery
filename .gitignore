@@ -1,0 +1,8 @@
+# AVRY Discovery Static Site
+.DS_Store
+Thumbs.db
+node_modules/
+.env
+.kiro
+.ki
+*.log
