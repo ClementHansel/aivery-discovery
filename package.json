@@ -1,0 +1,12 @@
+{
+  "name": "aivery-discovery",
+  "version": "1.0.0",
+  "description": "AVRY Discovery Dashboard",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx http-server ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

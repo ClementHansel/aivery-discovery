@@ -22,25 +22,32 @@
         .inspector-body { flex: 1; overflow-y: auto; padding: 25px; }
 
         #view-container { flex: 1; position: relative; display: flex; flex-direction: column; }
-        #view-header { padding: 25px 40px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        #view-header { padding: 25px 40px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.2); }
         .breadcrumb { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #666; }
         .breadcrumb a { color: inherit; text-decoration: none; }
 
-        #canvas, #tree-view { width: 100%; height: calc(100% - 80px); position: relative; }
+        #canvas, #tree-view { width: 100%; height: 100%; position: relative; }
         #tree-view { overflow: auto; padding: 40px; display: none; box-sizing: border-box; }
         .tree-node { cursor: pointer; padding: 6px 12px; border-radius: 4px; font-size: 13px; display: flex; align-items: center; white-space: nowrap; }
         .tree-node:hover { background: rgba(255,255,255,0.03); }
         .tree-indent { border-left: 1px solid #222; margin-left: 12px; padding-left: 12px; }
 
         .toggle-group { display: flex; background: rgba(255,255,255,0.03); padding: 4px; border-radius: 8px; }
-        .toggle-btn { padding: 6px 15px; border: none; background: transparent; color: #666; cursor: pointer; font-size: 11px; border-radius: 6px; }
+        .toggle-btn { padding: 6px 15px; border: none; background: transparent; color: #666; cursor: pointer; font-size: 11px; border-radius: 6px; transition: 0.2s; }
         .toggle-btn.active { background: var(--accent); color: #000; font-weight: 600; }
 
+        .lens-bar { padding: 15px 40px; display: flex; gap: 10px; border-bottom: 1px solid var(--border); }
+        .lens-btn { background: rgba(255,255,255,0.03); border: 1px solid var(--border); color: #888; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 11px; transition: 0.2s; }
+        .lens-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(0,242,255,0.05); }
+
         .node { stroke-width: 1.5px; transition: 0.3s; }
-        .node-label { fill: #666; font-size: 9px; pointer-events: none; }
+        .node-label { fill: #555; font-size: 9px; pointer-events: none; }
         
         #code-modal { position: fixed; top: 0; right: 0; width: 65%; height: 100%; background: #050608; border-left: 1px solid var(--accent); transform: translateX(100%); transition: 0.4s cubic-bezier(0.4,0,0.2,1); z-index: 2000; box-shadow: -50px 0 100px rgba(0,0,0,0.9); }
         #code-modal.open { transform: translateX(0); }
+
+        #search-input { width: 100%; background: #000; border: 1px solid var(--border); color: white; padding: 12px; border-radius: 8px; outline: none; font-size: 13px; }
+        #search-input:focus { border-color: var(--accent); }
     </style>
 </head>
 <body>
@@ -50,22 +57,27 @@
             <nav>
                 <a href="index.html" class="nav-item"><i data-feather="grid"></i> Dashboard</a>
                 <div style="margin: 20px 0 10px 12px; font-size: 10px; color: #444; text-transform: uppercase; letter-spacing: 2px;">Modules</div>
-                <a href="reports.html" class="nav-item"><i data-feather="file-text"></i> Reports</a>
-                <a href="analysis.html" class="nav-item"><i data-feather="zap"></i> Analysis</a>
-                <a href="vps.html" class="nav-item"><i data-feather="server"></i> VPS</a>
+                <a href="visualization.html" class="nav-item active"><i data-feather="map"></i> Visualization</a>
                 <a href="documentation.html" class="nav-item"><i data-feather="book-open"></i> Documentation</a>
                 <a href="tests.html" class="nav-item"><i data-feather="check-circle"></i> Tests</a>
-                <a href="visualization.html" class="nav-item active"><i data-feather="map"></i> Visualization</a>
+                <a href="analysis.html" class="nav-item"><i data-feather="zap"></i> Analysis</a>
+                <a href="reports.html" class="nav-item"><i data-feather="file-text"></i> Reports</a>
             </nav>
         </aside>
 
         <main id="view-container">
             <div id="view-header">
-                <div class="breadcrumb"><a href="index.html">AVRY</a> / VISUALIZATION</div>
+                <div class="breadcrumb"><a href="index.html" style="color:inherit; text-decoration:none;">AVRY</a> / VISUALIZATION</div>
                 <div class="toggle-group">
                     <button class="toggle-btn active" onclick="switchView('visual')">Visual Graph</button>
                     <button class="toggle-btn" onclick="switchView('tree')">Tree Structure</button>
                 </div>
+            </div>
+            <div class="lens-bar" id="lens-bar">
+                <button class="lens-btn active" onclick="setLens('File')">📂 Files</button>
+                <button class="lens-btn" onclick="setLens('Feature')">💡 Pages</button>
+                <button class="lens-btn" onclick="setLens('API')">🔌 Flows</button>
+                <button class="lens-btn" onclick="setLens('DB Table')">🗄️ Data</button>
             </div>
             <div id="canvas"></div>
             <div id="tree-view"></div>
@@ -73,26 +85,29 @@
 
         <aside class="inspector">
             <div class="inspector-header">
-                <h3 style="margin:0; font-size:11px; color:#444; text-transform:uppercase; letter-spacing:2px;">Node Inspector</h3>
+                <h3 style="margin:0; font-size:10px; color:#444; text-transform:uppercase; letter-spacing:2px;">Node Inspector</h3>
             </div>
             <div class="inspector-body">
-                <div id="welcome-msg" style="text-align:center; color:#444; margin-top:100px; font-size:13px;">Select a system component to inspect its architectural logic.</div>
+                <div id="welcome-msg" style="text-align:center; color:#444; margin-top:100px; font-size:13px;">Select a component to inspect.</div>
                 <div id="node-details" style="display:none;">
                     <h2 id="det-name" style="margin:0 0 15px; color:var(--accent); font-size:18px; font-weight:400;"></h2>
-                    <div style="font-family:'Fira Code'; font-size:10px; background:rgba(0,0,0,0.3); padding:10px; border-radius:6px; border:1px solid var(--border); word-break:break-all; margin-bottom:20px;" id="det-path"></div>
-                    <div style="font-size:13px; line-height:1.6; color:#aaa; margin-bottom:20px;" id="det-purpose"></div>
-                    <button onclick="requestOpenCode()" style="width:100%; padding:12px; background:rgba(0,242,255,0.05); border:1px solid var(--accent); color:var(--accent); border-radius:8px; cursor:pointer; font-weight:600; font-size:12px;">Explore Source & AI Insights</button>
+                    <div style="font-family:'Fira Code'; font-size:10px; background:rgba(0,0,0,0.3); padding:12px; border-radius:6px; border:1px solid var(--border); word-break:break-all; margin-bottom:20px; line-height:1.4;" id="det-path"></div>
+                    <div style="font-size:13px; line-height:1.6; color:#aaa; margin-bottom:30px;" id="det-purpose"></div>
+                    <button onclick="requestOpenCode()" style="width:100%; padding:15px; background:rgba(0,242,255,0.05); border:1px solid var(--accent); color:var(--accent); border-radius:8px; cursor:pointer; font-weight:600; font-size:12px; letter-spacing:1px;">EXPLORE SOURCE & INSIGHTS</button>
                 </div>
+            </div>
+            <div style="padding:20px; border-top:1px solid var(--border);">
+                <input type="text" id="search-input" placeholder="🔍 Search architecture...">
             </div>
         </aside>
     </div>
 
     <div id="code-modal">
-        <div style="padding:20px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
-            <h4 id="modal-title" style="margin:0; font-family:'Fira Code'; font-size:12px; color:var(--accent);"></h4>
+        <div style="padding:25px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
+            <h4 id="modal-title" style="margin:0; font-family:'Fira Code'; font-size:12px; color:var(--accent); letter-spacing:1px;"></h4>
             <button onclick="closeCode()" style="background:none; border:none; color:#555; cursor:pointer;"><i data-feather="x"></i></button>
         </div>
-        <div style="height:calc(100% - 60px); overflow:auto; padding:20px;">
+        <div style="height:calc(100% - 70px); overflow:auto; padding:30px;">
             <pre><code id="code-box" class="language-python"></code></pre>
         </div>
     </div>
@@ -100,8 +115,8 @@
     <script src="assets/lib/prism.js"></script>
     <script src="assets/lib/prism-python.min.js"></script>
     <script>
-        let graphData = null, simulation, link, node, label, selectedNode = null;
-        const width = window.innerWidth - 600, height = window.innerHeight - 80;
+        let graphData = null, simulation, link, node, label, selectedNode = null, activeLens = 'File';
+        const width = window.innerWidth - 600, height = window.innerHeight - 150;
         const svg = d3.select("#canvas").append("svg").attr("width", width).attr("height", height);
         const g = svg.append("g");
         svg.call(d3.zoom().scaleExtent([0.05, 5]).on("zoom", (e) => g.attr("transform", e.transform)));
@@ -119,20 +134,31 @@
             d3.select(`.toggle-btn[onclick*="${v}"]`).classed("active", true);
             document.getElementById('canvas').style.display = v === 'visual' ? 'block' : 'none';
             document.getElementById('tree-view').style.display = v === 'tree' ? 'block' : 'none';
+            document.getElementById('lens-bar').style.display = v === 'visual' ? 'flex' : 'none';
+        }
+
+        function setLens(l) {
+            activeLens = l;
+            d3.selectAll(".lens-btn").classed("active", false);
+            d3.select(`button[onclick*="'${l}'"]`).classed("active", true);
+            renderVisual();
         }
 
         function renderVisual() {
-            const nodes = graphData.nodes, links = graphData.links;
+            const nodes = graphData.nodes.filter(n => activeLens === 'File' || n.category === activeLens);
+            const nodeIds = new Set(nodes.map(n => n.id));
+            const links = graphData.links.filter(l => nodeIds.has(l.source.id || l.source) && nodeIds.has(l.target.id || l.target));
+            
             g.selectAll("*").remove();
             simulation = d3.forceSimulation(nodes)
-                .force("link", d3.forceLink(links).id(d => d.id).distance(80))
-                .force("charge", d3.forceManyBody().strength(-100))
+                .force("link", d3.forceLink(links).id(d => d.id).distance(100))
+                .force("charge", d3.forceManyBody().strength(-150))
                 .force("center", d3.forceCenter(width/2, height/2))
-                .force("collision", d3.forceCollide().radius(20));
+                .force("collision", d3.forceCollide().radius(25));
 
-            link = g.append("g").selectAll("line").data(links).join("line").attr("stroke", "#333").attr("stroke-width", 1).style("stroke-opacity", 0.1);
-            node = g.append("g").selectAll("circle").data(nodes).join("circle").attr("r", 5).attr("fill", d => d.layer==='FE'?'#61dafb':d.layer==='BE'?'#3c873a':'#f29111').style("opacity", 0.7);
-            label = g.append("g").selectAll("text").data(nodes.filter(n => n.weight > 5 || n.category==='Feature')).join("text").attr("class", "node-label").attr("dy", 14).attr("text-anchor", "middle").text(d => d.label.split('/').pop());
+            link = g.append("g").selectAll("line").data(links).join("line").attr("stroke", "#333").attr("stroke-width", 1).style("stroke-opacity", 0.15);
+            node = g.append("g").selectAll("circle").data(nodes).join("circle").attr("r", 6).attr("fill", d => d.layer==='FE'?'#61dafb':d.layer==='BE'?'#3c873a':'#f29111').style("opacity", 0.8);
+            label = g.append("g").selectAll("text").data(nodes).join("text").attr("class", "node-label").attr("dy", 16).attr("text-anchor", "middle").text(d => d.label.split('/').pop());
 
             node.on("click", (e, d) => selectNode(d));
             simulation.on("tick", () => {
@@ -146,7 +172,7 @@
             const div = document.createElement('div');
             div.className = 'tree-node';
             const isDir = item.children && item.children.length > 0;
-            div.innerHTML = `<span style="opacity:0.4; margin-right:8px;">${isDir?'⊞':'📄'}</span> ${item.name}`;
+            div.innerHTML = `<span style="opacity:0.3; margin-right:10px;">${isDir?'⊞':'📄'}</span> ${item.name}`;
             if (item.id) {
                 div.style.color = 'var(--accent)';
                 div.onclick = (e) => { e.stopPropagation(); selectNode(graphData.nodes.find(n => n.id === item.id)); };
@@ -171,8 +197,8 @@
             document.getElementById('welcome-msg').style.display = 'none';
             document.getElementById('node-details').style.display = 'block';
             document.getElementById('det-name').innerText = d.label;
-            document.getElementById('det-path').innerText = d.source_file || 'Internal Logic';
-            document.getElementById('det-purpose').innerText = d.functionDesc || "Standard architectural implementation.";
+            document.getElementById('det-path').innerText = d.source_file || 'Internal Module';
+            document.getElementById('det-purpose').innerText = d.functionDesc || "Standard architectural implementation component.";
         }
 
         async function requestOpenCode() {
@@ -184,9 +210,17 @@
             codeBox.textContent = code;
             document.getElementById('code-modal').classList.add('open');
             Prism.highlightElement(codeBox);
+            feather.replace();
         }
 
         function closeCode() { document.getElementById('code-modal').classList.remove('open'); }
+        
+        document.getElementById('search-input').oninput = function() {
+            const t = this.value.toLowerCase();
+            node.style("opacity", d => (!t || d.label.toLowerCase().includes(t)) ? 0.8 : 0.05);
+            label.style("opacity", d => (!t || d.label.toLowerCase().includes(t)) ? 1 : 0);
+        };
+
         init();
     </script>
 </body>

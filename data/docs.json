@@ -1,0 +1,317 @@
+[
+    {
+        "name": "AGENTS_BACKEND_IMPLEMENTATION_SUMMARY.md",
+        "path": "AGENTS_BACKEND_IMPLEMENTATION_SUMMARY.md",
+        "category": "Documentation"
+    },
+    {
+        "name": "AGENTS_CURL_TEST_COMMANDS.md",
+        "path": "AGENTS_CURL_TEST_COMMANDS.md",
+        "category": "Documentation"
+    },
+    {
+        "name": "AGENTS_IMPLEMENTATION_CHANGES.md",
+        "path": "AGENTS_IMPLEMENTATION_CHANGES.md",
+        "category": "Documentation"
+    },
+    {
+        "name": "deploy-intent-classifier.sh",
+        "path": "deploy-intent-classifier.sh",
+        "category": "Documentation"
+    },
+    {
+        "name": "deploy-nginx-security.sh",
+        "path": "deploy-nginx-security.sh",
+        "category": "Documentation"
+    },
+    {
+        "name": "deploy-vps-bridge-fix.sh",
+        "path": "deploy-vps-bridge-fix.sh",
+        "category": "Infrastructure"
+    },
+    {
+        "name": "deploy-vps-bridge-internal-only.sh",
+        "path": "deploy-vps-bridge-internal-only.sh",
+        "category": "Infrastructure"
+    },
+    {
+        "name": "deploy-vps-bridge-network-fix.sh",
+        "path": "deploy-vps-bridge-network-fix.sh",
+        "category": "Infrastructure"
+    },
+    {
+        "name": "deploy-vps-bridge-port-fix.sh",
+        "path": "deploy-vps-bridge-port-fix.sh",
+        "category": "Infrastructure"
+    },
+    {
+        "name": "deploy-vps-intent-classifier.sh",
+        "path": "deploy-vps-intent-classifier.sh",
+        "category": "Infrastructure"
+    },
+    {
+        "name": "deploy_layered_system.sh",
+        "path": "deploy_layered_system.sh",
+        "category": "Documentation"
+    },
+    {
+        "name": "fix-admin-login-auth.sh",
+        "path": "fix-admin-login-auth.sh",
+        "category": "Documentation"
+    },
+    {
+        "name": "fix-zeroclaw-n8n-integration.sh",
+        "path": "fix-zeroclaw-n8n-integration.sh",
+        "category": "Documentation"
+    },
+    {
+        "name": "fix_zeroclaw_config_cleanup.sh",
+        "path": "fix_zeroclaw_config_cleanup.sh",
+        "category": "Documentation"
+    },
+    {
+        "name": "README.md",
+        "path": "README.md",
+        "category": "Documentation"
+    },
+    {
+        "name": "remove-aria-stream-headers.sh",
+        "path": "remove-aria-stream-headers.sh",
+        "category": "Documentation"
+    },
+    {
+        "name": "requirements.txt",
+        "path": "requirements.txt",
+        "category": "Documentation"
+    },
+    {
+        "name": "restart_backend.sh",
+        "path": "restart_backend.sh",
+        "category": "Documentation"
+    },
+    {
+        "name": "restore-saturday-work.sh",
+        "path": "restore-saturday-work.sh",
+        "category": "Documentation"
+    },
+    {
+        "name": "start-dev.sh",
+        "path": "start-dev.sh",
+        "category": "Documentation"
+    },
+    {
+        "name": "start.sh",
+        "path": "start.sh",
+        "category": "Documentation"
+    },
+    {
+        "name": "start_backend.sh",
+        "path": "start_backend.sh",
+        "category": "Documentation"
+    },
+    {
+        "name": "start_console.sh",
+        "path": "start_console.sh",
+        "category": "Documentation"
+    },
+    {
+        "name": "start_server_9000.sh",
+        "path": "start_server_9000.sh",
+        "category": "Documentation"
+    },
+    {
+        "name": "vps-config-fix.sh",
+        "path": "vps-config-fix.sh",
+        "category": "Infrastructure"
+    },
+    {
+        "name": "vps-upload-fixed-config.sh",
+        "path": "vps-upload-fixed-config.sh",
+        "category": "Infrastructure"
+    },
+    {
+        "name": "VPS_BRIDGE_AGENTS_IMPLEMENTATION_COMPLETE.md",
+        "path": "VPS_BRIDGE_AGENTS_IMPLEMENTATION_COMPLETE.md",
+        "category": "Infrastructure"
+    },
+    {
+        "name": "VPS_BRIDGE_URL_CHANGES_VISUAL.txt",
+        "path": "VPS_BRIDGE_URL_CHANGES_VISUAL.txt",
+        "category": "Infrastructure"
+    },
+    {
+        "name": "VPS_DIAGNOSTIC_SCRIPT.sh",
+        "path": "VPS_DIAGNOSTIC_SCRIPT.sh",
+        "category": "Infrastructure"
+    },
+    {
+        "name": "VPS_INTENT_CLASSIFIER_DIAGNOSTIC.sh",
+        "path": "VPS_INTENT_CLASSIFIER_DIAGNOSTIC.sh",
+        "category": "Infrastructure"
+    },
+    {
+        "name": "ZEROCLAW_CORS_TEST_COMMANDS.sh",
+        "path": "ZEROCLAW_CORS_TEST_COMMANDS.sh",
+        "category": "Documentation"
+    },
+    {
+        "name": "blueprint.pdf",
+        "path": "blueprints/GrandMasterRCH/bp_071657fcda66/v1.3/blueprint.pdf",
+        "category": "Documentation"
+    },
+    {
+        "name": "blueprint.pdf",
+        "path": "blueprints/GrandMasterRCH/bp_203cf37811e8/v1.10/blueprint.pdf",
+        "category": "Documentation"
+    },
+    {
+        "name": "blueprint.pdf",
+        "path": "blueprints/GrandMasterRCH/bp_3a2b328df210/v1.10/blueprint.pdf",
+        "category": "Documentation"
+    },
+    {
+        "name": "blueprint.pdf",
+        "path": "blueprints/GrandMasterRCH/bp_59c6326d2972/v1.1/blueprint.pdf",
+        "category": "Documentation"
+    },
+    {
+        "name": "blueprint.pdf",
+        "path": "blueprints/GrandMasterRCH/bp_5c4aef43370d/v1.0/blueprint.pdf",
+        "category": "Documentation"
+    },
+    {
+        "name": "blueprint.pdf",
+        "path": "blueprints/GrandMasterRCH/bp_6124a042b2a3/v1.4/blueprint.pdf",
+        "category": "Documentation"
+    },
+    {
+        "name": "blueprint.pdf",
+        "path": "blueprints/GrandMasterRCH/bp_80adc5a2be72/v1.8/blueprint.pdf",
+        "category": "Documentation"
+    },
+    {
+        "name": "blueprint.pdf",
+        "path": "blueprints/GrandMasterRCH/bp_812f6a238095/v1.10/blueprint.pdf",
+        "category": "Documentation"
+    },
+    {
+        "name": "blueprint.pdf",
+        "path": "blueprints/GrandMasterRCH/bp_8380db948a4b/v1.0/blueprint.pdf",
+        "category": "Documentation"
+    },
+    {
+        "name": "blueprint.pdf",
+        "path": "blueprints/GrandMasterRCH/bp_99728fbb654d/v1.7/blueprint.pdf",
+        "category": "Documentation"
+    },
+    {
+        "name": "blueprint.pdf",
+        "path": "blueprints/GrandMasterRCH/bp_9f5a3c12f621/v1.6/blueprint.pdf",
+        "category": "Documentation"
+    },
+    {
+        "name": "blueprint.pdf",
+        "path": "blueprints/GrandMasterRCH/bp_bdb759b6d2f5/v1.9/blueprint.pdf",
+        "category": "Documentation"
+    },
+    {
+        "name": "blueprint.pdf",
+        "path": "blueprints/GrandMasterRCH/bp_c7976e0979bc/v1.10/blueprint.pdf",
+        "category": "Documentation"
+    },
+    {
+        "name": "blueprint.pdf",
+        "path": "blueprints/GrandMasterRCH/bp_d95a42aea62b/v1.2/blueprint.pdf",
+        "category": "Documentation"
+    },
+    {
+        "name": "blueprint.pdf",
+        "path": "blueprints/GrandMasterRCH/bp_f5e13dddac11/v1.10/blueprint.pdf",
+        "category": "Documentation"
+    },
+    {
+        "name": "blueprint.pdf",
+        "path": "blueprints/GrandMasterRCH/bp_fde7bfe5bcb5/v1.5/blueprint.pdf",
+        "category": "Documentation"
+    },
+    {
+        "name": "blueprint.pdf",
+        "path": "blueprints/GrandMasterRCH/superadmin_blueprint_001/v1.0/blueprint.pdf",
+        "category": "Documentation"
+    },
+    {
+        "name": "AIVORY_ARCHITECTURE_DIAGRAM.pdf",
+        "path": "docs/AIVORY_ARCHITECTURE_DIAGRAM.pdf",
+        "category": "Documentation"
+    },
+    {
+        "name": "AIVORY_ARCHITECTURE_DIAGRAM.txt",
+        "path": "docs/AIVORY_ARCHITECTURE_DIAGRAM.txt",
+        "category": "Documentation"
+    },
+    {
+        "name": "FLOW_DIAGRAM.txt",
+        "path": "docs/archive/FLOW_DIAGRAM.txt",
+        "category": "Documentation"
+    },
+    {
+        "name": "migrate-to-zeroclaw.sh",
+        "path": "frontend/migrate-to-zeroclaw.sh",
+        "category": "Documentation"
+    },
+    {
+        "name": "QUICK_MIGRATION.sh",
+        "path": "frontend/QUICK_MIGRATION.sh",
+        "category": "Documentation"
+    },
+    {
+        "name": "AIVORY_ARCHITECTURE_DIAGRAM.pdf",
+        "path": "nextjs-console/docs/AIVORY_ARCHITECTURE_DIAGRAM.pdf",
+        "category": "Documentation"
+    },
+    {
+        "name": "requirements.txt",
+        "path": "tests/requirements.txt",
+        "category": "Documentation"
+    },
+    {
+        "name": "deploy-thin-proxy.sh",
+        "path": "vps-bridge/deploy-thin-proxy.sh",
+        "category": "Infrastructure"
+    },
+    {
+        "name": "deploy-to-production.sh",
+        "path": "vps-bridge/deploy-to-production.sh",
+        "category": "Infrastructure"
+    },
+    {
+        "name": "deploy-workflow-endpoints.sh",
+        "path": "vps-bridge/deploy-workflow-endpoints.sh",
+        "category": "Infrastructure"
+    },
+    {
+        "name": "LOCAL_DEV.md",
+        "path": "vps-bridge/LOCAL_DEV.md",
+        "category": "Infrastructure"
+    },
+    {
+        "name": "start.sh",
+        "path": "vps-bridge/start.sh",
+        "category": "Infrastructure"
+    },
+    {
+        "name": "test-agents.sh",
+        "path": "vps-bridge/test-agents.sh",
+        "category": "Infrastructure"
+    },
+    {
+        "name": "test-all-endpoints.sh",
+        "path": "vps-bridge/test-all-endpoints.sh",
+        "category": "Infrastructure"
+    },
+    {
+        "name": "console_prompt.txt",
+        "path": "zeroclaw-routing-patch/console_prompt.txt",
+        "category": "Documentation"
+    }
+]
