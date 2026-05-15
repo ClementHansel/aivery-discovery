@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: Snapshot data models for persistence and API.
 """
 Snapshot data models for persistence and API.
 """
@@ -10,16 +8,12 @@ from datetime import datetime
 
 
 class SnapshotAnswer(BaseModel):
-
-# ARCHITECTURE INSIGHT: Single snapshot question answer.
     """Single snapshot question answer."""
     question_id: str = Field(description="Question identifier")
     selected_option: int = Field(ge=0, le=4, description="Selected option index (0-4)")
 
 
 class SnapshotSubmission(BaseModel):
-
-# ARCHITECTURE INSIGHT: Request to submit snapshot diagnostic.
     """Request to submit snapshot diagnostic."""
     diagnostic_id: Optional[str] = Field(default=None, description="Source diagnostic ID")
     user_id: Optional[str] = Field(default=None, description="User identifier")
@@ -31,8 +25,6 @@ class SnapshotSubmission(BaseModel):
 
 
 class SnapshotResult(BaseModel):
-
-# ARCHITECTURE INSIGHT: Result of snapshot assessment.
     """Result of snapshot assessment."""
     snapshot_id: str = Field(description="Unique snapshot identifier")
     diagnostic_id: Optional[str] = Field(description="Source diagnostic ID")
@@ -61,8 +53,6 @@ class SnapshotResult(BaseModel):
 
 
 class SnapshotRecord(BaseModel):
-
-# ARCHITECTURE INSIGHT: Database record for snapshot.
     """Database record for snapshot."""
     snapshot_id: str
     diagnostic_id: Optional[str]

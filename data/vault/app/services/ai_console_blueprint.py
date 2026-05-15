@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: AI Console Blueprint upload and translation service.
 """
 AI Console Blueprint upload and translation service.
 """
@@ -11,8 +9,6 @@ from app.services.blueprint_storage import BlueprintStorageService
 
 
 class AIConsoleService:
-
-# ARCHITECTURE INSIGHT: Handles Blueprint uploads and schema-based routing for AI Console.          Ro
     """
     Handles Blueprint uploads and schema-based routing for AI Console.
     
@@ -22,8 +18,6 @@ class AIConsoleService:
     """
     
     def __init__(self):
-
-# ARCHITECTURE INSIGHT: Initialize AI Console service.
         """Initialize AI Console service."""
         self.metadata_service = MetadataEmbeddingService()
         self.storage_service = BlueprintStorageService()
@@ -33,8 +27,6 @@ class AIConsoleService:
         user_id: str,
         pdf_bytes: bytes
     ) -> UploadResult:
-
-# ARCHITECTURE INSIGHT: Process uploaded Blueprint PDF.                  Steps:         1. Extract me
         """
         Process uploaded Blueprint PDF.
         
@@ -100,8 +92,6 @@ class AIConsoleService:
             )
     
     def _detect_schema_type(self, schema_version: Optional[str]) -> str:
-
-# ARCHITECTURE INSIGHT: Detect Blueprint schema type.                  Args:             schema_versi
         """
         Detect Blueprint schema type.
         
@@ -124,8 +114,6 @@ class AIConsoleService:
         blueprint_id: str,
         user_id: str
     ) -> dict:
-
-# ARCHITECTURE INSIGHT: Fast path: Translate aivory-v1 Blueprint to n8n.                  Steps:
         """
         Fast path: Translate aivory-v1 Blueprint to n8n.
         
@@ -182,8 +170,6 @@ class AIConsoleService:
         self,
         pdf_bytes: bytes
     ) -> dict:
-
-# ARCHITECTURE INSIGHT: Fallback: Interpret external blueprint with AI.                  Steps:
         """
         Fallback: Interpret external blueprint with AI.
         

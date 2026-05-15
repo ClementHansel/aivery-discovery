@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: Workflow Generator Service - AI-powered workflow creation
 """
 Workflow Generator Service - AI-powered workflow creation
 """
@@ -13,8 +11,6 @@ from app.config import settings
 logger = logging.getLogger(__name__)
 
 class WorkflowGenerator:
-
-# ARCHITECTURE INSIGHT: Generates workflow JSON from natural language descriptions.     Uses AI to conv
     """
     Generates workflow JSON from natural language descriptions.
     Uses AI to convert user intent into structured workflow definitions.
@@ -27,8 +23,6 @@ class WorkflowGenerator:
         )
     
     async def generate(self, prompt: str, tier: str) -> Dict[str, Any]:
-
-# ARCHITECTURE INSIGHT: Generate workflow from natural language prompt.                  Args:
         """
         Generate workflow from natural language prompt.
         
@@ -77,8 +71,6 @@ class WorkflowGenerator:
             raise
     
     def estimate_cost(self, prompt: str, tier: str) -> int:
-
-# ARCHITECTURE INSIGHT: Estimate credit cost for workflow generation.                  Args:
         """
         Estimate credit cost for workflow generation.
         
@@ -106,8 +98,6 @@ class WorkflowGenerator:
                 return 25  # Enterprise architecture
     
     def _get_workflow_system_prompt(self, tier: str) -> str:
-
-# ARCHITECTURE INSIGHT: Get system prompt for workflow generation based on tier.
         """Get system prompt for workflow generation based on tier."""
         base_prompt = """You are a workflow generation AI. Generate structured workflow JSON from user descriptions.
 
@@ -133,8 +123,6 @@ Respond with valid JSON only."""
         return tier_prompts.get(tier, base_prompt)
     
     def _parse_workflow_response(self, response: Dict, prompt: str, tier: str) -> Dict[str, Any]:
-
-# ARCHITECTURE INSIGHT: Parse AI response into workflow JSON.
         """Parse AI response into workflow JSON."""
         # In production, parse JSON from AI response
         # For now, generate mock workflow based on prompt
@@ -169,16 +157,12 @@ Respond with valid JSON only."""
         }
     
     def _extract_workflow_name(self, prompt: str) -> str:
-
-# ARCHITECTURE INSIGHT: Extract workflow name from prompt.
         """Extract workflow name from prompt."""
         # Simple extraction (in production, use AI)
         words = prompt.split()[:5]
         return " ".join(words).title() + " Workflow"
     
     def _generate_preview(self, workflow: Dict[str, Any]) -> Dict[str, Any]:
-
-# ARCHITECTURE INSIGHT: Generate human-readable preview of workflow.
         """Generate human-readable preview of workflow."""
         steps = workflow.get('steps', [])
         

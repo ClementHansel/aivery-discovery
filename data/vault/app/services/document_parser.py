@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: Document Parser Service - Extracts text from various document formats
 """
 Document Parser Service - Extracts text from various document formats
 """
@@ -10,16 +8,12 @@ from typing import Optional
 logger = logging.getLogger(__name__)
 
 class DocumentParser:
-
-# ARCHITECTURE INSIGHT: Parses documents and extracts text content.     Supports PDF, DOCX, CSV, TXT fo
     """
     Parses documents and extracts text content.
     Supports PDF, DOCX, CSV, TXT formats.
     """
     
     def parse(self, content: bytes, content_type: str, filename: str) -> Optional[str]:
-
-# ARCHITECTURE INSIGHT: Parse document content based on type.                  Args:             cont
         """
         Parse document content based on type.
         
@@ -49,8 +43,6 @@ class DocumentParser:
             return None
     
     def _parse_txt(self, content: bytes) -> str:
-
-# ARCHITECTURE INSIGHT: Parse plain text file.
         """Parse plain text file."""
         try:
             return content.decode('utf-8')

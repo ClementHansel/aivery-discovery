@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: AI enrichment service with graceful degradation
 """AI enrichment service with graceful degradation"""
 import logging
 from typing import Optional, List
@@ -12,8 +10,6 @@ logger = logging.getLogger(__name__)
 
 
 class AIEnrichment(BaseModel):
-
-# ARCHITECTURE INSIGHT: AI-generated enrichment content
     """AI-generated enrichment content"""
     insights: List[str]
     recommendation: str
@@ -21,8 +17,6 @@ class AIEnrichment(BaseModel):
 
 
 def build_insights_prompt(answers: List[DiagnosticAnswer], score: ScoringResult) -> str:
-
-# ARCHITECTURE INSIGHT: Build prompt for generating insights.          Args:         answers: List of
     """
     Build prompt for generating insights.
     
@@ -52,8 +46,6 @@ Format as bullet points starting with "- "."""
 
 
 def build_recommendation_prompt(answers: List[DiagnosticAnswer], score: ScoringResult) -> str:
-
-# ARCHITECTURE INSIGHT: Build prompt for generating recommendation.          Args:         answers: L
     """
     Build prompt for generating recommendation.
     
@@ -82,8 +74,6 @@ Be specific and actionable."""
 
 
 def build_narrative_prompt(score: ScoringResult) -> str:
-
-# ARCHITECTURE INSIGHT: Build prompt for generating narrative.          Args:         score: Scoring
     """
     Build prompt for generating narrative.
     
@@ -109,8 +99,6 @@ async def enrich_with_ai(
     score: ScoringResult,
     timeout: float = 5.0
 ) -> Optional[AIEnrichment]:
-
-# ARCHITECTURE INSIGHT: Attempt to generate AI-powered insights and recommendations.          This fun
     """
     Attempt to generate AI-powered insights and recommendations.
     
@@ -188,8 +176,6 @@ async def enrich_with_ai(
 
 
 def parse_insights(insights_text: str) -> List[str]:
-
-# ARCHITECTURE INSIGHT: Parse insights from LLM response text.          Extracts bullet points and ret
     """
     Parse insights from LLM response text.
     

@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: Scoring configuration for AI readiness diagnostic
 """Scoring configuration for AI readiness diagnostic"""
 
 # 12 diagnostic questions with 4 options each (scored 0-3)
@@ -147,8 +145,6 @@ CATEGORY_EXPLANATIONS = {
 
 
 def get_question_score_mapping() -> dict:
-
-# ARCHITECTURE INSIGHT: Get a mapping of question IDs to their score options.          Returns:
     """
     Get a mapping of question IDs to their score options.
     

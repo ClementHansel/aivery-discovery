@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: AIVORY AI Command Console API Routes Layer 5: Conversational与其他命令层
 """
 AIVORY AI Command Console API Routes
 Layer 5: Conversational与其他命令层
@@ -67,8 +65,6 @@ class PromptRequest(BaseModel):
 
 @router.post("/prompt")
 async def get_prompt(request: PromptRequest):
-
-# ARCHITECTURE INSIGHT: Get ARIA system prompt with tier-specific additions.          Returns complete
     """
     Get ARIA system prompt with tier-specific additions.
     
@@ -100,8 +96,6 @@ async def get_prompt(request: PromptRequest):
 
 @router.post("/classify-intent")
 async def classify_user_intent(request: MessageRequest):
-
-# ARCHITECTURE INSIGHT: Classify user message intent before streaming response.          This endpoint
     """
     Classify user message intent before streaming response.
     
@@ -133,8 +127,6 @@ async def classify_user_intent(request: MessageRequest):
 
 @router.post("/message", response_model=MessageResponse)
 async def send_message(request: MessageRequest):
-
-# ARCHITECTURE INSIGHT: Send a message to the AI console.          Validates tier permissions, credit
     """
     Send a message to the AI console.
     
@@ -214,8 +206,6 @@ async def upload_file(
     file: UploadFile = File(...),
     tier: str = Form(...)
 ):
-
-# ARCHITECTURE INSIGHT: Upload a document for AI analysis.          Validates file type, size, and tie
     """
     Upload a document for AI analysis.
     
@@ -263,8 +253,6 @@ async def upload_file(
 
 @router.get("/context")
 async def get_context(tier: str = "builder", user_id: str = "demo_user"):
-
-# ARCHITECTURE INSIGHT: Get current console context data.          Returns tier, credits, workflows, e
     """
     Get current console context data.
     
@@ -314,8 +302,6 @@ async def get_context(tier: str = "builder", user_id: str = "demo_user"):
 
 @router.post("/workflow/generate")
 async def generate_workflow(request: WorkflowGenerateRequest):
-
-# ARCHITECTURE INSIGHT: Generate workflow JSON from natural language.          Validates tier permissi
     """
     Generate workflow JSON from natural language.
     
@@ -370,8 +356,6 @@ async def generate_workflow(request: WorkflowGenerateRequest):
 
 @router.post("/workflow/confirm")
 async def confirm_workflow(request: WorkflowConfirmRequest):
-
-# ARCHITECTURE INSIGHT: Confirm and save generated workflow.
     """
     Confirm and save generated workflow.
     """

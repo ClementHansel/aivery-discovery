@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: Console Service - Core business logic for AI Command Console
 """
 Console Service - Core business logic for AI Command Console
 """
@@ -14,8 +12,6 @@ from app.prompts.console_prompts import get_console_system_prompt
 logger = logging.getLogger(__name__)
 
 class ConsoleService:
-
-# ARCHITECTURE INSIGHT: Core service for console operations.     Orchestrates AI interactions, document
     """
     Core service for console operations.
     Orchestrates AI interactions, document intelligence, and command execution.
@@ -46,8 +42,6 @@ class ConsoleService:
         has_snapshot: bool = False,
         has_blueprint: bool = False
     ) -> Dict[str, Any]:
-
-# ARCHITECTURE INSIGHT: Process a console message and return AI response with reasoning.         Implem
         """
         Process a console message and return AI response with reasoning.
         Implements automatic model fallback on rate limits.
@@ -151,8 +145,6 @@ class ConsoleService:
         workflow: Optional[str],
         tier: str
     ) -> str:
-
-# ARCHITECTURE INSIGHT: Build context string for AI with message, files, and workflow.
         """Build context string for AI with message, files, and workflow."""
         context_parts = [message]
         
@@ -167,8 +159,6 @@ class ConsoleService:
         return "\n".join(context_parts)
     
     def _select_model(self, tier: str) -> str:
-
-# ARCHITECTURE INSIGHT: Select AI model based on tier.         All tiers now use deepseek-v3-2-free for
         """
         Select AI model based on tier.
         All tiers now use deepseek-v3-2-free for console chat (fast response).
@@ -181,8 +171,6 @@ class ConsoleService:
     # Removed _get_system_prompt - now using get_console_system_prompt from prompts module
     
     def _build_reasoning_metadata(self, ai_response: Dict, tier: str) -> Optional[Dict[str, Any]]:
-
-# ARCHITECTURE INSIGHT: Build reasoning metadata from AI response.
         """Build reasoning metadata from AI response."""
         if tier == "builder":
             return None  # Builder tier doesn't get reasoning panel

@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: Blueprint API endpoints for generation, retrieval, and downloads.
 """
 Blueprint API endpoints for generation, retrieval, and downloads.
 """
@@ -33,8 +31,6 @@ payment_service = PaymentValidationService()
 
 @router.post("/generate", response_model=BlueprintGenerationResult)
 async def generate_blueprint(request: BlueprintGenerationRequest):
-
-# ARCHITECTURE INSIGHT: Generate AI Blueprint from Snapshot data.          Validates payment status an
     """
     Generate AI Blueprint from Snapshot data.
     
@@ -68,8 +64,6 @@ async def generate_blueprint(request: BlueprintGenerationRequest):
 
 @router.get("/list", response_model=List[BlueprintMetadata])
 async def list_blueprints(user_id: str):
-
-# ARCHITECTURE INSIGHT: List all blueprints for user.          Super admin sees all blueprints.     R
     """
     List all blueprints for user.
     
@@ -93,8 +87,6 @@ async def list_blueprints(user_id: str):
 
 @router.get("/{blueprint_id}", response_model=dict)
 async def get_blueprint(blueprint_id: str, user_id: str):
-
-# ARCHITECTURE INSIGHT: Get specific Blueprint JSON content.          Validates access control (owner
     """
     Get specific Blueprint JSON content.
     
@@ -130,8 +122,6 @@ async def get_blueprint(blueprint_id: str, user_id: str):
 
 @router.get("/{blueprint_id}/download/json")
 async def download_blueprint_json(blueprint_id: str, user_id: str):
-
-# ARCHITECTURE INSIGHT: Download Blueprint JSON file.          Args:         blueprint_id: Blueprint
     """
     Download Blueprint JSON file.
     
@@ -179,8 +169,6 @@ async def download_blueprint_json(blueprint_id: str, user_id: str):
 
 @router.get("/{blueprint_id}/download/pdf")
 async def download_blueprint_pdf(blueprint_id: str, user_id: str):
-
-# ARCHITECTURE INSIGHT: Download Blueprint PDF file.          Args:         blueprint_id: Blueprint i
     """
     Download Blueprint PDF file.
     
@@ -234,8 +222,6 @@ async def download_blueprint_pdf(blueprint_id: str, user_id: str):
 
 @router.post("/payment/record")
 async def record_payment(user_id: str, amount: float, payment_method: str = "stripe"):
-
-# ARCHITECTURE INSIGHT: Record successful Blueprint payment.          Args:         user_id: User ide
     """
     Record successful Blueprint payment.
     

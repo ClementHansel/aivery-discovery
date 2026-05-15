@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: User model for authentication system.
 """
 User model for authentication system.
 """
@@ -21,8 +19,6 @@ class User(BaseModel):
 
 
 class UserCreate(BaseModel):
-
-# ARCHITECTURE INSIGHT: User registration request
     """User registration request"""
     email: EmailStr
     password: str
@@ -36,8 +32,6 @@ class UserLogin(BaseModel):
 
 
 class UserResponse(BaseModel):
-
-# ARCHITECTURE INSIGHT: User response (no password)
     """User response (no password)"""
     user_id: str
     email: EmailStr
@@ -71,15 +65,11 @@ class TokenPair(BaseModel):
 
 
 class TokenRefreshRequest(BaseModel):
-
-# ARCHITECTURE INSIGHT: Token refresh request
     """Token refresh request"""
     refresh_token: str
 
 
 class AuthResponse(BaseModel):
-
-# ARCHITECTURE INSIGHT: Authentication response
     """Authentication response"""
     user: UserResponse
     tokens: TokenPair

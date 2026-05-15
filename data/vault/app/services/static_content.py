@@ -1,13 +1,9 @@
-
-# ARCHITECTURE INSIGHT: Static fallback content for AI readiness diagnostic
 """Static fallback content for AI readiness diagnostic"""
 from typing import Dict, List
 from pydantic import BaseModel
 
 
 class StaticContent(BaseModel):
-
-# ARCHITECTURE INSIGHT: Static content for a readiness category
     """Static content for a readiness category"""
     insights: List[str]
     recommendation: str
@@ -91,8 +87,6 @@ STATIC_CONTENT: Dict[str, StaticContent] = {
 
 
 def get_static_content(category: str) -> StaticContent:
-
-# ARCHITECTURE INSIGHT: Get static fallback content for a readiness category.          Args:
     """
     Get static fallback content for a readiness category.
     

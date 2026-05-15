@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: AIVORY INTELLIGENCE ENGINE V2 Snapshot Scoring Service with Weighted Objective-
 """
 AIVORY INTELLIGENCE ENGINE V2
 Snapshot Scoring Service with Weighted Objective-Based Scoring
@@ -158,8 +156,6 @@ OBJECTIVE_SYSTEM_MAPPING = {
 
 
 def calculate_snapshot_score(answers: List[Dict]) -> Dict:
-
-# ARCHITECTURE INSIGHT: Calculate weighted readiness score from 30-question snapshot diagnostic
     """
     Calculate weighted readiness score from 30-question snapshot diagnostic
     
@@ -297,8 +293,6 @@ def calculate_priority_score(
     category_scores: Dict[str, float],
     primary_objective: str
 ) -> int:
-
-# ARCHITECTURE INSIGHT: Calculate priority score (0-100) based on:     - Overall readiness     - Categ
     """
     Calculate priority score (0-100) based on:
     - Overall readiness
@@ -325,8 +319,6 @@ def get_system_recommendations(
     category_scores: Dict[str, float],
     automation_maturity: float
 ) -> List[str]:
-
-# ARCHITECTURE INSIGHT: Get top 3 system recommendations based on:     - Primary objective     - Lowes
     """
     Get top 3 system recommendations based on:
     - Primary objective

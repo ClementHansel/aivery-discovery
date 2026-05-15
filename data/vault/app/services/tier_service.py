@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: Tier Management Service for AI Operating Partner subscriptions. Handles workflo
 """
 Tier Management Service for AI Operating Partner subscriptions.
 Handles workflow limits, execution tracking, and upgrade logic.
@@ -17,8 +15,6 @@ from app.models.user_tier import (
 
 
 class TierService:
-
-# ARCHITECTURE INSIGHT: Service for managing user tiers and limits.
     """Service for managing user tiers and limits."""
     
     def __init__(self):
@@ -26,8 +22,6 @@ class TierService:
         self.user_states: Dict[str, UserTierState] = {}
     
     def get_user_state(self, user_id: str) -> UserTierState:
-
-# ARCHITECTURE INSIGHT: Get or create user state.
         """Get or create user state."""
         if user_id not in self.user_states:
             self.user_states[user_id] = UserTierState(
@@ -37,8 +31,6 @@ class TierService:
         return self.user_states[user_id]
     
     def set_user_tier(self, user_id: str, tier: TierLevel) -> UserTierState:
-
-# ARCHITECTURE INSIGHT: Set user's subscription tier.
         """Set user's subscription tier."""
         state = self.get_user_state(user_id)
         state.tier = tier
@@ -46,8 +38,6 @@ class TierService:
         return state
     
     def can_create_workflow(self, user_id: str) -> LimitCheckResponse:
-
-# ARCHITECTURE INSIGHT: Check if user can create a new workflow.
         """Check if user can create a new workflow."""
         state = self.get_user_state(user_id)
         
@@ -78,8 +68,6 @@ class TierService:
         )
     
     def can_execute_workflow(self, user_id: str) -> LimitCheckResponse:
-
-# ARCHITECTURE INSIGHT: Check if user can execute a workflow.
         """Check if user can execute a workflow."""
         state = self.get_user_state(user_id)
         
@@ -115,8 +103,6 @@ class TierService:
         )
     
     def increment_workflow_count(self, user_id: str) -> UserTierState:
-
-# ARCHITECTURE INSIGHT: Increment active workflow count.
         """Increment active workflow count."""
         state = self.get_user_state(user_id)
         state.active_workflows += 1
@@ -124,8 +110,6 @@ class TierService:
         return state
     
     def decrement_workflow_count(self, user_id: str) -> UserTierState:
-
-# ARCHITECTURE INSIGHT: Decrement active workflow count (when workflow is deleted).
         """Decrement active workflow count (when workflow is deleted)."""
         state = self.get_user_state(user_id)
         if state.active_workflows > 0:
@@ -134,8 +118,6 @@ class TierService:
         return state
     
     def increment_execution_count(self, user_id: str) -> UserTierState:
-
-# ARCHITECTURE INSIGHT: Increment monthly execution count.
         """Increment monthly execution count."""
         state = self.get_user_state(user_id)
         state.monthly_execution_count += 1
@@ -143,8 +125,6 @@ class TierService:
         return state
     
     def reset_execution_count(self, user_id: str) -> UserTierState:
-
-# ARCHITECTURE INSIGHT: Reset monthly execution count.
         """Reset monthly execution count."""
         state = self.get_user_state(user_id)
         state.monthly_execution_count = 0
@@ -153,8 +133,6 @@ class TierService:
         return state
     
     def get_upgrade_recommendation(self, user_id: str) -> Optional[UpgradeRequiredResponse]:
-
-# ARCHITECTURE INSIGHT: Get upgrade recommendation based on usage.
         """Get upgrade recommendation based on usage."""
         state = self.get_user_state(user_id)
         

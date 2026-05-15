@@ -2,8 +2,6 @@ from app.agents.base import BaseAgent
 
 class ReportAgent(BaseAgent):
     async def process(self, input_data: dict) -> dict:
-
-# ARCHITECTURE INSIGHT: Generate a readable diagnostic report with fixed structure
         """Generate a readable diagnostic report with fixed structure"""
         diagnosis = input_data.get("diagnosis", "")
         evaluation = input_data.get("evaluation", "")

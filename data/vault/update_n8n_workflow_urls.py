@@ -9,8 +9,6 @@ import json
 import sys
 
 def update_workflow_urls(db_path):
-
-# ARCHITECTURE INSIGHT: Update HTTP Request node URLs in n8n workflows
     """Update HTTP Request node URLs in n8n workflows"""
     
     # Connect to the database

@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: Metadata embedding service for Blueprint PDFs.
 """
 Metadata embedding service for Blueprint PDFs.
 """
@@ -19,8 +17,6 @@ from app.models.blueprint import BlueprintMetadata
 
 
 class MetadataEmbeddingService:
-
-# ARCHITECTURE INSIGHT: Embeds and extracts metadata in Blueprint PDFs.          Two embedding methods
     """
     Embeds and extracts metadata in Blueprint PDFs.
     
@@ -30,8 +26,6 @@ class MetadataEmbeddingService:
     """
     
     def __init__(self):
-
-# ARCHITECTURE INSIGHT: Initialize metadata embedding service.
         """Initialize metadata embedding service."""
         if not PYPDF2_AVAILABLE:
             print("Warning: Install PyPDF2 for full metadata support: pip install PyPDF2")
@@ -43,8 +37,6 @@ class MetadataEmbeddingService:
         schema_version: str,
         system_name: str = "AI System"
     ) -> bytes:
-
-# ARCHITECTURE INSIGHT: Embed metadata in PDF for extraction.                  Embeds as PDF metadata
         """
         Embed metadata in PDF for extraction.
         
@@ -101,8 +93,6 @@ class MetadataEmbeddingService:
         self,
         pdf_bytes: bytes
     ) -> Optional[dict]:
-
-# ARCHITECTURE INSIGHT: Extract embedded metadata from PDF.                  Tries multiple extraction
         """
         Extract embedded metadata from PDF.
         
@@ -159,8 +149,6 @@ class MetadataEmbeddingService:
         self,
         pdf_bytes: bytes
     ) -> str:
-
-# ARCHITECTURE INSIGHT: Detect Blueprint schema type from PDF.                  Args:             pdf
         """
         Detect Blueprint schema type from PDF.
         

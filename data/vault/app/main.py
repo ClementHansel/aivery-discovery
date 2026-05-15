@@ -36,8 +36,6 @@ app.include_router(auth_v2.router)
 
 @app.get("/health")
 async def health_check():
-
-# ARCHITECTURE INSIGHT: Health check endpoint that reports LLM availability
     """Health check endpoint that reports LLM availability"""
     llm_available = False
     

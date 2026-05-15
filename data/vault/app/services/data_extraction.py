@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: Data extraction service for snapshot diagnostics.  Extracts structured data fr
 """
 Data extraction service for snapshot diagnostics.
 
@@ -13,8 +11,6 @@ logger = logging.getLogger(__name__)
 
 
 class DataExtractionService:
-
-# ARCHITECTURE INSIGHT: Extract structured data from snapshot diagnostic answers.          Converts ra
     """
     Extract structured data from snapshot diagnostic answers.
     
@@ -27,8 +23,6 @@ class DataExtractionService:
     """
     
     def extract_pain_points(self, answers: List[Dict[str, Any]]) -> List[str]:
-
-# ARCHITECTURE INSIGHT: Extract pain points from snapshot answers.                  Looks for answers
         """
         Extract pain points from snapshot answers.
         
@@ -64,8 +58,6 @@ class DataExtractionService:
         return pain_points
     
     def extract_workflows(self, answers: List[Dict[str, Any]]) -> List[str]:
-
-# ARCHITECTURE INSIGHT: Extract workflow descriptions from snapshot answers.                  Identifi
         """
         Extract workflow descriptions from snapshot answers.
         
@@ -105,8 +97,6 @@ class DataExtractionService:
         answers: List[Dict[str, Any]],
         primary_objective: str
     ) -> List[str]:
-
-# ARCHITECTURE INSIGHT: Extract key business processes based on primary objective.                  Ta
         """
         Extract key business processes based on primary objective.
         
@@ -128,8 +118,6 @@ class DataExtractionService:
         return processes
     
     def determine_automation_level(self, answers: List[Dict[str, Any]]) -> str:
-
-# ARCHITECTURE INSIGHT: Determine current automation maturity level.                  Returns: "None",
         """
         Determine current automation maturity level.
         
@@ -163,8 +151,6 @@ class DataExtractionService:
             return "None"
     
     def calculate_data_quality_score(self, answers: List[Dict[str, Any]]) -> int:
-
-# ARCHITECTURE INSIGHT: Calculate data quality/readiness score (0-100).                  Based on data
         """
         Calculate data quality/readiness score (0-100).
         

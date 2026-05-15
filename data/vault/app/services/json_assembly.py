@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: JSON assembly service for Blueprint structure construction.
 """
 JSON assembly service for Blueprint structure construction.
 """
@@ -17,8 +15,6 @@ from app.models.blueprint import (
 
 
 class JSONAssemblyService:
-
-# ARCHITECTURE INSIGHT: Assembles Blueprint components into structured JSON format.          Generates
     """
     Assembles Blueprint components into structured JSON format.
     
@@ -42,8 +38,6 @@ class JSONAssemblyService:
         deployment_estimate: str,
         version: str = "1.0"
     ) -> dict:
-
-# ARCHITECTURE INSIGHT: Assemble all components into Blueprint JSON structure.                  Steps:
         """
         Assemble all components into Blueprint JSON structure.
         
@@ -99,8 +93,6 @@ class JSONAssemblyService:
             return blueprint_data
     
     def _generate_blueprint_id(self) -> str:
-
-# ARCHITECTURE INSIGHT: Generate unique blueprint ID with "bp_" prefix.                  Returns:
         """
         Generate unique blueprint ID with "bp_" prefix.
         
@@ -111,8 +103,6 @@ class JSONAssemblyService:
         return f"bp_{unique_id}"
     
     def validate_json_structure(self, blueprint_data: dict) -> bool:
-
-# ARCHITECTURE INSIGHT: Validate Blueprint JSON structure.                  Args:             bluepri
         """
         Validate Blueprint JSON structure.
         

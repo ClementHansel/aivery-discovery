@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: Payment validation service using database payment records.
 """
 Payment validation service using database payment records.
 """
@@ -12,8 +10,6 @@ from app.database.db_service import db
 
 
 class PaymentValidationService:
-
-# ARCHITECTURE INSIGHT: Validates payment status for product access by checking database payment records
     """
     Validates payment status for product access by checking database payment records.
     
@@ -27,8 +23,6 @@ class PaymentValidationService:
         self,
         user_id: str
     ) -> ValidationResult:
-
-# ARCHITECTURE INSIGHT: Check if user can access Blueprint generation by checking payment records.
         """
         Check if user can access Blueprint generation by checking payment records.
         
@@ -68,8 +62,6 @@ class PaymentValidationService:
         self,
         user_id: str
     ) -> ValidationResult:
-
-# ARCHITECTURE INSIGHT: Check if user can access Snapshot generation by checking payment records.
         """
         Check if user can access Snapshot generation by checking payment records.
         
@@ -112,8 +104,6 @@ class PaymentValidationService:
         payment_method: str = "stripe",
         product: str = "ai_blueprint"
     ) -> bool:
-
-# ARCHITECTURE INSIGHT: Record successful payment.                  Args:             user_id: User i
         """
         Record successful payment.
         
@@ -152,8 +142,6 @@ class PaymentValidationService:
         user_id: str,
         product: str = "ai_blueprint"
     ) -> bool:
-
-# ARCHITECTURE INSIGHT: Check if user has paid for product.                  Args:             user_i
         """
         Check if user has paid for product.
         

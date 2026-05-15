@@ -2,8 +2,6 @@ from app.agents.base import BaseAgent
 
 class ScoringAgent(BaseAgent):
     async def process(self, input_data: dict) -> dict:
-
-# ARCHITECTURE INSIGHT: Evaluate AI readiness based on structured context
         """Evaluate AI readiness based on structured context"""
         context = input_data.get("structured_context", "")
         

@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: Ollama LLM client with timeout and error handling
 """Ollama LLM client with timeout and error handling"""
 import httpx
 import logging
@@ -11,15 +9,11 @@ logger = logging.getLogger(__name__)
 
 
 class LLMError(Exception):
-
-# ARCHITECTURE INSIGHT: Base exception for LLM-related errors
     """Base exception for LLM-related errors"""
     pass
 
 
 class OllamaClient:
-
-# ARCHITECTURE INSIGHT: Client for interacting with Ollama LLM service
     """Client for interacting with Ollama LLM service"""
     
     def __init__(
@@ -38,8 +32,6 @@ class OllamaClient:
         system_prompt: Optional[str] = None,
         timeout: Optional[float] = None
     ) -> str:
-
-# ARCHITECTURE INSIGHT: Generate a response from Ollama.                  Args:             prompt: T
         """
         Generate a response from Ollama.
         
@@ -94,8 +86,6 @@ class OllamaClient:
             raise LLMError(f"LLM generation failed: {str(e)}")
     
     async def chat(self, messages: list[dict], timeout: Optional[float] = None) -> str:
-
-# ARCHITECTURE INSIGHT: Chat with Ollama using message history.                  Args:             me
         """
         Chat with Ollama using message history.
         

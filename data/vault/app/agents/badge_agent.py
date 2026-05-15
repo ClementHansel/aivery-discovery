@@ -3,8 +3,6 @@ import json
 
 class BadgeAgent(BaseAgent):
     async def process(self, input_data: dict) -> dict:
-
-# ARCHITECTURE INSIGHT: Generate AI readiness badge in strict JSON format
         """Generate AI readiness badge in strict JSON format"""
         score = input_data.get("score", 0)
         key_findings = input_data.get("key_findings", "")
@@ -73,8 +71,6 @@ Return only the JSON object."""
         return badge_data
     
     def _classify_score(self, score: int) -> str:
-
-# ARCHITECTURE INSIGHT: Classify score into category
         """Classify score into category"""
         if score <= 30:
             return "AI Unaware"

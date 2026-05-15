@@ -22,8 +22,6 @@ API_KEY_HEADER = 'X-API-Key'
 API_KEY_VALUE = 'supersecret-xyz123456789'
 
 def get_workflow():
-
-# ARCHITECTURE INSIGHT: Fetch workflow from n8n
     """Fetch workflow from n8n"""
     url = f"{N8N_BASE_URL}/api/v1/workflows/{WORKFLOW_ID}"
     headers = {
@@ -40,8 +38,6 @@ def get_workflow():
         return None
 
 def update_http_request_nodes(workflow):
-
-# ARCHITECTURE INSIGHT: Update all HTTP Request nodes with API key header
     """Update all HTTP Request nodes with API key header"""
     nodes = workflow.get('nodes', [])
     updated_count = 0
@@ -79,8 +75,6 @@ def update_http_request_nodes(workflow):
     return updated_count
 
 def save_workflow(workflow):
-
-# ARCHITECTURE INSIGHT: Save updated workflow to n8n
     """Save updated workflow to n8n"""
     url = f"{N8N_BASE_URL}/api/v1/workflows/{WORKFLOW_ID}"
     headers = {

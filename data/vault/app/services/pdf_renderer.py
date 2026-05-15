@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: PDF rendering service with Aivory branding and locked sections.
 """
 PDF rendering service with Aivory branding and locked sections.
 """
@@ -27,8 +25,6 @@ except ImportError:
 
 
 class PDFRenderingService:
-
-# ARCHITECTURE INSIGHT: Renders Blueprint PDF with Aivory branding and locked sections.          PDF S
     """
     Renders Blueprint PDF with Aivory branding and locked sections.
     
@@ -48,8 +44,6 @@ class PDFRenderingService:
     LOCK_ICON = "🔒"
     
     def __init__(self):
-
-# ARCHITECTURE INSIGHT: Initialize PDF rendering service.
         """Initialize PDF rendering service."""
         if not REPORTLAB_AVAILABLE:
             raise ImportError("ReportLab is required for PDF generation. Install with: pip install reportlab")
@@ -63,8 +57,6 @@ class PDFRenderingService:
         blueprint_json: dict,
         user_email: str
     ) -> bytes:
-
-# ARCHITECTURE INSIGHT: Render Blueprint PDF with branding and locked sections.                  Args:
         """
         Render Blueprint PDF with branding and locked sections.
         
@@ -143,8 +135,6 @@ class PDFRenderingService:
         return pdf_bytes
     
     def _render_header(self, blueprint_json: dict, user_email: str, title_style, styles) -> List:
-
-# ARCHITECTURE INSIGHT: Render header with logo and system name.
         """Render header with logo and system name."""
         elements = []
         
@@ -184,8 +174,6 @@ class PDFRenderingService:
         return elements
     
     def _render_executive_summary(self, blueprint_json: dict, heading_style, styles) -> List:
-
-# ARCHITECTURE INSIGHT: Generate and render executive summary.
         """Generate and render executive summary."""
         elements = []
         
@@ -212,8 +200,6 @@ class PDFRenderingService:
         return elements
     
     def _render_system_diagram(self, blueprint_json: dict, heading_style, styles) -> List:
-
-# ARCHITECTURE INSIGHT: Render ASCII flow diagram showing agent connections.
         """Render ASCII flow diagram showing agent connections."""
         elements = []
         
@@ -242,8 +228,6 @@ class PDFRenderingService:
         return elements
     
     def _render_agents_section(self, blueprint_json: dict, heading_style, styles) -> List:
-
-# ARCHITECTURE INSIGHT: Render full agent list with roles.
         """Render full agent list with roles."""
         elements = []
         
@@ -268,8 +252,6 @@ class PDFRenderingService:
         return elements
     
     def _render_integrations_section(self, blueprint_json: dict, heading_style, styles) -> List:
-
-# ARCHITECTURE INSIGHT: Render integration names (high-level only).
         """Render integration names (high-level only)."""
         elements = []
         
@@ -291,8 +273,6 @@ class PDFRenderingService:
         return elements
     
     def _render_workflow_pseudo_code(self, blueprint_json: dict, heading_style, styles) -> List:
-
-# ARCHITECTURE INSIGHT: Render workflow pseudo code with locking.                  Logic:         - S
         """
         Render workflow pseudo code with locking.
         
@@ -337,8 +317,6 @@ class PDFRenderingService:
         return elements
     
     def _render_deployment_estimate(self, blueprint_json: dict, heading_style, styles) -> List:
-
-# ARCHITECTURE INSIGHT: Render deployment estimate.
         """Render deployment estimate."""
         elements = []
         
@@ -351,8 +329,6 @@ class PDFRenderingService:
         return elements
     
     def _render_footer(self, blueprint_json: dict, styles) -> List:
-
-# ARCHITECTURE INSIGHT: Render footer with metadata and branding.
         """Render footer with metadata and branding."""
         elements = []
         
@@ -375,13 +351,9 @@ class PDFRenderingService:
 
 # Fallback simple PDF generator if ReportLab not available
 class SimplePDFGenerator:
-
-# ARCHITECTURE INSIGHT: Simple text-based PDF generator as fallback.
     """Simple text-based PDF generator as fallback."""
     
     async def render_blueprint_pdf(self, blueprint_json: dict, user_email: str) -> bytes:
-
-# ARCHITECTURE INSIGHT: Generate simple text-based PDF.
         """Generate simple text-based PDF."""
         # This would need a different library or just return text
         text_content = f"""

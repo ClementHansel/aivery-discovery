@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: Blueprint data models for AI System Blueprint ($79) generation pipeline.
 """
 Blueprint data models for AI System Blueprint ($79) generation pipeline.
 """
@@ -11,8 +9,6 @@ from enum import Enum
 
 
 class AgentDefinition(BaseModel):
-
-# ARCHITECTURE INSIGHT: Definition of an AI agent in the blueprint.
     """Definition of an AI agent in the blueprint."""
     id: str = Field(pattern=r"^agent_\d{2}$", description="Unique agent ID (agent_01, agent_02, ...)")
     name: str = Field(min_length=3, max_length=100, description="Descriptive agent name")
@@ -22,8 +18,6 @@ class AgentDefinition(BaseModel):
 
 
 class WorkflowDefinition(BaseModel):
-
-# ARCHITECTURE INSIGHT: Definition of a workflow connecting multiple agents.
     """Definition of a workflow connecting multiple agents."""
     id: str = Field(pattern=r"^workflow_\d{2}$", description="Unique workflow ID")
     name: str = Field(min_length=3, max_length=100, description="Workflow name")
@@ -32,8 +26,6 @@ class WorkflowDefinition(BaseModel):
 
 
 class IntegrationRequirement(BaseModel):
-
-# ARCHITECTURE INSIGHT: External service integration requirement.
     """External service integration requirement."""
     service_name: str = Field(description="Name of external service")
     integration_type: Literal["API", "Webhook", "Database", "File"] = Field(description="Integration method")
@@ -42,8 +34,6 @@ class IntegrationRequirement(BaseModel):
 
 
 class BlueprintJSON(BaseModel):
-
-# ARCHITECTURE INSIGHT: Complete Blueprint JSON structure.
     """Complete Blueprint JSON structure."""
     blueprint_id: str = Field(pattern=r"^bp_[a-z0-9]+$", description="Unique blueprint identifier")
     version: str = Field(default="1.0", description="Blueprint version")
@@ -59,8 +49,6 @@ class BlueprintJSON(BaseModel):
 
 
 class BlueprintMetadata(BaseModel):
-
-# ARCHITECTURE INSIGHT: Metadata for stored blueprint.
     """Metadata for stored blueprint."""
     blueprint_id: str = Field(description="Unique blueprint identifier")
     user_id: str = Field(description="Owner user ID")
@@ -74,16 +62,12 @@ class BlueprintMetadata(BaseModel):
 
 
 class BlueprintGenerationRequest(BaseModel):
-
-# ARCHITECTURE INSIGHT: Request to generate a blueprint.
     """Request to generate a blueprint."""
     user_id: str = Field(description="User identifier")
     snapshot_id: str = Field(description="AI Snapshot identifier")
 
 
 class BlueprintGenerationResult(BaseModel):
-
-# ARCHITECTURE INSIGHT: Result of blueprint generation.
     """Result of blueprint generation."""
     success: bool = Field(description="Generation success status")
     blueprint_id: str = Field(description="Generated blueprint ID")
@@ -93,8 +77,6 @@ class BlueprintGenerationResult(BaseModel):
 
 
 class UploadResult(BaseModel):
-
-# ARCHITECTURE INSIGHT: Result of blueprint PDF upload to AI Console.
     """Result of blueprint PDF upload to AI Console."""
     success: bool = Field(description="Upload success status")
     blueprint_id: Optional[str] = Field(description="Extracted blueprint ID")
@@ -104,8 +86,6 @@ class UploadResult(BaseModel):
 
 
 class ValidationResult(BaseModel):
-
-# ARCHITECTURE INSIGHT: Result of payment/access validation.
     """Result of payment/access validation."""
     allowed: bool = Field(description="Access allowed")
     bypass: bool = Field(default=False, description="Super admin bypass used")
@@ -114,8 +94,6 @@ class ValidationResult(BaseModel):
 
 
 class SchemaType(str, Enum):
-
-# ARCHITECTURE INSIGHT: Blueprint schema types for AI Console routing.
     """Blueprint schema types for AI Console routing."""
     AIVORY_V1 = "aivory-v1"
     EXTERNAL_KNOWN = "external-known"
@@ -123,8 +101,6 @@ class SchemaType(str, Enum):
 
 
 class SnapshotData(BaseModel):
-
-# ARCHITECTURE INSIGHT: AI Snapshot data structure (from $15 tier).
     """AI Snapshot data structure (from $15 tier)."""
     snapshot_id: str = Field(description="Snapshot identifier")
     user_email: EmailStr = Field(description="User email")
@@ -140,8 +116,6 @@ class SnapshotData(BaseModel):
 
 
 class StorageResult(BaseModel):
-
-# ARCHITECTURE INSIGHT: Result of blueprint storage operation.
     """Result of blueprint storage operation."""
     success: bool = Field(description="Storage success status")
     blueprint_id: str = Field(description="Blueprint identifier")

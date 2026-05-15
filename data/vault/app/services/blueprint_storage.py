@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: Blueprint storage service with file-based persistence and access control.
 """
 Blueprint storage service with file-based persistence and access control.
 """
@@ -19,8 +17,6 @@ from app.models.blueprint import (
 
 
 class BlueprintStorageService:
-
-# ARCHITECTURE INSIGHT: Manages Blueprint file storage with access control.          Storage structure
     """
     Manages Blueprint file storage with access control.
     
@@ -36,24 +32,18 @@ class BlueprintStorageService:
     """
     
     def __init__(self, base_path: str = "blueprints"):
-
-# ARCHITECTURE INSIGHT: Initialize storage service.
         """Initialize storage service."""
         self.base_path = Path(base_path)
         self.metadata_file = self.base_path / "metadata.json"
         self._ensure_storage_structure()
     
     def _ensure_storage_structure(self):
-
-# ARCHITECTURE INSIGHT: Create base storage directories if they don't exist.
         """Create base storage directories if they don't exist."""
         self.base_path.mkdir(parents=True, exist_ok=True)
         if not self.metadata_file.exists():
             self._save_metadata({})
     
     def _load_metadata(self) -> Dict:
-
-# ARCHITECTURE INSIGHT: Load metadata from JSON file.
         """Load metadata from JSON file."""
         if not self.metadata_file.exists():
             return {}
@@ -61,21 +51,15 @@ class BlueprintStorageService:
             return json.load(f)
     
     def _save_metadata(self, metadata: Dict):
-
-# ARCHITECTURE INSIGHT: Save metadata to JSON file.
         """Save metadata to JSON file."""
         with open(self.metadata_file, 'w') as f:
             json.dump(metadata, f, indent=2, default=str)
     
     def _is_super_admin(self, user_id: str) -> bool:
-
-# ARCHITECTURE INSIGHT: Check if user is GrandMasterRCH super admin.
         """Check if user is GrandMasterRCH super admin."""
         return user_id == "GrandMasterRCH"
     
     def _check_access(self, blueprint_id: str, user_id: str) -> bool:
-
-# ARCHITECTURE INSIGHT: Check if user has access to blueprint.                  Access granted if:
         """
         Check if user has access to blueprint.
         
@@ -105,8 +89,6 @@ class BlueprintStorageService:
         json_data: dict,
         pdf_bytes: bytes
     ) -> StorageResult:
-
-# ARCHITECTURE INSIGHT: Store Blueprint JSON and PDF files.                  Args:             user_i
         """
         Store Blueprint JSON and PDF files.
         
@@ -176,8 +158,6 @@ class BlueprintStorageService:
         blueprint_id: str,
         user_id: str
     ) -> Optional[dict]:
-
-# ARCHITECTURE INSIGHT: Retrieve Blueprint JSON with access control.                  Args:
         """
         Retrieve Blueprint JSON with access control.
         
@@ -207,8 +187,6 @@ class BlueprintStorageService:
         blueprint_id: str,
         user_id: str
     ) -> Optional[bytes]:
-
-# ARCHITECTURE INSIGHT: Retrieve Blueprint PDF with access control.                  Args:
         """
         Retrieve Blueprint PDF with access control.
         
@@ -237,8 +215,6 @@ class BlueprintStorageService:
         self,
         user_id: str
     ) -> List[BlueprintMetadata]:
-
-# ARCHITECTURE INSIGHT: List all blueprints for user.                  Super admin sees all blueprints
         """
         List all blueprints for user.
         
@@ -271,8 +247,6 @@ class BlueprintStorageService:
         self,
         blueprint_id: str
     ) -> Optional[BlueprintMetadata]:
-
-# ARCHITECTURE INSIGHT: Get metadata for specific blueprint.
         """Get metadata for specific blueprint."""
         metadata = self._load_metadata()
         if blueprint_id not in metadata:
@@ -284,8 +258,6 @@ class BlueprintStorageService:
         snapshot_id: str,
         user_id: str
     ) -> Optional[str]:
-
-# ARCHITECTURE INSIGHT: Check if blueprint already exists for this snapshot.                  Returns:
         """
         Check if blueprint already exists for this snapshot.
         
@@ -308,8 +280,6 @@ class BlueprintStorageService:
         return versions[0]
     
     async def increment_version(self, version: str) -> str:
-
-# ARCHITECTURE INSIGHT: Increment version number.                  Args:             version: Current
         """
         Increment version number.
         

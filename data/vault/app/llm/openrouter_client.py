@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: OpenRouter AI client for Aivory
 """OpenRouter AI client for Aivory"""
 import logging
 import httpx
@@ -10,23 +8,17 @@ logger = logging.getLogger(__name__)
 
 
 class OpenRouterMessage(BaseModel):
-
-# ARCHITECTURE INSIGHT: Message format for OpenRouter API
     """Message format for OpenRouter API"""
     role: str  # "system", "user", or "assistant"
     content: str
 
 
 class OpenRouterRateLimitError(Exception):
-
-# ARCHITECTURE INSIGHT: Raised when OpenRouter API returns rate limit error
     """Raised when OpenRouter API returns rate limit error"""
     pass
 
 
 class OpenRouterClient:
-
-# ARCHITECTURE INSIGHT: Client for OpenRouter API
     """Client for OpenRouter API"""
     
     def __init__(self, api_key: str = None, base_url: str = "https://openrouter.ai/api/v1"):
@@ -46,8 +38,6 @@ class OpenRouterClient:
         max_tokens: int = 2000,
         timeout: float = 60.0
     ) -> str:
-
-# ARCHITECTURE INSIGHT: Call OpenRouter chat completion API.                  Args:             messa
         """
         Call OpenRouter chat completion API.
         
@@ -121,8 +111,6 @@ class OpenRouterClient:
             raise ValueError(f"Unexpected API response format: {e}")
     
     async def get_models(self) -> List[Dict]:
-
-# ARCHITECTURE INSIGHT: Get list of available models from OpenRouter.                  Returns:
         """
         Get list of available models from OpenRouter.
         

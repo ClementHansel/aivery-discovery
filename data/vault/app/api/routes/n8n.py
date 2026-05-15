@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: n8n Integration API Routes
 """n8n Integration API Routes"""
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
@@ -28,8 +26,6 @@ class WebhookRequest(BaseModel):
 
 @router.get("/health")
 async def check_n8n_health():
-
-# ARCHITECTURE INSIGHT: Check n8n connection health
     """Check n8n connection health"""
     try:
         health = await n8n_client.health_check()

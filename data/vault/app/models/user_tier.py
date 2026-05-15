@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: User Tier Models for AI Operating Partner subscription management.
 """
 User Tier Models for AI Operating Partner subscription management.
 """
@@ -11,8 +9,6 @@ from enum import Enum
 
 
 class TierLevel(str, Enum):
-
-# ARCHITECTURE INSIGHT: Subscription tier levels.
     """Subscription tier levels."""
     FOUNDATION = "foundation"
     ACCELERATION = "acceleration"
@@ -20,8 +16,6 @@ class TierLevel(str, Enum):
 
 
 class TierLimits(BaseModel):
-
-# ARCHITECTURE INSIGHT: Limits for each tier.
     """Limits for each tier."""
     max_workflows: int
     max_executions: int
@@ -49,8 +43,6 @@ TIER_LIMITS = {
 
 
 class UserTierState(BaseModel):
-
-# ARCHITECTURE INSIGHT: User subscription state.
     """User subscription state."""
     user_id: str
     tier: Optional[TierLevel] = None
@@ -62,24 +54,18 @@ class UserTierState(BaseModel):
 
 
 class WorkflowCreationRequest(BaseModel):
-
-# ARCHITECTURE INSIGHT: Request to create a new workflow.
     """Request to create a new workflow."""
     user_id: str
     workflow_name: str
 
 
 class WorkflowExecutionRequest(BaseModel):
-
-# ARCHITECTURE INSIGHT: Request to execute a workflow.
     """Request to execute a workflow."""
     user_id: str
     workflow_id: str
 
 
 class LimitCheckResponse(BaseModel):
-
-# ARCHITECTURE INSIGHT: Response for limit checks.
     """Response for limit checks."""
     allowed: bool
     message: str
@@ -88,8 +74,6 @@ class LimitCheckResponse(BaseModel):
 
 
 class UpgradeRequiredResponse(BaseModel):
-
-# ARCHITECTURE INSIGHT: Response when upgrade is required.
     """Response when upgrade is required."""
     upgrade_required: bool
     current_tier: str

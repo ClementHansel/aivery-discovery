@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: Audit Logger Service - Logs all console operations for compliance
 """
 Audit Logger Service - Logs all console operations for compliance
 """
@@ -12,8 +10,6 @@ import json
 logger = logging.getLogger(__name__)
 
 class AuditLogger:
-
-# ARCHITECTURE INSIGHT: Logs all console operations for audit and compliance.     Tracks user actions,
     """
     Logs all console operations for audit and compliance.
     Tracks user actions, AI responses, credit usage, and errors.
@@ -33,8 +29,6 @@ class AuditLogger:
         tier: str,
         metadata: Optional[Dict[str, Any]] = None
     ):
-
-# ARCHITECTURE INSIGHT: Log a console operation.                  Args:             user_id: User ide
         """
         Log a console operation.
         
@@ -69,8 +63,6 @@ class AuditLogger:
         error_message: str,
         context: Optional[Dict[str, Any]] = None
     ):
-
-# ARCHITECTURE INSIGHT: Log an error.                  Args:             user_id: User identifier
         """
         Log an error.
         
@@ -94,8 +86,6 @@ class AuditLogger:
         logger.error(f"Error log: {error_type} in {operation} for {user_id}: {error_message}")
     
     def get_logs(self, user_id: Optional[str] = None, limit: int = 100) -> list:
-
-# ARCHITECTURE INSIGHT: Get audit logs.                  Args:             user_id: Filter by user (o
         """
         Get audit logs.
         
@@ -114,8 +104,6 @@ class AuditLogger:
         return sorted(filtered, key=lambda x: x['timestamp'], reverse=True)[:limit]
     
     def export_logs(self, filepath: str):
-
-# ARCHITECTURE INSIGHT: Export logs to JSON file.
         """Export logs to JSON file."""
         try:
             with open(filepath, 'w') as f:

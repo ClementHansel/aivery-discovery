@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: Configuration module for Aivory application
 """Configuration module for Aivory application"""
 import os
 import sys
@@ -14,8 +12,6 @@ load_dotenv(".env")        # unified config
 
 
 class Settings(BaseSettings):
-
-# ARCHITECTURE INSIGHT: Application settings loaded from environment variables
     """Application settings loaded from environment variables"""
     
     # Server configuration
@@ -44,8 +40,6 @@ class Settings(BaseSettings):
     cors_origins: list[str] = ["*"]
     
     def validate_paid_tier_config(self) -> None:
-
-# ARCHITECTURE INSIGHT: Validate that required configuration for paid tiers is present.         This sh
         """
         Validate that required configuration for paid tiers is present.
         This should be called before processing any paid diagnostic requests.

@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: Model Configuration - Centralized model selection and fallback logic
 """
 Model Configuration - Centralized model selection and fallback logic
 """
@@ -12,8 +10,6 @@ logger = logging.getLogger(__name__)
 
 
 class ModelType(str, Enum):
-
-# ARCHITECTURE INSIGHT: Available model types - OpenRouter Qwen models
     """Available model types - OpenRouter Qwen models"""
     QWEN_VL_30B_THINKING = "qwen/qwen3-vl-30b-a3b-thinking"  # Qwen 3 VL 30B Thinking (vision + reasoning)
     QWEN_VL_235B_THINKING = "qwen/qwen3-vl-235b-a22b-thinking"  # Qwen 3 VL 235B Thinking (vision + deep reasoning)
@@ -24,8 +20,6 @@ class ModelType(str, Enum):
 
 
 class ModelSelector:
-
-# ARCHITECTURE INSIGHT: Centralized model selection logic.          ALLOWED MODELS (OpenRouter - Qwen
     """
     Centralized model selection logic.
     
@@ -86,8 +80,6 @@ class ModelSelector:
     
     @classmethod
     def get_model_for_task(cls, task_type: str) -> str:
-
-# ARCHITECTURE INSIGHT: Select appropriate model based on task type.                  Args:
         """
         Select appropriate model based on task type.
         
@@ -140,15 +132,11 @@ class ModelSelector:
     
     @classmethod
     def get_model_specs(cls, model: str) -> Dict:
-
-# ARCHITECTURE INSIGHT: Get specifications for a model.
         """Get specifications for a model."""
         return cls.MODEL_SPECS.get(model, cls.MODEL_SPECS[ModelType.QWEN_NEXT_80B_FREE])
     
     @classmethod
     def get_fallback_model(cls, primary_model: str) -> str:
-
-# ARCHITECTURE INSIGHT: Get fallback model if primary fails.                  Args:             prima
         """
         Get fallback model if primary fails.
         
@@ -178,8 +166,6 @@ class ModelSelector:
     
     @classmethod
     def validate_model(cls, model: str) -> bool:
-
-# ARCHITECTURE INSIGHT: Validate if a model is allowed.                  Args:             model: Mod
         """
         Validate if a model is allowed.
         
@@ -206,8 +192,6 @@ class ModelSelector:
     
     @classmethod
     def get_all_models(cls) -> list:
-
-# ARCHITECTURE INSIGHT: Get list of all allowed models.
         """Get list of all allowed models."""
         return [
             ModelType.QWEN_VL_30B_THINKING,

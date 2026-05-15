@@ -2,8 +2,6 @@ from app.agents.base import BaseAgent
 
 class IntakeAgent(BaseAgent):
     async def process(self, input_data: dict) -> dict:
-
-# ARCHITECTURE INSIGHT: Process user answers and structure them for evaluation
         """Process user answers and structure them for evaluation"""
         user_answers = input_data.get("answers", {})
         

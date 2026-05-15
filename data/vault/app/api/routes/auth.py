@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: Authentication API endpoints.
 """
 Authentication API endpoints.
 """
@@ -28,8 +26,6 @@ auth_service = AuthService(db_service)
 
 
 def get_token_from_header(authorization: Optional[str] = Header(None)) -> Optional[str]:
-
-# ARCHITECTURE INSIGHT: Extract token from Authorization header
     """Extract token from Authorization header"""
     if not authorization:
         return None
@@ -43,8 +39,6 @@ def get_token_from_header(authorization: Optional[str] = Header(None)) -> Option
 
 @router.post("/register", response_model=AuthResponse)
 async def register(user_data: UserCreate):
-
-# ARCHITECTURE INSIGHT: Register new user account.          Creates user with hashed password, generat
     """
     Register new user account.
     
@@ -75,8 +69,6 @@ async def register(user_data: UserCreate):
 
 @router.post("/login", response_model=AuthResponse)
 async def login(credentials: UserLogin):
-
-# ARCHITECTURE INSIGHT: Login with email and password.          Validates credentials, generates JWT t
     """
     Login with email and password.
     
@@ -106,8 +98,6 @@ async def login(credentials: UserLogin):
 
 @router.post("/refresh", response_model=TokenPair)
 async def refresh_token(request: TokenRefreshRequest):
-
-# ARCHITECTURE INSIGHT: Refresh access token using refresh token.          Validates refresh token and
     """
     Refresh access token using refresh token.
     
@@ -135,8 +125,6 @@ async def refresh_token(request: TokenRefreshRequest):
 
 @router.post("/logout")
 async def logout(request: TokenRefreshRequest):
-
-# ARCHITECTURE INSIGHT: Logout user by invalidating session.          Deletes session from database, i
     """
     Logout user by invalidating session.
     
@@ -164,8 +152,6 @@ async def logout(request: TokenRefreshRequest):
 
 @router.get("/me", response_model=UserResponse)
 async def get_current_user(authorization: Optional[str] = Header(None)):
-
-# ARCHITECTURE INSIGHT: Get current user info from access token.          Validates access token and r
     """
     Get current user info from access token.
     
@@ -202,8 +188,6 @@ async def migrate_ids(
     blueprint_id: Optional[str] = None,
     authorization: Optional[str] = Header(None)
 ):
-
-# ARCHITECTURE INSIGHT: Migrate localStorage IDs to user account.          Links existing diagnostic/s
     """
     Migrate localStorage IDs to user account.
     

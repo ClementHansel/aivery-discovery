@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: Tier Validator Service - Enforces tier-based feature restrictions
 """
 Tier Validator Service - Enforces tier-based feature restrictions
 """
@@ -11,8 +9,6 @@ from datetime import datetime, timedelta
 logger = logging.getLogger(__name__)
 
 class TierValidator:
-
-# ARCHITECTURE INSIGHT: Validates tier permissions and enforces feature restrictions.
     """
     Validates tier permissions and enforces feature restrictions.
     """
@@ -59,50 +55,36 @@ class TierValidator:
         }
     
     def validate_console_access(self, tier: str) -> bool:
-
-# ARCHITECTURE INSIGHT: Check if tier has console access.
         """Check if tier has console access."""
         config = self.tier_config.get(tier, self.tier_config["builder"])
         return config.get("console_access", False)
     
     def validate_workflow_generation(self, tier: str) -> bool:
-
-# ARCHITECTURE INSIGHT: Check if tier can generate workflows.
         """Check if tier can generate workflows."""
         config = self.tier_config.get(tier, self.tier_config["builder"])
         return config.get("workflow_generation") in ["full", "complex", "suggestions_only"]
     
     def validate_log_introspection(self, tier: str) -> bool:
-
-# ARCHITECTURE INSIGHT: Check if tier can analyze logs.
         """Check if tier can analyze logs."""
         config = self.tier_config.get(tier, self.tier_config["builder"])
         return config.get("log_introspection", False)
     
     def get_max_file_size(self, tier: str) -> int:
-
-# ARCHITECTURE INSIGHT: Get maximum file size for tier.
         """Get maximum file size for tier."""
         config = self.tier_config.get(tier, self.tier_config["builder"])
         return config.get("max_file_size", 10 * 1024 * 1024)
     
     def get_file_upload_limit(self, tier: str) -> int:
-
-# ARCHITECTURE INSIGHT: Get file upload limit for tier.
         """Get file upload limit for tier."""
         config = self.tier_config.get(tier, self.tier_config["builder"])
         return config.get("file_upload_limit", 1)
     
     def get_credit_limit(self, tier: str) -> int:
-
-# ARCHITECTURE INSIGHT: Get credit limit for tier.
         """Get credit limit for tier."""
         config = self.tier_config.get(tier, self.tier_config["builder"])
         return config.get("credit_limit", 50)
     
     def get_tier_features(self, tier: str) -> Dict[str, Any]:
-
-# ARCHITECTURE INSIGHT: Get all features for tier.
         """Get all features for tier."""
         config = self.tier_config.get(tier, self.tier_config["builder"])
         return {
@@ -113,8 +95,6 @@ class TierValidator:
         }
     
     def check_rate_limit(self, user_id: str, tier: str) -> bool:
-
-# ARCHITECTURE INSIGHT: Check if user has exceeded rate limit.                  Args:             use
         """
         Check if user has exceeded rate limit.
         
@@ -153,8 +133,6 @@ class TierValidator:
         return True
     
     def get_rate_limit_reset_time(self, user_id: str) -> datetime:
-
-# ARCHITECTURE INSIGHT: Get time when rate limit resets.
         """Get time when rate limit resets."""
         if user_id not in self.rate_limits:
             return datetime.utcnow()

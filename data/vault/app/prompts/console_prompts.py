@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: Console System Prompts - ARIA Agent Configuration
 """
 Console System Prompts - ARIA Agent Configuration
 """
@@ -184,8 +182,6 @@ You are a multilingual assistant and MUST adapt to the user's language.
 
 
 def get_console_system_prompt(tier: str, has_snapshot: bool = False, has_blueprint: bool = False) -> str:
-
-# ARCHITECTURE INSIGHT: Get the console system prompt with tier-specific additions.          Args:
     """
     Get the console system prompt with tier-specific additions.
     

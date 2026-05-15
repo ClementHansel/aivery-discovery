@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: Workflows API endpoints - Minimal implementation for dashboard
 """
 Workflows API endpoints - Minimal implementation for dashboard
 """
@@ -15,8 +13,6 @@ router = APIRouter(prefix="/api/v1/workflows", tags=["workflows"])
 
 @router.get("/list")
 async def list_workflows(user_id: str = Query(..., description="User ID")):
-
-# ARCHITECTURE INSIGHT: List workflows for a user.          Returns empty list for now - placeholder f
     """
     List workflows for a user.
     
@@ -30,8 +26,6 @@ async def list_workflows(user_id: str = Query(..., description="User ID")):
 
 @router.get("/{workflow_id}")
 async def get_workflow(workflow_id: str, user_id: str = Query(...)):
-
-# ARCHITECTURE INSIGHT: Get workflow details.          Placeholder for future implementation.
     """
     Get workflow details.
     
@@ -44,8 +38,6 @@ async def get_workflow(workflow_id: str, user_id: str = Query(...)):
 
 @router.post("/create")
 async def create_workflow(user_id: str = Query(...)):
-
-# ARCHITECTURE INSIGHT: Create a new workflow.          Placeholder for future implementation.
     """
     Create a new workflow.
     

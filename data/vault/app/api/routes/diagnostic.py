@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: Diagnostic API routes
 """Diagnostic API routes"""
 import logging
 import json
@@ -27,8 +25,6 @@ router = APIRouter(prefix="/diagnostic", tags=["diagnostic"])
 
 @router.get("/test-llm")
 async def test_llm():
-
-# ARCHITECTURE INSIGHT: Test Ollama connection
     """Test Ollama connection"""
     try:
         llm_client = OllamaClient()
@@ -53,8 +49,6 @@ async def test_llm():
         )
 @router.post("/run")
 async def run_free_diagnostic(data: dict):
-
-# ARCHITECTURE INSIGHT: FREE AI READINESS DIAGNOSTIC (12 questions, $0)      Purpose: Basic readiness
     """
     FREE AI READINESS DIAGNOSTIC (12 questions, $0)
 
@@ -171,8 +165,6 @@ async def run_free_diagnostic(data: dict):
 # ============================================================================
 
 def format_answers_for_prompt(answers: List[dict]) -> str:
-
-# ARCHITECTURE INSIGHT: Format diagnostic answers into readable text for AI prompt
     """Format diagnostic answers into readable text for AI prompt"""
     formatted_lines = []
     for i, answer in enumerate(answers, 1):
@@ -184,8 +176,6 @@ def format_answers_for_prompt(answers: List[dict]) -> str:
 
 @router.post("/snapshot")
 async def run_snapshot_diagnostic(data: dict):
-
-# ARCHITECTURE INSIGHT: AIVORY INTELLIGENCE ENGINE V2 - SNAPSHOT DIAGNOSTIC ($15)          Purpose: St
     """
     AIVORY INTELLIGENCE ENGINE V2 - SNAPSHOT DIAGNOSTIC ($15)
     
@@ -340,8 +330,6 @@ async def run_snapshot_diagnostic(data: dict):
 
 @router.post("/deep")
 async def run_deep_diagnostic(data: dict):
-
-# ARCHITECTURE INSIGHT: AIVORY INTELLIGENCE ENGINE V2 - DEEP DIAGNOSTIC / BLUEPRINT ($99)          Pur
     """
     AIVORY INTELLIGENCE ENGINE V2 - DEEP DIAGNOSTIC / BLUEPRINT ($99)
     

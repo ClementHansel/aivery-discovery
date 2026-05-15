@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: Authentication service for user management and JWT tokens.
 """
 Authentication service for user management and JWT tokens.
 """
@@ -26,8 +24,6 @@ REFRESH_TOKEN_EXPIRE_DAYS = 7
 
 
 class AuthService:
-
-# ARCHITECTURE INSIGHT: Handles authentication, user management, and JWT tokens
     """Handles authentication, user management, and JWT tokens"""
     
     def __init__(self, db_service):
@@ -35,8 +31,6 @@ class AuthService:
         self._ensure_super_admin()
     
     def _ensure_super_admin(self):
-
-# ARCHITECTURE INSIGHT: Create super admin account if it doesn't exist
         """Create super admin account if it doesn't exist"""
         try:
             # Check if super admin exists
@@ -76,8 +70,6 @@ class AuthService:
             print(f"Warning: Could not create super admin: {e}")
     
     def _seed_super_admin_payments(self, user_id: str):
-
-# ARCHITECTURE INSIGHT: Seed payment records for super admin - all products pre-purchased
         """Seed payment records for super admin - all products pre-purchased"""
         try:
             superadmin_payments = [
@@ -121,8 +113,6 @@ class AuthService:
             print(f"Warning: Could not seed super admin payments: {e}")
     
     def _seed_super_admin_data(self, user_id: str):
-
-# ARCHITECTURE INSIGHT: Seed diagnostic, snapshot, and blueprint data for super admin
         """Seed diagnostic, snapshot, and blueprint data for super admin"""
         try:
             # Seed diagnostic
@@ -307,8 +297,6 @@ class AuthService:
             traceback.print_exc()
     
     def hash_password(self, password: str) -> str:
-
-# ARCHITECTURE INSIGHT: Hash password using bcrypt
         """Hash password using bcrypt"""
         return bcrypt.hashpw(
             password.encode('utf-8'), 
@@ -316,8 +304,6 @@ class AuthService:
         ).decode('utf-8')
     
     def verify_password(self, password: str, password_hash: str) -> bool:
-
-# ARCHITECTURE INSIGHT: Verify password against hash
         """Verify password against hash"""
         return bcrypt.checkpw(
             password.encode('utf-8'), 
@@ -325,8 +311,6 @@ class AuthService:
         )
     
     def create_access_token(self, user: dict) -> str:
-
-# ARCHITECTURE INSIGHT: Create JWT access token (15 minutes)
         """Create JWT access token (15 minutes)"""
         payload = {
             "user_id": user["user_id"],
@@ -338,8 +322,6 @@ class AuthService:
         return jwt.encode(payload, JWT_SECRET, algorithm=JWT_ALGORITHM)
     
     def create_refresh_token(self, user_id: str, session_id: str) -> str:
-
-# ARCHITECTURE INSIGHT: Create JWT refresh token (7 days)
         """Create JWT refresh token (7 days)"""
         payload = {
             "user_id": user_id,
@@ -350,8 +332,6 @@ class AuthService:
         return jwt.encode(payload, JWT_SECRET, algorithm=JWT_ALGORITHM)
     
     def verify_token(self, token: str) -> Optional[dict]:
-
-# ARCHITECTURE INSIGHT: Verify and decode JWT token
         """Verify and decode JWT token"""
         try:
             payload = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
@@ -567,8 +547,6 @@ class AuthService:
         return AuthResponse(user=user_response, tokens=tokens)
     
     async def refresh_access_token(self, refresh_token: str) -> TokenPair:
-
-# ARCHITECTURE INSIGHT: Refresh access token using refresh token
         """Refresh access token using refresh token"""
         # Verify refresh token
         payload = self.verify_token(refresh_token)
@@ -601,8 +579,6 @@ class AuthService:
         )
     
     async def logout(self, refresh_token: str) -> bool:
-
-# ARCHITECTURE INSIGHT: Logout user by invalidating session
         """Logout user by invalidating session"""
         # Verify refresh token
         payload = self.verify_token(refresh_token)
@@ -618,8 +594,6 @@ class AuthService:
             return False
     
     async def get_current_user(self, access_token: str) -> Optional[UserResponse]:
-
-# ARCHITECTURE INSIGHT: Get current user from access token with completion flags
         """Get current user from access token with completion flags"""
         payload = self.verify_token(access_token)
         if not payload:
@@ -704,8 +678,6 @@ class AuthService:
         snapshot_id: Optional[str] = None,
         blueprint_id: Optional[str] = None
     ) -> dict:
-
-# ARCHITECTURE INSIGHT: Migrate localStorage IDs to user account
         """Migrate localStorage IDs to user account"""
         migrated = {
             "diagnostic": False,

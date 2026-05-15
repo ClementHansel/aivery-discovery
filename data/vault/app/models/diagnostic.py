@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: Diagnostic data models for persistence and API.
 """
 Diagnostic data models for persistence and API.
 """
@@ -10,16 +8,12 @@ from datetime import datetime
 
 
 class DiagnosticAnswer(BaseModel):
-
-# ARCHITECTURE INSIGHT: Single diagnostic question answer.
     """Single diagnostic question answer."""
     question_id: str = Field(description="Question identifier")
     selected_option: int = Field(ge=0, le=4, description="Selected option index (0-4)")
 
 
 class DiagnosticSubmission(BaseModel):
-
-# ARCHITECTURE INSIGHT: Request to submit diagnostic.
     """Request to submit diagnostic."""
     user_id: Optional[str] = Field(default=None, description="User identifier (optional)")
     user_email: Optional[EmailStr] = Field(default=None, description="User email")
@@ -29,8 +23,6 @@ class DiagnosticSubmission(BaseModel):
 
 
 class DiagnosticResult(BaseModel):
-
-# ARCHITECTURE INSIGHT: Result of diagnostic assessment.
     """Result of diagnostic assessment."""
     diagnostic_id: str = Field(description="Unique diagnostic identifier")
     user_id: Optional[str] = Field(description="User identifier")
@@ -49,8 +41,6 @@ class DiagnosticResult(BaseModel):
 
 
 class DiagnosticRecord(BaseModel):
-
-# ARCHITECTURE INSIGHT: Database record for diagnostic.
     """Database record for diagnostic."""
     diagnostic_id: str
     user_id: Optional[str]

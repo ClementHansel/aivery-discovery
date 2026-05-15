@@ -7,7 +7,5 @@ class BaseAgent(ABC):
     
     @abstractmethod
     async def process(self, input_data: dict) -> dict:
-
-# ARCHITECTURE INSIGHT: Process input and return output
         """Process input and return output"""
         pass

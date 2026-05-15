@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: Database service for diagnostics, snapshots, and blueprints.  For MVP, uses JS
 """
 Database service for diagnostics, snapshots, and blueprints.
 
@@ -20,8 +18,6 @@ logger = logging.getLogger(__name__)
 
 
 class DatabaseService:
-
-# ARCHITECTURE INSIGHT: File-based database service for MVP.          Storage structure:     data/
     """
     File-based database service for MVP.
     
@@ -38,8 +34,6 @@ class DatabaseService:
     """
     
     def __init__(self, base_path: str = "data"):
-
-# ARCHITECTURE INSIGHT: Initialize database service.
         """Initialize database service."""
         self.base_path = Path(base_path)
         self.diagnostics_path = self.base_path / "diagnostics"
@@ -60,8 +54,6 @@ class DatabaseService:
     # ========================================================================
     
     def save_json(self, collection: str, item_id: str, data: dict) -> bool:
-
-# ARCHITECTURE INSIGHT: Save JSON data to a collection.
         """Save JSON data to a collection."""
         try:
             collection_path = self.base_path / collection
@@ -78,8 +70,6 @@ class DatabaseService:
             return False
     
     def load_json(self, collection: str, item_id: str) -> Optional[dict]:
-
-# ARCHITECTURE INSIGHT: Load JSON data from a collection.
         """Load JSON data from a collection."""
         try:
             collection_path = self.base_path / collection
@@ -97,8 +87,6 @@ class DatabaseService:
             return None
     
     def load_all_json(self, collection: str) -> List[dict]:
-
-# ARCHITECTURE INSIGHT: Load all JSON files from a collection.
         """Load all JSON files from a collection."""
         try:
             collection_path = self.base_path / collection
@@ -117,8 +105,6 @@ class DatabaseService:
             return []
     
     def delete_json(self, collection: str, item_id: str) -> bool:
-
-# ARCHITECTURE INSIGHT: Delete JSON file from a collection.
         """Delete JSON file from a collection."""
         try:
             collection_path = self.base_path / collection
@@ -148,8 +134,6 @@ class DatabaseService:
         score: int,
         category: str
     ) -> bool:
-
-# ARCHITECTURE INSIGHT: Store diagnostic record.
         """Store diagnostic record."""
         try:
             record = {
@@ -179,8 +163,6 @@ class DatabaseService:
         self,
         diagnostic_id: str
     ) -> Optional[Dict[str, Any]]:
-
-# ARCHITECTURE INSIGHT: Retrieve diagnostic record.
         """Retrieve diagnostic record."""
         try:
             file_path = self.diagnostics_path / f"{diagnostic_id}.json"
@@ -202,8 +184,6 @@ class DatabaseService:
         self,
         user_id: str
     ) -> List[Dict[str, Any]]:
-
-# ARCHITECTURE INSIGHT: List all diagnostics for a user.
         """List all diagnostics for a user."""
         try:
             diagnostics = []
@@ -244,8 +224,6 @@ class DatabaseService:
         automation_level: str,
         data_quality_score: int
     ) -> bool:
-
-# ARCHITECTURE INSIGHT: Store snapshot record.
         """Store snapshot record."""
         try:
             record = {
@@ -283,8 +261,6 @@ class DatabaseService:
         self,
         snapshot_id: str
     ) -> Optional[Dict[str, Any]]:
-
-# ARCHITECTURE INSIGHT: Retrieve snapshot record.
         """Retrieve snapshot record."""
         try:
             file_path = self.snapshots_path / f"{snapshot_id}.json"
@@ -306,8 +282,6 @@ class DatabaseService:
         self,
         user_id: str
     ) -> List[Dict[str, Any]]:
-
-# ARCHITECTURE INSIGHT: List all snapshots for a user.
         """List all snapshots for a user."""
         try:
             snapshots = []
@@ -329,8 +303,6 @@ class DatabaseService:
         self,
         diagnostic_id: str
     ) -> List[Dict[str, Any]]:
-
-# ARCHITECTURE INSIGHT: List all snapshots linked to a diagnostic.
         """List all snapshots linked to a diagnostic."""
         try:
             snapshots = []
@@ -358,8 +330,6 @@ class DatabaseService:
         snapshot_id: str,
         user_id: str
     ) -> bool:
-
-# ARCHITECTURE INSIGHT: Add snapshot_id link to existing blueprint metadata.
         """Add snapshot_id link to existing blueprint metadata."""
         try:
             # Find blueprint metadata file

@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: Aivory Super Admin Automated Test Suite Uses Playwright for end-to-end testing
 """
 Aivory Super Admin Automated Test Suite
 Uses Playwright for end-to-end testing
@@ -32,8 +30,6 @@ CONFIG = {
 
 
 class TestReport:
-
-# ARCHITECTURE INSIGHT: Test report generator
     """Test report generator"""
     
     def __init__(self):
@@ -51,8 +47,6 @@ class TestReport:
         })
     
     def generate_report(self):
-
-# ARCHITECTURE INSIGHT: Generate JSON test report
         """Generate JSON test report"""
         total = len(self.results)
         passed = sum(1 for r in self.results if r["passed"])
@@ -83,8 +77,6 @@ class TestReport:
 
 
 async def login_as_super_admin(page: Page):
-
-# ARCHITECTURE INSIGHT: Login with Super Admin credentials
     """Login with Super Admin credentials"""
     await page.goto(f"{CONFIG['base_url']}/login.html")
     await page.fill('input[name="username"]', CONFIG['credentials']['username'])
@@ -94,8 +86,6 @@ async def login_as_super_admin(page: Page):
 
 
 async def test_super_admin_authentication(page: Page, report: TestReport):
-
-# ARCHITECTURE INSIGHT: Test 1.1: Super Admin Authentication
     """Test 1.1: Super Admin Authentication"""
     print("\n🧪 Test 1.1: Super Admin Authentication")
     
@@ -129,8 +119,6 @@ async def test_super_admin_authentication(page: Page, report: TestReport):
 
 
 async def test_dashboard_access(page: Page, report: TestReport):
-
-# ARCHITECTURE INSIGHT: Test 1.2: Access All Dashboard Sections
     """Test 1.2: Access All Dashboard Sections"""
     print("\n🧪 Test 1.2: Dashboard Section Access")
     
@@ -177,8 +165,6 @@ async def test_dashboard_access(page: Page, report: TestReport):
 
 
 async def test_free_diagnostic(page: Page, report: TestReport):
-
-# ARCHITECTURE INSIGHT: Test 2.1: Run Free AI Diagnostic
     """Test 2.1: Run Free AI Diagnostic"""
     print("\n🧪 Test 2.1: Free AI Readiness Diagnostic")
     
@@ -226,8 +212,6 @@ async def test_free_diagnostic(page: Page, report: TestReport):
 
 
 async def test_roi_engine_conservative(page: Page, report: TestReport):
-
-# ARCHITECTURE INSIGHT: Test 7.1: ROI Engine Conservative Mode
     """Test 7.1: ROI Engine Conservative Mode"""
     print("\n🧪 Test 7.1: ROI Engine - Conservative Mode")
     
@@ -278,8 +262,6 @@ async def test_roi_engine_conservative(page: Page, report: TestReport):
 
 
 async def test_roi_engine_growth(page: Page, report: TestReport):
-
-# ARCHITECTURE INSIGHT: Test 7.2: ROI Engine Growth Mode
     """Test 7.2: ROI Engine Growth Mode"""
     print("\n🧪 Test 7.2: ROI Engine - Growth Mode")
     
@@ -320,8 +302,6 @@ async def test_roi_engine_growth(page: Page, report: TestReport):
 
 
 async def test_multi_turn_diagnostic(page: Page, report: TestReport):
-
-# ARCHITECTURE INSIGHT: Test 6.1: Multi-Turn Guided Diagnostic
     """Test 6.1: Multi-Turn Guided Diagnostic"""
     print("\n🧪 Test 6.1: Multi-Turn Guided Diagnostic")
     
@@ -374,8 +354,6 @@ async def test_multi_turn_diagnostic(page: Page, report: TestReport):
 
 
 async def test_subscription_tiers(page: Page, report: TestReport):
-
-# ARCHITECTURE INSIGHT: Test 5.x: Subscription Tier Features
     """Test 5.x: Subscription Tier Features"""
     print("\n🧪 Test 5.x: Subscription Tier Validation")
     
@@ -430,8 +408,6 @@ async def test_subscription_tiers(page: Page, report: TestReport):
 
 
 async def test_ui_color_consistency(page: Page, report: TestReport):
-
-# ARCHITECTURE INSIGHT: Test 10.1: Brand Color Consistency
     """Test 10.1: Brand Color Consistency"""
     print("\n🧪 Test 10.1: UI Color Consistency")
     
@@ -471,8 +447,6 @@ async def test_ui_color_consistency(page: Page, report: TestReport):
 
 
 async def run_all_tests():
-
-# ARCHITECTURE INSIGHT: Run complete test suite
     """Run complete test suite"""
     print("=" * 60)
     print("🚀 AIVORY SUPER ADMIN FULL FEATURE TEST SUITE")

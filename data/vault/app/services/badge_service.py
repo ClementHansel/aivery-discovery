@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: Badge generation service for AI readiness scores  CRITICAL BRANDING REQUIREMEN
 """Badge generation service for AI readiness scores
 
 CRITICAL BRANDING REQUIREMENT:
@@ -12,8 +10,6 @@ import os
 
 
 def get_logo_base64() -> str:
-
-# ARCHITECTURE INSIGHT: Get Aivory logo as base64 encoded data URL.          Returns:         Base64
     """
     Get Aivory logo as base64 encoded data URL.
     
@@ -31,8 +27,6 @@ def get_logo_base64() -> str:
 
 
 def get_category_color(category: str) -> str:
-
-# ARCHITECTURE INSIGHT: Get color for a readiness category.          Args:         category: Readines
     """
     Get color for a readiness category.
     
@@ -52,8 +46,6 @@ def get_category_color(category: str) -> str:
 
 
 def generate_badge(score: float, category: str) -> str:
-
-# ARCHITECTURE INSIGHT: Generate SVG badge for AI readiness score.          Creates a downloadable vis
     """
     Generate SVG badge for AI readiness score.
     
@@ -124,8 +116,6 @@ def generate_badge(score: float, category: str) -> str:
 
 
 def generate_badge_data_url(score: float, category: str) -> str:
-
-# ARCHITECTURE INSIGHT: Generate badge as data URL for embedding.          Args:         score: AI re
     """
     Generate badge as data URL for embedding.
     

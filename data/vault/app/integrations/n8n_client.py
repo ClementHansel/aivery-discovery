@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: n8n Integration Client for Aivory
 """n8n Integration Client for Aivory"""
 import logging
 import time
@@ -11,8 +9,6 @@ logger = logging.getLogger(__name__)
 
 
 class N8nClient:
-
-# ARCHITECTURE INSIGHT: Client for n8n workflow automation integration
     """Client for n8n workflow automation integration"""
     
     def __init__(self, base_url: str, timeout: float = 10.0, max_retries: int = 3):
@@ -22,8 +18,6 @@ class N8nClient:
         self._connection_status = None
     
     async def health_check(self) -> Dict[str, Any]:
-
-# ARCHITECTURE INSIGHT: Check n8n connection health.                  Returns:             {
         """
         Check n8n connection health.
         
@@ -88,8 +82,6 @@ class N8nClient:
         payload: Dict[str, Any],
         method: str = "POST"
     ) -> Dict[str, Any]:
-
-# ARCHITECTURE INSIGHT: Trigger n8n webhook with retry logic.                  Args:             webh
         """
         Trigger n8n webhook with retry logic.
         
@@ -151,8 +143,6 @@ class N8nClient:
         raise ConnectionError(f"n8n webhook failed after {self.max_retries} attempts")
     
     async def _exponential_backoff(self, attempt: int):
-
-# ARCHITECTURE INSIGHT: Exponential backoff delay between retries
         """Exponential backoff delay between retries"""
         import asyncio
         delay = min(2 ** attempt, 8)  # Max 8 seconds
@@ -161,7 +151,5 @@ class N8nClient:
     
     @property
     def is_connected(self) -> Optional[bool]:
-
-# ARCHITECTURE INSIGHT: Get cached connection status
         """Get cached connection status"""
         return self._connection_status == "connected" if self._connection_status else None

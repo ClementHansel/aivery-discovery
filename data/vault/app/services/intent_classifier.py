@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: Intent Classifier Service Analyzes user messages to determine intent and provid
 """
 Intent Classifier Service
 Analyzes user messages to determine intent and provides contextual understanding
@@ -13,8 +11,6 @@ logger = logging.getLogger(__name__)
 
 
 class IntentClassifier:
-
-# ARCHITECTURE INSIGHT: Classifies user intents for better AI understanding
     """Classifies user intents for better AI understanding"""
     
     INTENT_CATEGORIES = {
@@ -33,8 +29,6 @@ class IntentClassifier:
         self.openrouter = OpenRouterClient()
         
     async def classify_intent(self, message: str, context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-
-# ARCHITECTURE INSIGHT: Classify the intent of a user message                  Args:             mess
         """
         Classify the intent of a user message
         
@@ -110,8 +104,6 @@ Intent categories:
             return self._get_fallback_classification(message)
     
     def _get_fallback_classification(self, message: str) -> Dict[str, Any]:
-
-# ARCHITECTURE INSIGHT: Fallback classification if LLM fails
         """Fallback classification if LLM fails"""
         # Simple keyword-based fallback
         message_lower = message.lower()

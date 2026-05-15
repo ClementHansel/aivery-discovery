@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: API routes for tier management and limit checking.
 """
 API routes for tier management and limit checking.
 """
@@ -19,8 +17,6 @@ router = APIRouter(prefix="/api/v1/tier", tags=["tier"])
 
 @router.get("/check-workflow-limit/{user_id}", response_model=LimitCheckResponse)
 async def check_workflow_limit(user_id: str):
-
-# ARCHITECTURE INSIGHT: Check if user can create a new workflow.
     """
     Check if user can create a new workflow.
     """
@@ -29,8 +25,6 @@ async def check_workflow_limit(user_id: str):
 
 @router.get("/check-execution-limit/{user_id}", response_model=LimitCheckResponse)
 async def check_execution_limit(user_id: str):
-
-# ARCHITECTURE INSIGHT: Check if user can execute a workflow.
     """
     Check if user can execute a workflow.
     """
@@ -39,8 +33,6 @@ async def check_execution_limit(user_id: str):
 
 @router.post("/create-workflow", response_model=UserTierState)
 async def create_workflow(request: WorkflowCreationRequest):
-
-# ARCHITECTURE INSIGHT: Create a new workflow (increments workflow count).
     """
     Create a new workflow (increments workflow count).
     """
@@ -56,8 +48,6 @@ async def create_workflow(request: WorkflowCreationRequest):
 
 @router.post("/execute-workflow", response_model=UserTierState)
 async def execute_workflow(request: WorkflowExecutionRequest):
-
-# ARCHITECTURE INSIGHT: Execute a workflow (increments execution count).
     """
     Execute a workflow (increments execution count).
     """
@@ -73,8 +63,6 @@ async def execute_workflow(request: WorkflowExecutionRequest):
 
 @router.get("/state/{user_id}", response_model=UserTierState)
 async def get_user_state(user_id: str):
-
-# ARCHITECTURE INSIGHT: Get user's current tier state.
     """
     Get user's current tier state.
     """
@@ -83,8 +71,6 @@ async def get_user_state(user_id: str):
 
 @router.post("/set-tier/{user_id}/{tier}", response_model=UserTierState)
 async def set_user_tier(user_id: str, tier: TierLevel):
-
-# ARCHITECTURE INSIGHT: Set user's subscription tier.
     """
     Set user's subscription tier.
     """
@@ -93,8 +79,6 @@ async def set_user_tier(user_id: str, tier: TierLevel):
 
 @router.post("/reset-executions/{user_id}", response_model=UserTierState)
 async def reset_executions(user_id: str):
-
-# ARCHITECTURE INSIGHT: Reset monthly execution count (admin endpoint).
     """
     Reset monthly execution count (admin endpoint).
     """

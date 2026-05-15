@@ -2,8 +2,6 @@ from app.agents.base import BaseAgent
 
 class DiagnosisAgent(BaseAgent):
     async def process(self, input_data: dict) -> dict:
-
-# ARCHITECTURE INSIGHT: Identify top operational problems based on evaluation
         """Identify top operational problems based on evaluation"""
         evaluation = input_data.get("readiness_evaluation", "")
         

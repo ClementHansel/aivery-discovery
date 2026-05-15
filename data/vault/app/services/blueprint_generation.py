@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: Blueprint generation orchestration service.
 """
 Blueprint generation orchestration service.
 """
@@ -132,15 +130,11 @@ SUPERADMIN_MOCK_SNAPSHOT = {
 
 
 class SnapshotNotFoundError(Exception):
-
-# ARCHITECTURE INSIGHT: Raised when AI Snapshot data is not found.
     """Raised when AI Snapshot data is not found."""
     pass
 
 
 class BlueprintGenerationService:
-
-# ARCHITECTURE INSIGHT: Orchestrates end-to-end Blueprint generation from Snapshot data.          Pipe
     """
     Orchestrates end-to-end Blueprint generation from Snapshot data.
     
@@ -160,8 +154,6 @@ class BlueprintGenerationService:
     """
     
     def __init__(self):
-
-# ARCHITECTURE INSIGHT: Initialize Blueprint generation service.
         """Initialize Blueprint generation service."""
         self.payment_service = PaymentValidationService()
         self.ai_generator = AIBlueprintGenerator()
@@ -175,8 +167,6 @@ class BlueprintGenerationService:
         user_id: str,
         snapshot_id: str
     ) -> BlueprintGenerationResult:
-
-# ARCHITECTURE INSIGHT: Generate complete Blueprint from AI Snapshot.                  Args:
         """
         Generate complete Blueprint from AI Snapshot.
         
@@ -326,8 +316,6 @@ class BlueprintGenerationService:
         snapshot_id: str,
         user_id: str
     ) -> Optional[SnapshotData]:
-
-# ARCHITECTURE INSIGHT: Retrieve AI Snapshot data from database.                  Args:             s
         """
         Retrieve AI Snapshot data from database.
         

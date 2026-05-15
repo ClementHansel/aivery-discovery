@@ -29,8 +29,6 @@ headers = {
 
 
 def get_workflows():
-
-# ARCHITECTURE INSIGHT: Fetch all workflows from n8n
     """Fetch all workflows from n8n"""
     print(f"Fetching workflows from {N8N_BASE_URL}/api/v1/workflows...")
     response = requests.get(f"{N8N_BASE_URL}/api/v1/workflows", headers=headers)
@@ -44,8 +42,6 @@ def get_workflows():
 
 
 def find_workflow_by_name(workflows, name):
-
-# ARCHITECTURE INSIGHT: Find workflow by name
     """Find workflow by name"""
     for workflow in workflows:
         if workflow.get('name') == name:
@@ -54,8 +50,6 @@ def find_workflow_by_name(workflows, name):
 
 
 def update_http_request_nodes(workflow):
-
-# ARCHITECTURE INSIGHT: Update all HTTP Request nodes with correct API key header
     """Update all HTTP Request nodes with correct API key header"""
     nodes = workflow.get('nodes', [])
     updated_count = 0
@@ -115,8 +109,6 @@ def update_http_request_nodes(workflow):
 
 
 def update_workflow(workflow):
-
-# ARCHITECTURE INSIGHT: Push updated workflow back to n8n
     """Push updated workflow back to n8n"""
     workflow_id = workflow.get('id')
     print(f"\n📤 Updating workflow {workflow_id}...")
@@ -149,8 +141,6 @@ def update_workflow(workflow):
 
 
 def activate_workflow(workflow_id):
-
-# ARCHITECTURE INSIGHT: Activate the workflow
     """Activate the workflow"""
     print(f"\n🔄 Activating workflow {workflow_id}...")
     

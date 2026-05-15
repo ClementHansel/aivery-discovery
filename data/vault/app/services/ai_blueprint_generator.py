@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: AI-powered Blueprint content generation service using OpenRouter LLM.
 """
 AI-powered Blueprint content generation service using OpenRouter LLM.
 """
@@ -20,8 +18,6 @@ from app.config import settings
 
 
 class AIBlueprintGenerator:
-
-# ARCHITECTURE INSIGHT: Generates Blueprint content using AI analysis of Snapshot data.          Gener
     """
     Generates Blueprint content using AI analysis of Snapshot data.
     
@@ -34,8 +30,6 @@ class AIBlueprintGenerator:
     """
     
     def __init__(self):
-
-# ARCHITECTURE INSIGHT: Initialize AI generation service.
         """Initialize AI generation service."""
         from app.config import settings
         self.llm_client = OpenRouterClient(
@@ -47,8 +41,6 @@ class AIBlueprintGenerator:
         self,
         snapshot_data: SnapshotData
     ) -> str:
-
-# ARCHITECTURE INSIGHT: Generate concise, descriptive system name using AI.                  Args:
         """
         Generate concise, descriptive system name using AI.
         
@@ -97,8 +89,6 @@ Return only the system name, no explanation."""
         snapshot_data: SnapshotData,
         system_name: str
     ) -> List[AgentDefinition]:
-
-# ARCHITECTURE INSIGHT: Generate 2-5 agents based on automation opportunities.                  Args:
         """
         Generate 2-5 agents based on automation opportunities.
         
@@ -181,8 +171,6 @@ Return only valid JSON, no explanation."""
             ]
     
     def _create_default_agent(self, index: int) -> AgentDefinition:
-
-# ARCHITECTURE INSIGHT: Create a default agent definition.
         """Create a default agent definition."""
         return AgentDefinition(
             id=f"agent_{index:02d}",
@@ -201,8 +189,6 @@ Return only valid JSON, no explanation."""
         agents: List[AgentDefinition],
         snapshot_data: SnapshotData
     ) -> List[WorkflowDefinition]:
-
-# ARCHITECTURE INSIGHT: Generate workflow definitions connecting agents.                  Args:
         """
         Generate workflow definitions connecting agents.
         
@@ -246,8 +232,6 @@ Return only valid JSON, no explanation."""
         snapshot_data: SnapshotData,
         agents: List[AgentDefinition]
     ) -> List[IntegrationRequirement]:
-
-# ARCHITECTURE INSIGHT: Identify required external integrations.                  Args:             s
         """
         Identify required external integrations.
         
@@ -320,8 +304,6 @@ Return only valid JSON, no explanation."""
         integrations: List[IntegrationRequirement],
         readiness_score: int
     ) -> str:
-
-# ARCHITECTURE INSIGHT: Calculate implementation time estimate.                  Formula:         bas
         """
         Calculate implementation time estimate.
         

@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: ID generation utilities for diagnostics, snapshots, and blueprints.  Uses Pyth
 """
 ID generation utilities for diagnostics, snapshots, and blueprints.
 
@@ -11,8 +9,6 @@ import string
 
 
 def generate_diagnostic_id() -> str:
-
-# ARCHITECTURE INSIGHT: Generate unique diagnostic ID.          Format: diag_{12 random alphanumeric c
     """
     Generate unique diagnostic ID.
     
@@ -28,8 +24,6 @@ def generate_diagnostic_id() -> str:
 
 
 def generate_snapshot_id() -> str:
-
-# ARCHITECTURE INSIGHT: Generate unique snapshot ID.          Format: snap_{12 random alphanumeric cha
     """
     Generate unique snapshot ID.
     
@@ -45,8 +39,6 @@ def generate_snapshot_id() -> str:
 
 
 def generate_blueprint_id() -> str:
-
-# ARCHITECTURE INSIGHT: Generate unique blueprint ID.          Format: bp_{12 random alphanumeric char
     """
     Generate unique blueprint ID.
     
@@ -62,8 +54,6 @@ def generate_blueprint_id() -> str:
 
 
 def generate_id(prefix: str) -> str:
-
-# ARCHITECTURE INSIGHT: Generate unique ID with custom prefix.          Format: {prefix}_{12 random al
     """
     Generate unique ID with custom prefix.
     

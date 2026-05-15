@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: Contact form API routes
 """Contact form API routes"""
 import logging
 from datetime import datetime
@@ -14,8 +12,6 @@ router = APIRouter(prefix="/contact", tags=["contact"])
 
 @router.post("", response_model=ContactResponse)
 async def submit_contact(contact: ContactForm):
-
-# ARCHITECTURE INSIGHT: Process contact form submission.          For MVP, logs contact information to
     """
     Process contact form submission.
     

@@ -7,33 +7,33 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/feather-icons"></script>
     <style>
-        :root { --bg: #05060a; --card-bg: rgba(15, 18, 25, 0.8); --accent: #00f2ff; --border: rgba(255, 255, 255, 0.08); --text: #e0e0e0; }
+        :root { --bg: #05060a; --card-bg: rgba(15, 18, 25, 0.9); --accent: #00f2ff; --border: rgba(255, 255, 255, 0.08); --text: #e0e0e0; }
         body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow-x: hidden; }
         .container { max-width: 1200px; width: 90%; text-align: center; padding: 40px 0; }
-        header { margin-bottom: 60px; }
+        header { margin-bottom: 80px; }
         h1 { font-size: 42px; letter-spacing: 8px; color: var(--accent); margin: 0; font-weight: 300; }
-        .subtitle { color: #666; margin-top: 10px; font-size: 12px; text-transform: uppercase; letter-spacing: 4px; }
+        .subtitle { color: #444; margin-top: 10px; font-size: 11px; text-transform: uppercase; letter-spacing: 4px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .card { background: var(--card-bg); border: 1px solid var(--border); padding: 30px; border-radius: 12px; transition: 0.3s; text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center; }
-        .card:hover { border-color: var(--accent); transform: translateY(-5px); background: rgba(0, 242, 255, 0.03); }
-        .icon-box { width: 50px; height: 50px; background: rgba(0, 242, 255, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: var(--accent); }
-        .card h3 { font-size: 18px; margin: 0 0 10px; font-weight: 600; }
-        .card p { font-size: 13px; color: #777; line-height: 1.5; margin: 0; }
+        .card { background: var(--card-bg); border: 1px solid var(--border); padding: 40px 30px; border-radius: 16px; transition: 0.3s; text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center; }
+        .card:hover { border-color: var(--accent); transform: translateY(-5px); background: rgba(0, 242, 255, 0.03); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .icon-box { width: 56px; height: 56px; background: rgba(0, 242, 255, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 25px; color: var(--accent); }
+        .card h3 { font-size: 18px; margin: 0 0 12px; font-weight: 500; letter-spacing: 1px; }
+        .card p { font-size: 12px; color: #666; line-height: 1.6; margin: 0; }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
             <h1>AVRY DISCOVERY</h1>
-            <div class="subtitle">Full-Spectrum Architectural Hub</div>
+            <div class="subtitle">Architectural Intelligence Platform</div>
         </header>
         <div class="grid">
-            <a href="reports.html" class="card"><div class="icon-box"><i data-feather="file-text"></i></div><h3>Reports</h3><p>System health and performance reports.</p></a>
-            <a href="analysis.html" class="card"><div class="icon-box"><i data-feather="zap"></i></div><h3>Analysis</h3><p>Functional and business deep-dives.</p></a>
-            <a href="vps.html" class="card"><div class="icon-box"><i data-feather="server"></i></div><h3>VPS</h3><p>Infrastructure bridge and VPS analysis.</p></a>
-            <a href="documentation.html" class="card"><div class="icon-box"><i data-feather="book-open"></i></div><h3>Documentation</h3><p>Technical guides and system documentation.</p></a>
-            <a href="tests.html" class="card"><div class="icon-box"><i data-feather="check-circle"></i></div><h3>Tests</h3><p>QA suite with AI-annotated logic.</p></a>
-            <a href="visualization.html" class="card"><div class="icon-box"><i data-feather="map"></i></div><h3>Visualization</h3><p>Interactive neural graph and tree explorer.</p></a>
+            <a href="reports.html" class="card"><div class="icon-box"><i data-feather="file-text"></i></div><h3>Reports</h3><p>Technical system and health reports derived from repository state.</p></a>
+            <a href="analysis.html" class="card"><div class="icon-box"><i data-feather="zap"></i></div><h3>Analysis</h3><p>Functional deep-dives and business logic extractions.</p></a>
+            <a href="vps.html" class="card"><div class="icon-box"><i data-feather="server"></i></div><h3>VPS</h3><p>Infrastructure bridge and VPS architecture analysis.</p></a>
+            <a href="documentation.html" class="card"><div class="icon-box"><i data-feather="book-open"></i></div><h3>Documentation</h3><p>Full system guides and architectural documentation.</p></a>
+            <a href="tests.html" class="card"><div class="icon-box"><i data-feather="check-circle"></i></div><h3>Tests</h3><p>QA verification suite with AI-annotated logic comments.</p></a>
+            <a href="visualization.html" class="card"><div class="icon-box"><i data-feather="map"></i></div><h3>Visualization</h3><p>Interactive force-directed graph and hierarchical tree explorer.</p></a>
         </div>
     </div>
     <script>feather.replace();</script>

@@ -2,17 +2,17 @@
     {
         "name": "AGENTS_BACKEND_IMPLEMENTATION_SUMMARY.md",
         "path": "AGENTS_BACKEND_IMPLEMENTATION_SUMMARY.md",
-        "type": "Report"
+        "type": "Documentation"
     },
     {
         "name": "AGENTS_CURL_TEST_COMMANDS.md",
         "path": "AGENTS_CURL_TEST_COMMANDS.md",
-        "type": "Report"
+        "type": "Documentation"
     },
     {
         "name": "AGENTS_IMPLEMENTATION_CHANGES.md",
         "path": "AGENTS_IMPLEMENTATION_CHANGES.md",
-        "type": "Report"
+        "type": "Documentation"
     },
     {
         "name": "README.md",
@@ -22,7 +22,7 @@
     {
         "name": "requirements.txt",
         "path": "requirements.txt",
-        "type": "Report"
+        "type": "Documentation"
     },
     {
         "name": "VPS_BRIDGE_AGENTS_IMPLEMENTATION_COMPLETE.md",
@@ -47,7 +47,7 @@
     {
         "name": "requirements.txt",
         "path": "tests/requirements.txt",
-        "type": "Report"
+        "type": "Documentation"
     },
     {
         "name": "LOCAL_DEV.md",
@@ -57,6 +57,6 @@
     {
         "name": "console_prompt.txt",
         "path": "zeroclaw-routing-patch/console_prompt.txt",
-        "type": "Report"
+        "type": "Documentation"
     }
 ]

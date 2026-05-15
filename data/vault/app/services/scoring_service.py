@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: Scoring service for AI readiness diagnostic
 """Scoring service for AI readiness diagnostic"""
 from typing import List, Dict, Any
 from pydantic import BaseModel, Field
@@ -13,16 +11,12 @@ from app.services.scoring_config import (
 
 
 class DiagnosticAnswer(BaseModel):
-
-# ARCHITECTURE INSIGHT: Single diagnostic answer
     """Single diagnostic answer"""
     question_id: str
     selected_option: int = Field(ge=0, le=3, description="Selected option index (0-3)")
 
 
 class ScoringResult(BaseModel):
-
-# ARCHITECTURE INSIGHT: Result of scoring calculation
     """Result of scoring calculation"""
     raw_score: int = Field(ge=0, le=36, description="Sum of all answer scores")
     normalized_score: float = Field(ge=0, le=100, description="Score normalized to 0-100 scale")
@@ -31,8 +25,6 @@ class ScoringResult(BaseModel):
 
 
 def calculate_score(answers: List[DiagnosticAnswer]) -> ScoringResult:
-
-# ARCHITECTURE INSIGHT: Calculate AI readiness score from diagnostic answers.          This function i
     """
     Calculate AI readiness score from diagnostic answers.
     
@@ -91,8 +83,6 @@ def calculate_score(answers: List[DiagnosticAnswer]) -> ScoringResult:
 
 
 def assign_category(normalized_score: float) -> str:
-
-# ARCHITECTURE INSIGHT: Assign readiness category based on normalized score.          Args:         n
     """
     Assign readiness category based on normalized score.
     
@@ -111,8 +101,6 @@ def assign_category(normalized_score: float) -> str:
 
 
 def calculate_score_from_dict(answers_dict: Dict[str, int]) -> ScoringResult:
-
-# ARCHITECTURE INSIGHT: Convenience function to calculate score from a dictionary.          Args:
     """
     Convenience function to calculate score from a dictionary.
     

@@ -1,12 +1,8 @@
-
-# ARCHITECTURE INSIGHT: Data models for contact form
 """Data models for contact form"""
 from pydantic import BaseModel, Field, EmailStr
 
 
 class ContactForm(BaseModel):
-
-# ARCHITECTURE INSIGHT: Contact form submission
     """Contact form submission"""
     name: str = Field(min_length=1, description="Contact name")
     company: str = Field(min_length=1, description="Company name")
@@ -15,8 +11,6 @@ class ContactForm(BaseModel):
 
 
 class ContactResponse(BaseModel):
-
-# ARCHITECTURE INSIGHT: Response after contact form submission
     """Response after contact form submission"""
     success: bool = Field(description="Whether submission was successful")
     message: str = Field(description="Response message")

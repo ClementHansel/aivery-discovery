@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: Prompts module - System prompts and prompt templates for Aivory AI agents
 """
 Prompts module - System prompts and prompt templates for Aivory AI agents
 """

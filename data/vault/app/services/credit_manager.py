@@ -1,5 +1,3 @@
-
-# ARCHITECTURE INSIGHT: Credit Manager Service - Handles intelligence credit operations
 """
 Credit Manager Service - Handles intelligence credit operations
 """
@@ -11,8 +9,6 @@ from datetime import datetime
 logger = logging.getLogger(__name__)
 
 class CreditManager:
-
-# ARCHITECTURE INSIGHT: Manages intelligence credits for console operations.     Tracks balances, deduc
     """
     Manages intelligence credits for console operations.
     Tracks balances, deductions, and transaction history.
@@ -26,14 +22,10 @@ class CreditManager:
         self.transactions = []
     
     def get_credits(self, user_id: str) -> int:
-
-# ARCHITECTURE INSIGHT: Get current credit balance for user.
         """Get current credit balance for user."""
         return self.credits.get(user_id, 0)
     
     def deduct_credits(self, user_id: str, amount: int, operation: str) -> int:
-
-# ARCHITECTURE INSIGHT: Deduct credits from user balance.                  Args:             user_id:
         """
         Deduct credits from user balance.
         
@@ -68,8 +60,6 @@ class CreditManager:
         return new_balance
     
     def add_credits(self, user_id: str, amount: int, reason: str = "manual_add") -> int:
-
-# ARCHITECTURE INSIGHT: Add credits to user balance.
         """Add credits to user balance."""
         current = self.get_credits(user_id)
         new_balance = current + amount
@@ -89,8 +79,6 @@ class CreditManager:
         return new_balance
     
     def estimate_cost(self, operation: str, tier: str, **kwargs) -> int:
-
-# ARCHITECTURE INSIGHT: Estimate credit cost for an operation.                  Args:             ope
         """
         Estimate credit cost for an operation.
         
@@ -131,8 +119,6 @@ class CreditManager:
         return costs.get(operation, 1)
     
     def get_transaction_history(self, user_id: str, limit: int = 10) -> list:
-
-# ARCHITECTURE INSIGHT: Get recent transaction history for user.
         """Get recent transaction history for user."""
         user_transactions = [t for t in self.transactions if t['user_id'] == user_id]
         return sorted(user_transactions, key=lambda x: x['timestamp'], reverse=True)[:limit]
