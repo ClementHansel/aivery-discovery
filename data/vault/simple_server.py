@@ -63,8 +63,6 @@ STATIC_CONTENT = {
 }
 
 def calculate_score(answers):
-
-# ARCHITECTURE INSIGHT: Calculate AI readiness score
     """Calculate AI readiness score"""
     raw_score = sum(ans["selected_option"] for ans in answers)
     normalized_score = (raw_score / 36) * 100
@@ -106,8 +104,6 @@ def generate_badge(score, category):
 </svg>'''
 
 class RequestHandler(SimpleHTTPRequestHandler):
-
-# ARCHITECTURE INSIGHT: Custom request handler that serves static files and handles API requests
     """Custom request handler that serves static files and handles API requests"""
     
     def __init__(self, *args, **kwargs):
@@ -115,8 +111,6 @@ class RequestHandler(SimpleHTTPRequestHandler):
         super().__init__(*args, directory='frontend', **kwargs)
     
     def end_headers(self):
-
-# ARCHITECTURE INSIGHT: Add CORS headers to all responses
         """Add CORS headers to all responses"""
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
@@ -124,15 +118,11 @@ class RequestHandler(SimpleHTTPRequestHandler):
         super().end_headers()
     
     def do_OPTIONS(self):
-
-# ARCHITECTURE INSIGHT: Handle CORS preflight
         """Handle CORS preflight"""
         self.send_response(200)
         self.end_headers()
     
     def do_GET(self):
-
-# ARCHITECTURE INSIGHT: Handle GET requests - serve static files or API endpoints
         """Handle GET requests - serve static files or API endpoints"""
         if self.path.startswith('/api/'):
             # Handle API GET requests
@@ -149,8 +139,6 @@ class RequestHandler(SimpleHTTPRequestHandler):
             super().do_GET()
     
     def do_POST(self):
-
-# ARCHITECTURE INSIGHT: Handle POST requests - API only
         """Handle POST requests - API only"""
         if self.path == '/api/v1/diagnostic/run':
             try:

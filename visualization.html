@@ -4,283 +4,358 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visualization | AVRY Discovery</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="assets/lib/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="assets/lib/prism.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/discovery.css">
     <script src="https://unpkg.com/feather-icons"></script>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
     <style>
-        :root { --bg: #0a0b10; --panel: #14161e; --accent: #00f2ff; --text: #e0e0e0; --border: rgba(255, 255, 255, 0.1); }
-        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; display: flex; height: 100vh; overflow: hidden; }
-        
-        .sidebar { width: 260px; background: var(--panel); border-right: 1px solid var(--border); padding: 40px 20px; display: flex; flex-direction: column; flex-shrink: 0; }
-        .nav-item { padding: 12px; color: #888; text-decoration: none; display: flex; align-items: center; gap: 12px; font-size: 13px; border-radius: 8px; margin-bottom: 4px; }
-        .nav-item.active { background: rgba(0, 242, 255, 0.1); color: var(--accent); font-weight: 600; }
-        
-        .main { flex: 1; display: flex; flex-direction: column; position: relative; }
-        .header { padding: 30px 40px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-        .breadcrumb { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #666; }
-        
-        .tabs { display: flex; gap: 30px; margin-top: 15px; }
-        .tab { font-size: 13px; color: #555; cursor: pointer; padding-bottom: 8px; position: relative; transition: 0.3s; }
-        .tab.active { color: var(--accent); }
-        .tab.active::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: var(--accent); }
-        
-        .content-area { flex: 1; position: relative; overflow: hidden; }
-        .view-pane { position: absolute; inset: 0; display: none; }
-        .view-pane.active { display: block; }
-        
-        #graph-container { width: 100%; height: 100%; }
-        .node circle { stroke: #fff; stroke-width: 1.5px; cursor: pointer; }
-        .link { stroke: rgba(255,255,255,0.05); stroke-opacity: 0.6; }
-        
-        .details-panel { position: absolute; top: 20px; right: 20px; width: 320px; background: rgba(20, 22, 30, 0.95); backdrop-filter: blur(10px); border: 1px solid var(--border); border-radius: 12px; padding: 25px; max-height: calc(100% - 40px); overflow-y: auto; z-index: 100; display: none; }
-        .details-panel.active { display: block; }
-        
-        .tree-node { margin-left: 20px; padding: 4px 0; font-size: 13px; }
-        .tree-folder { color: #888; cursor: pointer; display: flex; align-items: center; gap: 8px; }
-        .tree-file { color: var(--accent); cursor: pointer; display: flex; align-items: center; gap: 8px; }
-        
-        .search-bar { width: 100%; max-width: 400px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 8px; padding: 10px 15px; color: #fff; font-family: inherit; }
-        
-        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; padding: 40px; }
-        .stat-card { background: var(--panel); border: 1px solid var(--border); padding: 30px; border-radius: 12px; text-align: center; }
-        .stat-value { font-size: 48px; color: var(--accent); font-weight: 300; }
-        .stat-label { font-size: 12px; color: #666; text-transform: uppercase; margin-top: 10px; }
+        .top-bar { padding: 16px 24px; background: rgba(0,0,0,0.5); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .vis-container { flex: 1; display: flex; position: relative; overflow: hidden; }
+        #view-content { flex: 1; position: relative; background: #020305; }
+        #canvas, #tree-view { width: 100%; height: 100%; position: absolute; }
+        #tree-view { overflow: auto; padding: 40px; display: none; background: var(--bg); }
+
+        .inspector { width: var(--inspector-width); background: var(--panel); border-left: 1px solid var(--border); display: flex; flex-direction: column; flex-shrink: 0; box-shadow: -10px 0 30px rgba(0,0,0,0.5); }
+        .inspector-body { flex: 1; overflow-y: auto; padding: 32px; scroll-behavior: smooth; }
+
+        .inspector-body h3 { font-family: 'Inter', sans-serif; letter-spacing: -0.5px; }
+        .inspector-body details { margin-bottom: 24px; background: rgba(255,255,255,0.02); border-radius: 12px; border: 1px solid var(--border); overflow: hidden; transition: 0.3s; }
+        .inspector-body details[open] { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.1); }
+        .inspector-body summary { padding: 16px; cursor: pointer; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent); font-weight: 600; list-style: none; display: flex; align-items: center; justify-content: space-between; }
+        .inspector-body summary::after { content: '+'; font-size: 14px; opacity: 0.5; }
+        .inspector-body details[open] summary::after { content: '−'; }
+        .details-content { padding: 0 16px 20px; line-height: 1.6; }
+
+        #code-modal { position: fixed; top: 0; right: 0; width: 70%; height: 100%; background: #050608; border-left: 1px solid var(--accent); transform: translateX(100%); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: 2000; box-shadow: -20px 0 60px rgba(0,0,0,0.8); }
+        #code-modal.open { transform: translateX(0); }
+        .modal-header { padding: 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+
+        /* Tree Styles */
+        .tree-node { cursor: pointer; padding: 8px 12px; border-radius: 6px; font-size: 13px; display: flex; align-items: center; color: var(--text-dim); transition: 0.2s; }
+        .tree-node:hover { background: rgba(255,255,255,0.05); color: var(--text); }
+        .tree-indent { border-left: 1px solid var(--border); margin-left: 18px; padding-left: 10px; }
+
+        /* Node/Link */
+        .node { cursor: pointer; stroke-width: 2px; stroke: rgba(0,0,0,0.3); transition: r 0.3s, fill 0.3s; }
+        .link { stroke-opacity: 0.1; stroke: #555; transition: stroke-opacity 0.3s, stroke 0.3s; }
+        .node-label { fill: #888; font-size: 10px; pointer-events: none; font-weight: 400; }
+        .rel-card:hover { background: rgba(0, 242, 255, 0.05) !important; transform: translateX(5px); }
     </style>
 </head>
 <body>
-    <div class="sidebar">
-        <h2 style="color: var(--accent); font-weight: 300; letter-spacing: 3px; font-size: 20px; margin-bottom: 40px;">AVRY</h2>
-        <nav>
-            <a href="index.html" class="nav-item"><i data-feather="grid"></i> Dashboard</a>
-            <div style="margin: 20px 0 10px 12px; font-size: 10px; color: #444; text-transform: uppercase; letter-spacing: 2px;">Modules</div>
-            <a href="visualization.html" class="nav-item active"><i data-feather="map"></i> Visualization</a>
-            <a href="reports.html" class="nav-item"><i data-feather="file-text"></i> Reports</a>
-            <a href="analysis.html" class="nav-item"><i data-feather="zap"></i> Analysis</a>
-            <a href="tests.html" class="nav-item"><i data-feather="check-circle"></i> Tests</a>
-            <a href="vps.html" class="nav-item"><i data-feather="server"></i> VPS</a>
-            <a href="documentation.html" class="nav-item"><i data-feather="book-open"></i> Documentation</a>
-        </nav>
+    <div id="app-container">
+        <main class="main-content">
+            <div class="top-bar">
+                <div class="lens-group">
+                    <button class="lens-btn active" onclick="setLens('File')"><i data-feather="folder"></i> Files</button>
+                    <button class="lens-btn" onclick="setLens('Feature')"><i data-feather="layout"></i> Pages</button>
+                    <button class="lens-btn" onclick="setLens('Service')"><i data-feather="cpu"></i> Services</button>
+                    <button class="lens-btn" onclick="setLens('Flow')"><i data-feather="activity"></i> Flows</button>
+                    <button class="lens-btn" onclick="setLens('DB Table')"><i data-feather="database"></i> DB</button>
+                    <button class="lens-btn" onclick="setLens('API')"><i data-feather="share-2"></i> API</button>
+                </div>
+                
+                <div class="vis-toggle-group">
+                    <button class="lens-btn active" id="btn-visual" onclick="switchView('visual')"><i data-feather="globe"></i> Graph</button>
+                    <button class="lens-btn" id="btn-tree" onclick="switchView('tree')"><i data-feather="list"></i> Tree</button>
+                </div>
+            </div>
+
+            <div id="loading-overlay">
+                <div class="spinner"></div>
+                <p style="color:var(--text-dim); font-size:12px; letter-spacing:1px; text-transform:uppercase;">Initializing Neural Graph...</p>
+            </div>
+
+            <div class="vis-container">
+                <div id="view-content">
+                    <div id="canvas"></div>
+                    <div id="tree-view"></div>
+                </div>
+
+                <aside class="inspector">
+                    <div class="inspector-body">
+                        <div id="welcome-msg" style="text-align:center; color:var(--text-dim); margin-top:100px;">
+                            <i data-feather="info" style="width:48px; height:48px; margin-bottom:20px; opacity:0.3;"></i>
+                            <p>Select a node to inspect its neural architecture and functional purpose.</p>
+                        </div>
+                        <div id="node-details" style="display:none;">
+                            <h3 id="det-name" style="color:var(--accent); margin:0 0 15px; font-weight:600; font-size:18px;"></h3>
+                            
+                            <span style="font-size:10px; text-transform:uppercase; color:var(--text-dim); letter-spacing:1px; margin-bottom:8px; display:block;">File Address</span>
+                            <div class="path-box" id="det-path"></div>
+                            
+                            <details open>
+                                <summary>Functional Purpose</summary>
+                                <div id="det-purpose" class="details-content"></div>
+                            </details>
+                            
+                            <details open style="margin-top:15px;">
+                                <summary>Architectural Logic</summary>
+                                <div id="det-logic" class="details-content" style="font-family:'Fira Code'; font-size:11px; color: #999;"></div>
+                            </details>
+
+                            <details style="margin-top:15px;">
+                                <summary>Related Components</summary>
+                                <div id="det-related" style="padding:10px;"></div>
+                            </details>
+
+                            <button class="lens-btn" style="width:100%; margin-top:30px; justify-content:center; border-color:var(--accent); color:var(--accent);" id="btn-open-code">
+                                <i data-feather="code"></i> Open Code & Insights
+                            </button>
+                        </div>
+                    </div>
+                    <div style="padding:16px 24px; border-top:1px solid var(--border); background:rgba(0,0,0,0.2);">
+                        <input type="text" id="search-input" placeholder="🔍 Search components..." style="width:100%; background:#000; border:1px solid var(--border); color:white; padding:12px; border-radius:8px; outline:none; font-size:14px;">
+                    </div>
+                </aside>
+            </div>
+        </main>
     </div>
-    
-    <div class="main">
-        <div class="header">
-            <div>
-                <div class="breadcrumb"><a href="index.html" style="color:inherit; text-decoration:none;">AVRY</a> / VISUALIZATION</div>
-                <div class="tabs">
-                    <div class="tab active" data-view="graph">Graph Explorer</div>
-                    <div class="tab" data-view="tree">Tree Structure</div>
-                    <div class="tab" data-view="search">Search Index</div>
-                    <div class="tab" data-view="stats">Architectural Stats</div>
-                    <div class="tab" data-view="details">Logical Details</div>
-                </div>
-            </div>
-            <input type="text" class="search-bar" placeholder="Search modules, pages, functions..." id="global-search">
-        </div>
-        
-        <div class="content-area">
-            <!-- Graph Pane -->
-            <div class="view-pane active" id="pane-graph">
-                <div id="graph-container"></div>
-            </div>
-            
-            <!-- Tree Pane -->
-            <div class="view-pane" id="pane-tree" style="padding: 40px; overflow-y: auto;">
-                <div id="tree-root"></div>
-            </div>
-            
-            <!-- Search Pane -->
-            <div class="view-pane" id="pane-search" style="padding: 40px; overflow-y: auto;">
-                <div id="search-results" style="display: grid; grid-template-columns: 1fr; gap: 10px;"></div>
-            </div>
-            
-            <!-- Stats Pane -->
-            <div class="view-pane" id="pane-stats">
-                <div class="stats-grid">
-                    <div class="stat-card"><div class="stat-value" id="stat-nodes">0</div><div class="stat-label">Total Components</div></div>
-                    <div class="stat-card"><div class="stat-value" id="stat-pages">0</div><div class="stat-label">Page Modules</div></div>
-                    <div class="stat-card"><div class="stat-value" id="stat-clusters">0</div><div class="stat-label">Functional Clusters</div></div>
-                    <div class="stat-card"><div class="stat-value" id="stat-logic">0</div><div class="stat-label">Logic Rationales</div></div>
-                </div>
-            </div>
-            
-            <!-- Details Pane (Also as overlay) -->
-            <div class="details-panel" id="details-overlay">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                    <span id="detail-category" style="font-size: 10px; color: var(--accent); text-transform: uppercase; border: 1px solid var(--accent); padding: 2px 6px; border-radius: 4px;">MODULE</span>
-                    <i data-feather="x" style="width:16px; cursor:pointer;" onclick="closeDetails()"></i>
-                </div>
-                <h3 id="detail-label" style="margin: 0; font-weight: 400; color: #fff; font-size: 18px;">Select a Node</h3>
-                <p id="detail-file" style="font-size: 12px; color: #444; margin-top: 8px; word-break: break-all;"></p>
-                
-                <div style="margin-top: 30px;">
-                    <label style="font-size: 10px; color: #666; text-transform: uppercase;">Functional Cluster</label>
-                    <div id="detail-cluster" style="font-size: 14px; color: #ccc; margin-top: 5px;">-</div>
-                </div>
-                
-                <div style="margin-top: 20px;">
-                    <label style="font-size: 10px; color: #666; text-transform: uppercase;">Purpose & Logic</label>
-                    <div id="detail-desc" style="font-size: 13px; color: #888; margin-top: 10px; line-height: 1.6;">-</div>
-                </div>
-                
-                <div style="margin-top: 20px;">
-                    <label style="font-size: 10px; color: #666; text-transform: uppercase;">Implementation Details</label>
-                    <pre id="detail-logic" style="font-size: 12px; color: #555; margin-top: 10px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 6px; white-space: pre-wrap;"></pre>
-                </div>
-                
-                <button id="view-file-btn" style="width: 100%; margin-top: 30px; background: transparent; border: 1px solid var(--border); color: #fff; padding: 12px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;">
-                    <i data-feather="code"></i> View Source
-                </button>
-            </div>
-        </div>
-    </div>
-    
+
+    <script src="assets/lib/prism.js"></script>
+    <script src="assets/lib/prism-python.min.js"></script>
+    <script src="assets/js/discovery.js"></script>
     <script>
-        let graphData;
+        let graphData = null, simulation, link, node, label, activeLens = 'File', primaryIds = new Set();
+        const canvasContainer = document.getElementById('view-content');
+        const overlay = document.getElementById('loading-overlay');
         
         async function init() {
-            const resp = await fetch('data/graph.json');
-            graphData = await resp.json();
-            
-            renderGraph();
-            renderTree(graphData.tree, document.getElementById('tree-root'));
-            updateStats();
-            feather.replace();
-            
-            // Tab Switching
-            document.querySelectorAll('.tab').forEach(t => {
-                t.onclick = () => {
-                    document.querySelectorAll('.tab, .view-pane').forEach(el => el.classList.remove('active'));
-                    t.classList.add('active');
-                    document.getElementById(`pane-${t.dataset.view}`).classList.add('active');
-                };
-            });
-            
-            // Search
-            document.getElementById('global-search').oninput = (e) => {
-                const q = e.target.value.toLowerCase();
-                if (!q) return;
-                const results = graphData.nodes.filter(n => 
-                    n.label.toLowerCase().includes(q) || 
-                    (n.source_file || "").toLowerCase().includes(q)
-                ).slice(0, 20);
+            try {
+                overlay.style.opacity = '1';
+                overlay.style.display = 'flex';
                 
-                const resDiv = document.getElementById('search-results');
-                resDiv.innerHTML = results.map(r => `
-                    <div style="background: var(--panel); border: 1px solid var(--border); padding: 15px; border-radius: 8px; cursor: pointer;" onclick="showNodeDetails(${JSON.stringify(r).replace(/"/g, '&quot;')})">
-                        <div style="font-size: 14px; color: var(--accent);">${r.label}</div>
-                        <div style="font-size: 11px; color: #444; margin-top: 5px;">${r.source_file || 'Internal Module'}</div>
-                    </div>
-                `).join('');
-            };
+                const resp = await fetch('data/graph.json');
+                graphData = await resp.json();
+                
+                // Allow UI to render the overlay before heavy processing
+                setTimeout(() => {
+                    renderVisual();
+                    renderTree(graphData.tree || {name:"AVRY Root", children:[]}, document.getElementById('tree-view'));
+                    overlay.style.opacity = '0';
+                    setTimeout(() => overlay.style.display = 'none', 500);
+                }, 300);
+            } catch (e) {
+                console.error("Fetch error:", e);
+                overlay.style.display = 'none';
+                document.getElementById('welcome-msg').innerHTML = `
+                    <div style="padding:20px; color:#ff4444; border:1px solid #ff4444; border-radius:8px; font-size:13px;">
+                        <strong>Security Error:</strong> Browsers block local file access for security.<br><br>
+                        Please run <code>python serve_discovery.py</code> to view the dashboard correctly.
+                    </div>`;
+            }
         }
 
-        function renderGraph() {
-            const width = document.getElementById('graph-container').clientWidth;
-            const height = document.getElementById('graph-container').clientHeight;
+        function renderVisual() {
+            if (!graphData) return;
+            const w = canvasContainer.clientWidth;
+            const h = canvasContainer.clientHeight;
+            d3.select("#canvas").selectAll("*").remove();
+            const svg = d3.select("#canvas").append("svg").attr("width", w).attr("height", h);
+            const g = svg.append("g");
             
-            const svg = d3.select("#graph-container")
-                .append("svg")
-                .attr("width", width)
-                .attr("height", height);
+            const zoom = d3.zoom().scaleExtent([0.05, 5]).on("zoom", (e) => g.attr("transform", e.transform));
+            svg.call(zoom);
 
-            const simulation = d3.forceSimulation(graphData.nodes)
-                .force("link", d3.forceLink(graphData.links).id(d => d.id).distance(100))
-                .force("charge", d3.forceManyBody().strength(-200))
-                .force("center", d3.forceCenter(width / 2, height / 2));
+            // Filter logic
+            const filteredNodes = graphData.nodes.filter(n => activeLens === 'File' || n.category === activeLens);
+            primaryIds = new Set(filteredNodes.map(n => n.id));
+            
+            // Show connections for specialized tabs
+            const showConnections = ['Service', 'Flow', 'DB Table', 'API', 'Feature'].includes(activeLens);
+            
+            let visibleNodes, visibleLinks;
+            if (showConnections) {
+                visibleNodes = graphData.nodes.filter(n => primaryIds.has(n.id) || graphData.links.some(l => (l.source === n.id && primaryIds.has(l.target)) || (l.target === n.id && primaryIds.has(l.source))));
+                const visibleIds = new Set(visibleNodes.map(n => n.id));
+                visibleLinks = graphData.links.filter(l => visibleIds.has(l.source) && visibleIds.has(l.target));
+            } else {
+                visibleNodes = filteredNodes;
+                visibleLinks = [];
+            }
 
-            const link = svg.append("g")
-                .attr("class", "links")
-                .selectAll("line")
-                .data(graphData.links)
-                .enter().append("line")
-                .attr("class", "link");
+            // Optimize simulation
+            simulation = d3.forceSimulation(visibleNodes)
+                .force("link", d3.forceLink(visibleLinks).id(d => d.id).distance(120))
+                .force("charge", d3.forceManyBody().strength(-300))
+                .force("center", d3.forceCenter(w/2, h/2))
+                .force("collision", d3.forceCollide().radius(40))
+                .velocityDecay(0.3); // Faster stabilization
 
-            const node = svg.append("g")
-                .attr("class", "nodes")
-                .selectAll("circle")
-                .data(graphData.nodes)
-                .enter().append("circle")
-                .attr("r", d => d.category === 'Feature' ? 8 : 5)
-                .attr("fill", d => d.category === 'Feature' ? varColor('--accent') : "#333")
-                .on("click", (e, d) => showNodeDetails(d))
-                .call(d3.drag()
-                    .on("start", dragstarted)
-                    .on("drag", dragged)
-                    .on("end", dragended));
+            link = g.append("g").selectAll("line").data(visibleLinks).join("line").attr("class", "link");
+            
+            node = g.append("g").selectAll("circle").data(visibleNodes).join("circle")
+                .attr("class", "node")
+                .attr("r", d => primaryIds.has(d.id) ? 8 : 5)
+                .attr("fill", d => {
+                    if (d.category === 'DB Table') return '#f29111';
+                    if (d.category === 'API') return '#a29bfe';
+                    if (d.layer === 'FE') return '#61dafb';
+                    if (d.layer === 'BE') return '#3c873a';
+                    return '#888';
+                })
+                .style("opacity", d => primaryIds.has(d.id) ? 1 : 0.2)
+                .call(d3.drag().on("start", (e, d) => { if (!e.active) simulation.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+                    .on("drag", (e, d) => { d.fx = e.x; d.fy = e.y; })
+                    .on("end", (e, d) => { if (!e.active) simulation.alphaTarget(0); d.fx = null; d.fy = null; }));
 
-            node.append("title").text(d => d.label);
+            label = g.append("g").selectAll("text").data(visibleNodes.filter(n => primaryIds.has(n.id))).join("text")
+                .attr("class", "node-label")
+                .attr("dy", 18).attr("text-anchor", "middle")
+                .text(d => {
+                    // Show file name instead of full path or page.tsx
+                    const parts = d.label.split('/');
+                    return parts[parts.length - 1];
+                });
+
+            node.on("click", (e, d) => { e.stopPropagation(); selectNode(d); });
+            svg.on("click", () => resetSelection());
 
             simulation.on("tick", () => {
-                link.attr("x1", d => d.source.x)
-                    .attr("y1", d => d.source.y)
-                    .attr("x2", d => d.target.x)
-                    .attr("y2", d => d.target.y);
-                node.attr("cx", d => d.x)
-                    .attr("cy", d => d.y);
+                link.attr("x1", d => d.source.x).attr("y1", d => d.source.y).attr("x2", d => d.target.x).attr("y2", d => d.target.y);
+                node.attr("cx", d => d.x).attr("cy", d => d.y);
+                label.attr("x", d => d.x).attr("y", d => d.y);
             });
-
-            function dragstarted(event) {
-                if (!event.active) simulation.alphaTarget(0.3).restart();
-                event.subject.fx = event.subject.x;
-                event.subject.fy = event.subject.y;
-            }
-            function dragged(event) {
-                event.subject.fx = event.x;
-                event.subject.fy = event.y;
-            }
-            function dragended(event) {
-                if (!event.active) simulation.alphaTarget(0);
-                event.subject.fx = null;
-                event.subject.fy = null;
-            }
         }
 
-        function renderTree(node, container) {
-            const item = document.createElement('div');
-            item.className = 'tree-node';
-            
-            if (node.children && node.children.length > 0) {
-                item.innerHTML = `<div class="tree-folder"><i data-feather="folder" style="width:14px;"></i> ${node.name}</div>`;
-                const childContainer = document.createElement('div');
-                childContainer.style.display = 'block';
-                node.children.forEach(c => renderTree(c, childContainer));
-                item.appendChild(childContainer);
-            } else {
-                item.innerHTML = `<div class="tree-file" onclick="openVaultFile('${node.name}')"><i data-feather="file-text" style="width:14px;"></i> ${node.name}</div>`;
-            }
-            container.appendChild(item);
+        function resetSelection() {
+            link.transition().duration(300).style("stroke-opacity", 0.1).style("stroke", "#555").style("stroke-width", 1);
+            node.transition().duration(300).style("opacity", n => primaryIds.has(n.id) ? 1 : 0.2).attr("r", n => primaryIds.has(n.id) ? 8 : 5);
+            document.getElementById('welcome-msg').style.display = 'block';
+            document.getElementById('node-details').style.display = 'none';
         }
 
-        function showNodeDetails(d) {
-            document.getElementById('details-overlay').classList.add('active');
-            document.getElementById('detail-label').innerText = d.label;
-            document.getElementById('detail-file').innerText = d.source_file || 'Built-in Module';
-            document.getElementById('detail-category').innerText = d.category || 'COMPONENT';
-            document.getElementById('detail-cluster').innerText = d.clusterName || 'General Core';
-            document.getElementById('detail-desc').innerText = d.functionDesc || 'Standard functional module of the AVRY architecture.';
-            document.getElementById('detail-logic').innerText = d.detailedLogic || 'Logic is implicitly defined by the module boundaries.';
+        function switchView(v) {
+            document.getElementById('btn-visual').classList.toggle('active', v === 'visual');
+            document.getElementById('btn-tree').classList.toggle('active', v === 'tree');
+            document.getElementById('canvas').style.display = v === 'visual' ? 'block' : 'none';
+            document.getElementById('tree-view').style.display = v === 'tree' ? 'block' : 'none';
+        }
+
+        function setLens(l) {
+            activeLens = l;
+            document.querySelectorAll('.lens-group .lens-btn').forEach(b => b.classList.toggle('active', b.innerText.trim().includes(l)));
+            overlay.style.display = 'flex';
+            overlay.style.opacity = '1';
+            setTimeout(() => {
+                renderVisual();
+                overlay.style.opacity = '0';
+                setTimeout(() => overlay.style.display = 'none', 500);
+            }, 300);
+        }
+
+        function selectNode(d) {
+            if (!d) return;
+            document.getElementById('welcome-msg').style.display = 'none';
+            document.getElementById('node-details').style.display = 'block';
             
-            document.getElementById('view-file-btn').onclick = () => {
-                if (d.source_file) {
-                    const filename = d.source_file.split('/').pop().split('\\').pop();
-                    window.open(`data/vault/${filename}`, '_blank');
+            const fileName = d.label.split('/').pop();
+            document.getElementById('det-name').innerText = fileName;
+            document.getElementById('det-path').innerText = d.source_file || d.id || 'N/A';
+            
+            // Refine display
+            document.getElementById('det-purpose').innerHTML = `<p style="margin:0; font-size:13px; color:var(--text);">${d.functionDesc || "Standard architectural component of the AVRY ecosystem."}</p>`;
+            document.getElementById('det-logic').innerHTML = `<p style="margin:0; font-family:'Inter'; font-size:13px; color:#999; line-height:1.5;">${d.detailedLogic || "Encapsulated logic following modular design patterns."}</p>`;
+            
+            // Highlight connections
+            link.transition().duration(300)
+                .style("stroke-opacity", l => (l.source.id || l.source) === d.id || (l.target.id || l.target) === d.id ? 0.8 : 0.05)
+                .style("stroke", l => (l.source.id || l.source) === d.id || (l.target.id || l.target) === d.id ? "var(--accent)" : "#555")
+                .style("stroke-width", l => (l.source.id || l.source) === d.id || (l.target.id || l.target) === d.id ? 2 : 1);
+            
+            node.transition().duration(300)
+                .style("opacity", n => n.id === d.id ? 1 : 0.2)
+                .attr("r", n => n.id === d.id ? 12 : (['Service', 'Flow', 'DB Table', 'API', 'Feature'].includes(activeLens) && graphData.nodes.filter(nn => nn.category === activeLens).some(nn => nn.id === n.id) ? 8 : 5));
+
+            const related = graphData.links.filter(l => (l.source.id || l.source) === d.id || (l.target.id || l.target) === d.id);
+            const relBox = document.getElementById('det-related');
+            relBox.innerHTML = "";
+            
+            if (related.length === 0) relBox.innerHTML = "<p style='font-size:11px; color:#444;'>No direct relations detected.</p>";
+            
+            related.forEach(l => {
+                const otherId = (l.source.id || l.source) === d.id ? (l.target.id || l.target) : (l.source.id || l.source);
+                const other = graphData.nodes.find(n => n.id === otherId);
+                if (other) {
+                    const rDiv = document.createElement('div');
+                    rDiv.className = 'rel-card';
+                    rDiv.style = "padding:12px; background:rgba(255,255,255,0.03); border-radius:8px; margin-bottom:10px; cursor:pointer; font-size:12px; border:1px solid var(--border); display:flex; align-items:center; gap:12px; transition:0.2s;";
+                    
+                    const icon = other.category === 'DB Table' ? 'database' : other.category === 'API' ? 'share-2' : 'file';
+                    rDiv.innerHTML = `<i data-feather="${icon}" style="width:14px; height:14px; color:var(--accent); opacity:0.7;"></i> <span>${other.label.split('/').pop()}</span>`;
+                    
+                    rDiv.onmouseover = () => rDiv.style.borderColor = 'var(--accent)';
+                    rDiv.onmouseout = () => rDiv.style.borderColor = 'var(--border)';
+                    rDiv.onclick = (e) => {
+                        e.stopPropagation();
+                        selectNode(other);
+                        // Focus visual node
+                        const visualNode = node.filter(n => n.id === other.id);
+                        if (!visualNode.empty()) {
+                            visualNode.dispatch('click');
+                        }
+                    };
+                    relBox.appendChild(rDiv);
                 }
-            };
+            });
+            
+            document.getElementById('btn-open-code').onclick = () => openCode(d.source_file);
+            feather.replace();
         }
 
-        function closeDetails() {
-            document.getElementById('details-overlay').classList.remove('active');
+        document.getElementById('search-input').addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            if (!term) {
+                node.style("opacity", d => ['Service', 'Flow', 'DB Table', 'API', 'Feature'].includes(activeLens) ? (graphData.nodes.filter(n => n.category === activeLens).some(n => n.id === d.id) ? 1 : 0.2) : 1);
+                label.style("opacity", 1);
+                return;
+            }
+            node.style("opacity", d => d.label.toLowerCase().includes(term) || (d.source_file && d.source_file.toLowerCase().includes(term)) ? 1 : 0.05);
+            label.style("opacity", d => d.label.toLowerCase().includes(term) ? 1 : 0);
+        });
+
+        async function openCode(p) {
+            if (!p) return;
+            injectModal();
+            const resp = await fetch(`data/vault/${p}`);
+            const code = await resp.text();
+            document.getElementById('modal-title').innerText = p;
+            const codeBox = document.getElementById('code-box');
+            codeBox.textContent = code;
+            document.getElementById('modal').style.display = 'block';
+            if (typeof Prism !== 'undefined') Prism.highlightElement(codeBox);
+            feather.replace();
         }
 
-        function updateStats() {
-            document.getElementById('stat-nodes').innerText = graphData.nodes.length;
-            document.getElementById('stat-pages').innerText = graphData.nodes.filter(n => n.category === 'Feature').length;
-            document.getElementById('stat-clusters').innerText = [...new Set(graphData.nodes.map(n => n.clusterName))].length;
-            document.getElementById('stat-logic').innerText = graphData.nodes.filter(n => n.detailedLogic).length;
+        function closeModal_vis() { 
+            const m = document.getElementById('modal');
+            if (m) m.style.display = 'none';
         }
 
-        function varColor(name) { return getComputedStyle(document.documentElement).getPropertyValue(name); }
-        function openVaultFile(name) { window.open(`data/vault/${name}`, '_blank'); }
+        function renderTree(item, container, depth=0) {
+            if (!item) return;
+            const div = document.createElement('div');
+            div.className = 'tree-node';
+            div.innerHTML = `<span style="opacity:0.5; margin-right:10px;">${item.children&&item.children.length?'⊞':'📄'}</span> ${item.name}`;
+            if (item.id) {
+                div.style.color = 'var(--accent)';
+                div.onclick = (e) => { e.stopPropagation(); selectNode(graphData.nodes.find(n => n.id === item.id)); };
+            }
+            container.appendChild(div);
+            if (item.children && item.children.length) {
+                const indent = document.createElement('div');
+                indent.className = 'tree-indent';
+                indent.style.display = depth < 1 ? 'block' : 'none';
+                item.children.forEach(c => renderTree(c, indent, depth + 1));
+                container.appendChild(indent);
+                div.onclick = () => {
+                    const h = indent.style.display === 'none';
+                    indent.style.display = h ? 'block' : 'none';
+                    div.querySelector('span').innerText = h ? '⊟' : '⊞';
+                };
+            }
+        }
 
         init();
     </script>

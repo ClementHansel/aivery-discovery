@@ -1,58 +1,878 @@
 [
     {
-        "name": "Super Admin Authentication",
-        "description": "Test 1.1: Super Admin Authentication",
-        "file": "tests/test_super_admin_suite.py",
-        "result": "Passed",
-        "timestamp": "2026-05-15 23:32:56"
+        "name": "discovery/data/vault/nextjs-console/__tests__/agentic-reducer-immutability.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/agentic-reducer-immutability.properties.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
     },
     {
-        "name": "Dashboard Access",
-        "description": "Test 1.2: Access All Dashboard Sections",
-        "file": "tests/test_super_admin_suite.py",
-        "result": "Passed",
-        "timestamp": "2026-05-15 23:32:56"
+        "name": "discovery/data/vault/nextjs-console/__tests__/AgentNode.accessibility.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/AgentNode.accessibility.test.tsx.log",
+        "timestamp": "2026-05-15 22:42:26"
     },
     {
-        "name": "Free Diagnostic",
-        "description": "Test 2.1: Run Free AI Diagnostic",
-        "file": "tests/test_super_admin_suite.py",
-        "result": "Passed",
-        "timestamp": "2026-05-15 23:32:56"
+        "name": "discovery/data/vault/nextjs-console/__tests__/AgentNode.integration.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/AgentNode.integration.test.tsx.log",
+        "timestamp": "2026-05-15 22:42:26"
     },
     {
-        "name": "Roi Engine Conservative",
-        "description": "Test 7.1: ROI Engine Conservative Mode",
-        "file": "tests/test_super_admin_suite.py",
-        "result": "Passed",
-        "timestamp": "2026-05-15 23:32:56"
+        "name": "discovery/data/vault/nextjs-console/__tests__/AgentNode.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/AgentNode.properties.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
     },
     {
-        "name": "Roi Engine Growth",
-        "description": "Test 7.2: ROI Engine Growth Mode",
-        "file": "tests/test_super_admin_suite.py",
-        "result": "Passed",
-        "timestamp": "2026-05-15 23:32:56"
+        "name": "discovery/data/vault/nextjs-console/__tests__/AgentNode.unit.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/AgentNode.unit.test.tsx.log",
+        "timestamp": "2026-05-15 22:42:26"
     },
     {
-        "name": "Multi Turn Diagnostic",
-        "description": "Test 6.1: Multi-Turn Guided Diagnostic",
-        "file": "tests/test_super_admin_suite.py",
-        "result": "Passed",
-        "timestamp": "2026-05-15 23:32:56"
+        "name": "discovery/data/vault/nextjs-console/__tests__/AgentNode.visual.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/AgentNode.visual.test.tsx.log",
+        "timestamp": "2026-05-15 22:42:26"
     },
     {
-        "name": "Subscription Tiers",
-        "description": "Test 5.x: Subscription Tier Features",
-        "file": "tests/test_super_admin_suite.py",
-        "result": "Passed",
-        "timestamp": "2026-05-15 23:32:56"
+        "name": "discovery/data/vault/nextjs-console/__tests__/aira-workflow-generation.e2e.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/aira-workflow-generation.e2e.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
     },
     {
-        "name": "Ui Color Consistency",
-        "description": "Test 10.1: Brand Color Consistency",
-        "file": "tests/test_super_admin_suite.py",
-        "result": "Passed",
-        "timestamp": "2026-05-15 23:32:56"
+        "name": "discovery/data/vault/nextjs-console/__tests__/aira-workflow-generation.integration.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/aira-workflow-generation.integration.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/aira-workflow-generation.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/aira-workflow-generation.properties.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/api-routes.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/api-routes.properties.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/apiRoutes.unit.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/apiRoutes.unit.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/auto-scroll-threshold.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/auto-scroll-threshold.properties.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/canvasLayout.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/canvasLayout.properties.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/canvasLayout.unit.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/canvasLayout.unit.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/console-copilot-memory-fix.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/console-copilot-memory-fix.properties.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/console-copilot-memory-fix.unit.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/console-copilot-memory-fix.unit.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/console-layout-bug-condition.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/console-layout-bug-condition.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/console-layout-preservation.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/console-layout-preservation.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/console-streaming-bug-condition-fixed.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/console-streaming-bug-condition-fixed.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/console-streaming-bug-condition.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/console-streaming-bug-condition.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/console-streaming-preservation.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/console-streaming-preservation.properties.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/diagnostic-roi-bugs.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/diagnostic-roi-bugs.properties.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/errorHandling.unit.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/errorHandling.unit.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/external-link-security.properties.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/external-link-security.properties.test.tsx.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/file-attachment-bar-badge-colors.properties.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/file-attachment-bar-badge-colors.properties.test.tsx.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/file-attachment-bar-filename-display.properties.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/file-attachment-bar-filename-display.properties.test.tsx.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/integration.activation.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/integration.activation.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/integration.concurrent-saves.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/integration.concurrent-saves.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/integration.conflict-resolution.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/integration.conflict-resolution.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/integration.error-scenarios.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/integration.error-scenarios.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/integration.large-workflows.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/integration.large-workflows.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/integration.offline.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/integration.offline.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/integration.workflow-cycle.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/integration.workflow-cycle.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/malformed-event-handling.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/malformed-event-handling.properties.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/mapper.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/mapper.properties.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/markdown-element-styling.properties.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/markdown-element-styling.properties.test.tsx.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/markdown-heading-typography.properties.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/markdown-heading-typography.properties.test.tsx.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/n8n.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/n8n.properties.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/n8n.unit.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/n8n.unit.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/n8nMapper.unit.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/n8nMapper.unit.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/nodeMapper.unit.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/nodeMapper.unit.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/offline-execution.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/offline-execution.properties.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/offlineMode.unit.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/offlineMode.unit.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/parseLLMResponse.unit.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/parseLLMResponse.unit.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/phase-status-icon-mapping.properties.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/phase-status-icon-mapping.properties.test.tsx.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/phasebox-toggle.properties.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/phasebox-toggle.properties.test.tsx.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/streaming-cursor-visibility.properties.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/streaming-cursor-visibility.properties.test.tsx.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/substep-indicator-duration.properties.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/substep-indicator-duration.properties.test.tsx.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/substep-indicator-svg-icons.properties.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/substep-indicator-svg-icons.properties.test.tsx.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/SyncStatus.unit.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/SyncStatus.unit.test.tsx.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/visual-consistency.unit.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/visual-consistency.unit.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/workflow-builder-upgrade.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/workflow-builder-upgrade.properties.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/workflow-container-auto-expand.properties.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/workflow-container-auto-expand.properties.test.tsx.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/workflow-container-completion-footer.properties.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/workflow-container-completion-footer.properties.test.tsx.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/workflow-operations.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/workflow-operations.properties.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/workflow-serializer.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/workflow-serializer.properties.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/workflow-serializer.unit.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/workflow-serializer.unit.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/workflow-types.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/workflow-types.properties.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/workflow-types.unit.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/workflow-types.unit.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/workflow-validation.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/workflow-validation.properties.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/workflow-validation.unit.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/workflow-validation.unit.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/workflows-page-action-mapping.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/workflows-page-action-mapping.properties.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/workflows-page-app-tool-mapping.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/workflows-page-app-tool-mapping.properties.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/workflows-page-apps-badge.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/workflows-page-apps-badge.properties.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/workflows-page-apps-icon.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/workflows-page-apps-icon.properties.test.ts.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/workflows-page-apps-icon.unit.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/workflows-page-apps-icon.unit.test.tsx.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/workflows-page-collapse-expand-drag.unit.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/workflows-page-collapse-expand-drag.unit.test.tsx.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/workflows-page-drag-drop-flow.integration.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/workflows-page-drag-drop-flow.integration.test.tsx.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/workflows-page-drag-drop.unit.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/workflows-page-drag-drop.unit.test.tsx.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/workflows-page-sidebar-flow.integration.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/workflows-page-sidebar-flow.integration.test.tsx.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "discovery/data/vault/nextjs-console/__tests__/workflows-page-sidebar.unit.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/workflows-page-sidebar.unit.test.tsx.log",
+        "timestamp": "2026-05-15 22:42:26"
+    },
+    {
+        "name": "nextjs-console/__tests__/agentic-reducer-immutability.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/agentic-reducer-immutability.properties.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/AgentNode.accessibility.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/AgentNode.accessibility.test.tsx.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/AgentNode.integration.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/AgentNode.integration.test.tsx.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/AgentNode.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/AgentNode.properties.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/AgentNode.unit.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/AgentNode.unit.test.tsx.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/AgentNode.visual.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/AgentNode.visual.test.tsx.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/aira-workflow-generation.e2e.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/aira-workflow-generation.e2e.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/aira-workflow-generation.integration.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/aira-workflow-generation.integration.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/aira-workflow-generation.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/aira-workflow-generation.properties.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/api-routes.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/api-routes.properties.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/apiRoutes.unit.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/apiRoutes.unit.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/auto-scroll-threshold.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/auto-scroll-threshold.properties.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/canvasLayout.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/canvasLayout.properties.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/canvasLayout.unit.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/canvasLayout.unit.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/console-copilot-memory-fix.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/console-copilot-memory-fix.properties.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/console-copilot-memory-fix.unit.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/console-copilot-memory-fix.unit.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/console-layout-bug-condition.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/console-layout-bug-condition.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/console-layout-preservation.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/console-layout-preservation.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/console-streaming-bug-condition-fixed.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/console-streaming-bug-condition-fixed.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/console-streaming-bug-condition.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/console-streaming-bug-condition.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/console-streaming-preservation.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/console-streaming-preservation.properties.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/diagnostic-roi-bugs.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/diagnostic-roi-bugs.properties.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/errorHandling.unit.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/errorHandling.unit.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/external-link-security.properties.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/external-link-security.properties.test.tsx.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/file-attachment-bar-badge-colors.properties.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/file-attachment-bar-badge-colors.properties.test.tsx.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/file-attachment-bar-filename-display.properties.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/file-attachment-bar-filename-display.properties.test.tsx.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/integration.activation.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/integration.activation.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/integration.concurrent-saves.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/integration.concurrent-saves.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/integration.conflict-resolution.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/integration.conflict-resolution.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/integration.error-scenarios.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/integration.error-scenarios.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/integration.large-workflows.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/integration.large-workflows.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/integration.offline.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/integration.offline.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/integration.workflow-cycle.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/integration.workflow-cycle.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/malformed-event-handling.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/malformed-event-handling.properties.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/mapper.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/mapper.properties.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/markdown-element-styling.properties.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/markdown-element-styling.properties.test.tsx.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/markdown-heading-typography.properties.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/markdown-heading-typography.properties.test.tsx.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/n8n.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/n8n.properties.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/n8n.unit.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/n8n.unit.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/n8nMapper.unit.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/n8nMapper.unit.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/nodeMapper.unit.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/nodeMapper.unit.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/offline-execution.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/offline-execution.properties.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/offlineMode.unit.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/offlineMode.unit.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/parseLLMResponse.unit.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/parseLLMResponse.unit.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/phase-status-icon-mapping.properties.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/phase-status-icon-mapping.properties.test.tsx.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/phasebox-toggle.properties.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/phasebox-toggle.properties.test.tsx.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/streaming-cursor-visibility.properties.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/streaming-cursor-visibility.properties.test.tsx.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/substep-indicator-duration.properties.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/substep-indicator-duration.properties.test.tsx.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/substep-indicator-svg-icons.properties.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/substep-indicator-svg-icons.properties.test.tsx.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/SyncStatus.unit.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/SyncStatus.unit.test.tsx.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/visual-consistency.unit.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/visual-consistency.unit.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/workflow-builder-upgrade.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/workflow-builder-upgrade.properties.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/workflow-container-auto-expand.properties.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/workflow-container-auto-expand.properties.test.tsx.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/workflow-container-completion-footer.properties.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/workflow-container-completion-footer.properties.test.tsx.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/workflow-operations.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/workflow-operations.properties.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/workflow-serializer.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/workflow-serializer.properties.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/workflow-serializer.unit.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/workflow-serializer.unit.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/workflow-types.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/workflow-types.properties.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/workflow-types.unit.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/workflow-types.unit.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/workflow-validation.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/workflow-validation.properties.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/workflow-validation.unit.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/workflow-validation.unit.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/workflows-page-action-mapping.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/workflows-page-action-mapping.properties.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/workflows-page-app-tool-mapping.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/workflows-page-app-tool-mapping.properties.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/workflows-page-apps-badge.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/workflows-page-apps-badge.properties.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/workflows-page-apps-icon.properties.test.ts",
+        "description": "System validation test.",
+        "result_path": "results/workflows-page-apps-icon.properties.test.ts.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/workflows-page-apps-icon.unit.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/workflows-page-apps-icon.unit.test.tsx.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/workflows-page-collapse-expand-drag.unit.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/workflows-page-collapse-expand-drag.unit.test.tsx.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/workflows-page-drag-drop-flow.integration.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/workflows-page-drag-drop-flow.integration.test.tsx.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/workflows-page-drag-drop.unit.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/workflows-page-drag-drop.unit.test.tsx.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/workflows-page-sidebar-flow.integration.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/workflows-page-sidebar-flow.integration.test.tsx.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "nextjs-console/__tests__/workflows-page-sidebar.unit.test.tsx",
+        "description": "System validation test.",
+        "result_path": "results/workflows-page-sidebar.unit.test.tsx.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "tests/requirements.txt",
+        "description": "System validation test.",
+        "result_path": "results/requirements.txt.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "tests/test_super_admin_suite.py",
+        "description": "System validation test.",
+        "result_path": "results/test_super_admin_suite.py.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "tests/schemas/free_diagnostic_output.json",
+        "description": "System validation test.",
+        "result_path": "results/free_diagnostic_output.json.log",
+        "timestamp": "2026-05-15 19:36:21"
+    },
+    {
+        "name": "tests/schemas/roi_calculation_output.json",
+        "description": "System validation test.",
+        "result_path": "results/roi_calculation_output.json.log",
+        "timestamp": "2026-05-15 19:36:21"
     }
 ]

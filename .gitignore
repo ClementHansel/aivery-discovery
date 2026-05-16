@@ -1,8 +1,10 @@
-# AVRY Discovery Static Site
 .DS_Store
 Thumbs.db
-node_modules/
-.env
-.kiro
-.ki
 *.log
+.vscode/
+.idea/
+node_modules/
+dist/
+build/
+.env
+.netlify/

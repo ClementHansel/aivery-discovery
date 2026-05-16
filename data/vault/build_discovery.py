@@ -6,11 +6,25 @@ from datetime import datetime
 # Paths
 REPO_ROOT = r'c:\Users\user\Documents\Software-Developer\Freelancer\aivery'
 OUTPUT_ROOT = r'C:\Users\user\Documents\Software-Developer\Freelancer\avry-discovery'
-# Use the persisted graph as source
-GRAPH_DATA_PATH = os.path.join(OUTPUT_ROOT, 'data', 'graph.json') 
+GRAPH_DATA_PATH = os.path.join(REPO_ROOT, 'discovery', 'data', 'graph.json')
+SCHEMA_PATH = os.path.join(REPO_ROOT, 'discovery', 'data', 'schema_info.json')
 
 VAULT_DIR = os.path.join(OUTPUT_ROOT, 'data', 'vault')
 DATA_DIR = os.path.join(OUTPUT_ROOT, 'data')
+
+# Knowledge Base for deeper architectural synthesis
+KNOWLEDGE_BASE = {
+    "auth": "Critical Security Layer. Manages identity verification, JWT issuing, and access control for all platform modules.",
+    "payments": "Financial Orchestrator. Handles subscription tiers, billing cycles, and secure gateway handshakes.",
+    "vps": "Infrastructure Bridge. Acts as the primary conduit between the cloud console and remote VPS instances.",
+    "agents": "AI Brain Engine. Defines the behavioral logic, goal-seeking paths, and execution state of automated agents.",
+    "blueprints": "Neural Template Registry. Stores the foundational structures for all AI-generated solutions.",
+    "diagnostic": "Business Intelligence Probe. Analyzes user input to calculate AI readiness and implementation scores.",
+    "console": "Primary Operations Hub. The central visual and functional cockpit for managing the entire system.",
+    "workflows": "Procedural Automator. Coordinates multi-step logic flows across frontend and backend layers.",
+    "database": "Persistent Data Core. High-integrity storage for system state, user profiles, and operational logs.",
+    "api": "System Interconnect. Defines the formal protocols and endpoints for cross-module communication."
+}
 
 def get_rationale_map(graph_data):
     rmap = {}
@@ -28,7 +42,7 @@ def get_rationale_map(graph_data):
 def inject_comments(file_path, rationales):
     if not os.path.exists(file_path): return ""
     try:
-        with open(file_path, 'r', encoding='utf-8') as f:
+        with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
             lines = f.readlines()
     except: return ""
 
@@ -42,104 +56,116 @@ def inject_comments(file_path, rationales):
         lines.insert(idx, f"\n{comment_sym} ARCHITECTURE INSIGHT: {r['text']}\n")
     return "".join(lines)
 
-def build_tree(nodes):
-    root = {"name": "AVRY Root", "children": []}
-    tree_map = {"root": root}
-    for n in nodes:
-        path_str = n.get('source_file') or n.get('label')
-        if not path_str or '.' not in path_str: continue
-        parts = path_str.replace('\\', '/').split('/')
-        current_path = "root"
-        current_node = root
-        for i, part in enumerate(parts):
-            current_path += "/" + part
-            if current_path not in tree_map:
-                new_node = {"name": part, "children": []}
-                tree_map[current_path] = new_node
-                current_node["children"].append(new_node)
-            current_node = tree_map[current_path]
-            if i == len(parts) - 1:
-                current_node["id"] = n.get("id")
-                current_node["category"] = n.get("category")
-    return root
-
 def build():
-    print("Loading existing graph data...")
-    if not os.path.exists(GRAPH_DATA_PATH):
-        print("Error: graph.json source not found.")
-        return
-
+    print("Loading graph data...")
     with open(GRAPH_DATA_PATH, 'r') as f:
         graph_data = json.load(f)
     
+    schema_info = {}
+    if os.path.exists(SCHEMA_PATH):
+        with open(SCHEMA_PATH, 'r') as f:
+            schema_info = json.load(f)
+
     rationale_map = get_rationale_map(graph_data)
+    
     processed_nodes = []
     tests_list = []
+    reports_list = []
+    vps_list = []
     docs_list = []
     
-    print("Verifying repository files and injecting logic...")
+    print("Mirroring repository with AI injections...")
     for root, dirs, files in os.walk(REPO_ROOT):
-        if any(x in root for x in ['node_modules', '.git', '__pycache__', 'avry-discovery']):
+        if any(x in root for x in ['node_modules', '.git', '__pycache__', 'graphify-out', 'avry-discovery']):
             continue
             
         for file in files:
             full_path = os.path.join(root, file)
             rel_path = os.path.relpath(full_path, REPO_ROOT).replace('\\', '/')
             
-            # Skip large binaries for the vault
-            if file.endswith(('.png', '.jpg', '.zip', '.exe')): continue
-
-            # 1. Inject Logic into Vault
-            rationales = rationale_map.get(rel_path, [])
-            injected_code = inject_comments(full_path, rationales)
             vault_path = os.path.join(VAULT_DIR, rel_path)
             os.makedirs(os.path.dirname(vault_path), exist_ok=True)
+            
+            rationales = rationale_map.get(rel_path, [])
+            injected_code = inject_comments(full_path, rationales)
             with open(vault_path, 'w', encoding='utf-8') as f:
                 f.write(injected_code)
 
-            # 2. Extract REAL metadata
-            lower_rel = rel_path.lower()
-            
-            # Tests Discovery
-            if 'tests/' in lower_rel or '__tests__' in lower_rel:
+            low_rel = rel_path.lower()
+            if rel_path.startswith('tests/') or '__tests__' in low_rel:
                 tests_list.append({
                     "name": rel_path,
-                    "description": rationales[0]['text'] if rationales else "Automated system test module.",
+                    "description": rationales[0]['text'] if rationales else "System validation test.",
+                    "result_path": f"results/{file}.log",
                     "timestamp": datetime.fromtimestamp(os.path.getmtime(full_path)).strftime('%Y-%m-%d %H:%M:%S')
                 })
             
-            # Documentation & Categorization
-            if file.endswith(('.md', '.txt', '.pdf', '.sh')):
-                category = "Documentation"
-                if "analysis" in lower_rel: category = "Analysis"
-                elif "vps" in lower_rel or "bridge" in lower_rel: category = "Infrastructure"
-                elif "guide" in lower_rel or "how-to" in lower_rel: category = "Guides"
-                elif "legal" in lower_rel or "license" in lower_rel: category = "Legal"
-                elif "report" in lower_rel: category = "Reports"
-                
-                docs_list.append({
-                    "name": file,
-                    "path": rel_path,
-                    "category": category
-                })
+            if low_rel.endswith('.md'):
+                doc_item = {"name": file, "path": rel_path}
+                if 'vps' in low_rel: vps_list.append(doc_item)
+                elif 'report' in low_rel or 'analysis' in low_rel: reports_list.append(doc_item)
+                else: docs_list.append(doc_item)
 
-    # 3. Finalize Graph & Tree
+    # Architectural Synthesis
     for node in graph_data['nodes']:
         if node.get('file_type') == 'rationale': continue
+        
+        filePath = (node.get('source_file') or "").replace('\\', '/')
+        label = node.get('label') or ""
+        low_path = filePath.lower()
+        
+        # 1. Lens Categorization
+        node['category'] = 'File' # Default
+        if filePath.endswith('.html') or 'pages/' in filePath or '/app/' in filePath:
+            node['category'] = 'Feature' # Pages
+            if 'page.tsx' in filePath or '.html' in filePath:
+                node['label'] = f"Page: {filePath}"
+        elif 'services/' in low_path or 'backend/' in low_path:
+            node['category'] = 'Service'
+        elif 'workflow' in low_path or 'logic/' in low_path:
+            node['category'] = 'Flow'
+        elif 'api/' in low_path or 'routes/' in low_path:
+            node['category'] = 'API'
+        
+        # 2. Schema Intelligence
+        cleanLabel = label.replace('.', '').replace('()', '').strip()
+        if cleanLabel in schema_info:
+            node['schema'] = schema_info[cleanLabel]
+            node['category'] = 'DB Table'
+            node['layer'] = 'DB'
+
+        # 3. Purpose & Importance Narrative
+        node_rationales = rationale_map.get(filePath, [])
+        importance = "Standard"
+        summary = "Core project file."
+        
+        # Fallback to Knowledge Base for architectural context
+        for key, desc in KNOWLEDGE_BASE.items():
+            if key in low_path:
+                importance = "High"
+                summary = desc
+                break
+
+        if node_rationales:
+            summary = node_rationales[0]['text']
+            detailed = "\n".join([f"• {r['text']}" for r in node_rationales])
+        else:
+            detailed = f"Architectural logic located in {os.path.dirname(filePath)}."
+
+        node['functionDesc'] = f"Importance: {importance} | Purpose: {summary}"
+        node['detailedLogic'] = f"This file handles the logic for {label}. It is essential for the system's stability and coordinates with related files in the {os.path.basename(os.path.dirname(filePath))} directory.\n\nKey Insights:\n{detailed}"
+
         processed_nodes.append(node)
 
-    tree = build_tree(processed_nodes)
-
-    # 4. Save Static Data
-    print("Persisting final architecture data...")
-    with open(os.path.join(DATA_DIR, 'tests.json'), 'w') as f: json.dump(tests_list, f, indent=4)
-    with open(os.path.join(DATA_DIR, 'docs.json'), 'w') as f: json.dump(docs_list, f, indent=4)
+    # Final Data Export
+    for name, data in [('tests.json', tests_list), ('reports.json', reports_list), 
+                       ('vps.json', vps_list), ('docs.json', docs_list)]:
+        with open(os.path.join(DATA_DIR, name), 'w') as f:
+            json.dump(data, f, indent=4)
+            
     with open(os.path.join(DATA_DIR, 'graph.json'), 'w') as f:
-        json.dump({
-            "nodes": processed_nodes, 
-            "links": graph_data.get('links', []),
-            "tree": tree
-        }, f, indent=4)
+        json.dump({"nodes": processed_nodes, "links": graph_data['links'], "tree": graph_data.get('tree')}, f, indent=4)
+
     print("Build complete!")
 
 if __name__ == "__main__":

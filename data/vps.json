@@ -1,0 +1,14 @@
+[
+    {
+        "name": "VPS_BRIDGE_COMPLETE.md",
+        "path": "VPS_BRIDGE_AGENTS_IMPLEMENTATION_COMPLETE.md",
+        "description": "Final report on the VPS bridge implementation.",
+        "timestamp": "2026-05-16 11:00:00"
+    },
+    {
+        "name": "LOCAL_DEV_GUIDE.md",
+        "path": "vps-bridge/LOCAL_DEV.md",
+        "description": "Local development setup for the VPS bridge.",
+        "timestamp": "2026-05-16 11:30:00"
+    }
+]

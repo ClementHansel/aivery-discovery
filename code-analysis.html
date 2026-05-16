@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Analysis | AVRY Discovery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/discovery.css">
+    <link rel="stylesheet" href="assets/lib/prism.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+    <div id="app-container">
+        <main class="main-content">
+            <header class="page-header">
+                <h1 id="page-title">Code Analysis</h1>
+                <p id="page-desc">Deep-dive functional and business logic explorations.</p>
+            </header>
+            <div class="scroll-area">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>File Name</th>
+                            <th>Description</th>
+                            <th>Timestamp</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body"></tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <script src="assets/lib/prism.js"></script>
+    <script src="assets/lib/prism-python.min.js"></script>
+    <script src="assets/js/discovery.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadTableData('reports.json', 'table-body', 'Analysis');
+        });
+    </script>
+</body>
+</html>
