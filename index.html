@@ -3,41 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AVRY Discovery Dashboard</title>
+    <title>Dashboard | AVRY Discovery</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/feather-icons"></script>
     <style>
-        :root { --bg: #05060a; --card-bg: rgba(15, 18, 25, 0.9); --accent: #00f2ff; --border: rgba(255, 255, 255, 0.08); --text: #e0e0e0; }
-        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow-x: hidden; }
-        .container { max-width: 1100px; width: 90%; text-align: center; padding: 40px 0; }
-        header { margin-bottom: 60px; }
-        h1 { font-size: 42px; letter-spacing: 10px; color: var(--accent); margin: 0; font-weight: 300; }
-        .subtitle { color: #444; margin-top: 10px; font-size: 11px; text-transform: uppercase; letter-spacing: 5px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .card { background: var(--card-bg); border: 1px solid var(--border); padding: 40px 30px; border-radius: 16px; transition: 0.3s; text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center; }
-        .card:hover { border-color: var(--accent); transform: translateY(-5px); background: rgba(0, 242, 255, 0.03); box-shadow: 0 20px 50px rgba(0,0,0,0.6); }
-        .icon-box { width: 56px; height: 56px; background: rgba(0, 242, 255, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 25px; color: var(--accent); }
-        .card h3 { font-size: 18px; margin: 0 0 12px; font-weight: 500; letter-spacing: 1px; }
-        .card p { font-size: 12px; color: #666; line-height: 1.6; margin: 0; }
-        .main-card { grid-column: 1 / -1; background: linear-gradient(135deg, rgba(0,242,255,0.05) 0%, rgba(15,18,25,0.9) 100%); }
+        :root { --bg: #0a0b10; --panel: #14161e; --accent: #00f2ff; --text: #e0e0e0; --border: rgba(255, 255, 255, 0.1); }
+        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; display: flex; height: 100vh; overflow: hidden; }
+        .sidebar { width: 260px; background: var(--panel); border-right: 1px solid var(--border); padding: 40px 20px; display: flex; flex-direction: column; flex-shrink: 0; }
+        .main { flex: 1; padding: 60px 80px; overflow-y: auto; }
+        .nav-item { padding: 12px; color: #888; text-decoration: none; display: flex; align-items: center; gap: 12px; font-size: 13px; border-radius: 8px; margin-bottom: 4px; transition: 0.2s; }
+        .nav-item:hover { background: rgba(255,255,255,0.05); color: #fff; }
+        .nav-item.active { background: rgba(0, 242, 255, 0.1); color: var(--accent); font-weight: 600; }
+        
+        .welcome { margin-bottom: 60px; }
+        .welcome h1 { font-size: 42px; font-weight: 300; margin: 0; letter-spacing: -1px; }
+        .welcome p { color: #555; margin-top: 15px; font-size: 18px; }
+        
+        .module-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; }
+        .module-card { background: var(--panel); border: 1px solid var(--border); padding: 40px; border-radius: 16px; cursor: pointer; transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); text-decoration: none; color: inherit; position: relative; overflow: hidden; }
+        .module-card:hover { border-color: var(--accent); transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        .module-card i { color: var(--accent); margin-bottom: 25px; width: 32px; height: 32px; }
+        .module-card h3 { font-size: 20px; margin: 0; font-weight: 400; color: #fff; }
+        .module-card p { font-size: 14px; color: #666; margin-top: 15px; line-height: 1.6; }
+        .module-card .arrow { position: absolute; bottom: 40px; right: 40px; opacity: 0; transition: 0.3s; transform: translateX(-10px); }
+        .module-card:hover .arrow { opacity: 1; transform: translateX(0); }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>AVRY DISCOVERY</h1>
-            <div class="subtitle">Neural Architecture Hub</div>
-        </header>
-        <div class="grid">
-            <a href="visualization.html" class="card main-card">
-                <div class="icon-box"><i data-feather="map"></i></div>
-                <h3>Architectural Visualization</h3>
-                <p>Interactive force-directed graph and hierarchical tree explorer mapping the entire system's connectivity and logic.</p>
+    <div class="sidebar">
+        <h2 style="color: var(--accent); font-weight: 300; letter-spacing: 3px; font-size: 20px; margin-bottom: 40px;">AVRY</h2>
+        <nav>
+            <a href="index.html" class="nav-item active"><i data-feather="grid"></i> Dashboard</a>
+            <div style="margin: 20px 0 10px 12px; font-size: 10px; color: #444; text-transform: uppercase; letter-spacing: 2px;">Modules</div>
+            <a href="visualization.html" class="nav-item"><i data-feather="map"></i> Visualization</a>
+            <a href="reports.html" class="nav-item"><i data-feather="file-text"></i> Reports</a>
+            <a href="analysis.html" class="nav-item"><i data-feather="zap"></i> Analysis</a>
+            <a href="tests.html" class="nav-item"><i data-feather="check-circle"></i> Tests</a>
+            <a href="vps.html" class="nav-item"><i data-feather="server"></i> VPS</a>
+            <a href="documentation.html" class="nav-item"><i data-feather="book-open"></i> Documentation</a>
+        </nav>
+    </div>
+    
+    <div class="main">
+        <div class="welcome">
+            <h1>Discovery Platform</h1>
+            <p>Architectural intelligence and functional mapping for the AVRY ecosystem.</p>
+        </div>
+        
+        <div class="module-grid">
+            <a href="visualization.html" class="module-card">
+                <i data-feather="map"></i>
+                <h3>Visualization</h3>
+                <p>Interactive graph and tree structures mapping the repository topology.</p>
+                <i data-feather="arrow-right" class="arrow"></i>
             </a>
-            <a href="documentation.html" class="card"><div class="icon-box"><i data-feather="book-open"></i></div><h3>Documentation</h3><p>System guides, infrastructure analysis, and technical specifications.</p></a>
-            <a href="tests.html" class="card"><div class="icon-box"><i data-feather="check-circle"></i></div><h3>Tests</h3><p>Real-time verification suite with AI-annotated architectural test logic.</p></a>
-            <a href="analysis.html" class="card"><div class="icon-box"><i data-feather="zap"></i></div><h3>Deep Analysis</h3><p>Functional extractions and business logic mapping derived from source code.</p></a>
-            <a href="reports.html" class="card"><div class="icon-box"><i data-feather="file-text"></i></div><h3>Reports</h3><p>Automated system health and structural integrity reports.</p></a>
+            <a href="reports.html" class="module-card">
+                <i data-feather="file-text"></i>
+                <h3>Reports</h3>
+                <p>Automated agent summaries and periodic architectural snapshots.</p>
+                <i data-feather="arrow-right" class="arrow"></i>
+            </a>
+            <a href="analysis.html" class="module-card">
+                <i data-feather="zap"></i>
+                <h3>Analysis</h3>
+                <p>Deep dive into CORS policies, logical clusters, and system logic.</p>
+                <i data-feather="arrow-right" class="arrow"></i>
+            </a>
+            <a href="tests.html" class="module-card">
+                <i data-feather="check-circle"></i>
+                <h3>Tests</h3>
+                <p>Real-time test suite results with functional documentation.</p>
+                <i data-feather="arrow-right" class="arrow"></i>
+            </a>
+            <a href="vps.html" class="module-card">
+                <i data-feather="server"></i>
+                <h3>VPS</h3>
+                <p>Diagnostic data and network configuration for infrastructure.</p>
+                <i data-feather="arrow-right" class="arrow"></i>
+            </a>
+            <a href="documentation.html" class="module-card">
+                <i data-feather="book-open"></i>
+                <h3>Documentation</h3>
+                <p>Central knowledge base for architecture and system specs.</p>
+                <i data-feather="arrow-right" class="arrow"></i>
+            </a>
         </div>
     </div>
     <script>feather.replace();</script>
