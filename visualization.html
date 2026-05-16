@@ -328,8 +328,24 @@
             document.getElementById('det-path').innerText = d.source_file || d.id || 'N/A';
             
             // Refine display
-            document.getElementById('det-purpose').innerHTML = `<p style="margin:0; font-size:13px; color:var(--text);">${d.functionDesc || "Standard architectural component of the AVRY ecosystem."}</p>`;
-            document.getElementById('det-logic').innerHTML = `<p style="margin:0; font-family:'Inter'; font-size:13px; color:#999; line-height:1.5;">${d.detailedLogic || "Encapsulated logic following modular design patterns."}</p>`;
+            document.getElementById('det-purpose').innerHTML = `
+                <div style="display:flex; gap:8px; margin-bottom:12px;">
+                    <div style="background:rgba(0,242,255,0.1); color:var(--accent); padding:4px 8px; border-radius:4px; font-size:10px; font-weight:700; border:1px solid var(--accent-dim); letter-spacing:0.5px;">
+                        IMPORTANCE: ${d.importance || 'HIGH'}
+                    </div>
+                    <div style="background:rgba(255,255,255,0.05); color:var(--text-dim); padding:4px 8px; border-radius:4px; font-size:10px; font-weight:700; border:1px solid var(--border); letter-spacing:0.5px;">
+                        ROLE: ${d.category || 'MODULE'}
+                    </div>
+                </div>
+                <div style="color:var(--text); font-size:14px; font-weight:600; margin-bottom:8px; line-height:1.4;">
+                    ${d.functionDesc || "Architectural System Component"}
+                </div>
+            `;
+            document.getElementById('det-logic').innerHTML = `
+                <div style="color:var(--text-dim); font-size:13px; line-height:1.6; padding-top:10px; border-top:1px solid rgba(255,255,255,0.05);">
+                    ${d.detailedLogic || "Deep structural analysis pending for this component."}
+                </div>
+            `;
             
             // Highlight connections
             link.transition().duration(300)
