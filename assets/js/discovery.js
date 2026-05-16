@@ -124,4 +124,5 @@ async function loadTableData(dataFile, targetElementId, filterType = null) {
 document.addEventListener('DOMContentLoaded', () => {
     injectSidebar();
     injectModal();
+    if (typeof feather !== 'undefined') feather.replace();
 });
