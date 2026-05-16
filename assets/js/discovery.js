@@ -17,7 +17,9 @@ function injectSidebar() {
     sidebar.className = 'sidebar';
     
     let menuHtml = `
-        <a href="index.html" style="text-decoration: none;"><h2>AVRY</h2></a>
+        <div class="sidebar-header">
+            <a href="index.html" style="text-decoration: none;"><h2>AVRY</h2></a>
+        </div>
         <nav class="nav-menu">
     `;
     
@@ -30,7 +32,9 @@ function injectSidebar() {
         `;
     });
     
-    menuHtml += `</nav>`;
+    menuHtml += `</nav>
+        <div class="sidebar-footer" id="sidebar-footer" style="display:none;"></div>
+    `;
     sidebar.innerHTML = menuHtml;
     
     const container = document.getElementById('app-container');

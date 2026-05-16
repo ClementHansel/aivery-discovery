@@ -139,6 +139,20 @@
                 const resp = await fetch('data/graph.json');
                 graphData = await resp.json();
                 
+                // Move legend to sidebar footer
+                const footer = document.getElementById('sidebar-footer');
+                const legend = document.getElementById('spectrum-legend');
+                if (footer && legend) {
+                    footer.appendChild(legend);
+                    footer.style.display = 'block';
+                    legend.style.position = 'static';
+                    legend.style.background = 'transparent';
+                    legend.style.border = 'none';
+                    legend.style.padding = '0';
+                    legend.style.boxShadow = 'none';
+                    legend.style.backdropFilter = 'none';
+                }
+
                 // Allow UI to render the overlay before heavy processing
                 setTimeout(() => {
                     renderVisual();
