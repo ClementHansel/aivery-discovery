@@ -190,30 +190,18 @@
             const showConnections = true; // Always show connections for context
             
             let visibleNodes, visibleLinks;
-            if (showConnections && activeLens !== 'File') {
-                visibleNodes = graphData.nodes.filter(n => primaryIds.has(n.id) || graphData.links.some(l => {
-                    const s = l.source.id || l.source;
-                    const t = l.target.id || l.target;
-                    return (s === n.id && primaryIds.has(t)) || (t === n.id && primaryIds.has(s));
-                }));
-                const visibleIds = new Set(visibleNodes.map(n => n.id));
-                visibleLinks = graphData.links.filter(l => {
-                    const s = l.source.id || l.source;
-                    const t = l.target.id || l.target;
-                    return visibleIds.has(s) && visibleIds.has(t);
-                });
-            } else if (activeLens === 'File') {
-                // For files, show all files but only their direct connections
-                visibleNodes = filteredNodes;
-                visibleLinks = graphData.links.filter(l => {
-                    const s = l.source.id || l.source;
-                    const t = l.target.id || l.target;
-                    return primaryIds.has(s) && primaryIds.has(t);
-                });
-            } else {
-                visibleNodes = filteredNodes;
-                visibleLinks = [];
-            }
+            // For all lenses, show the primary nodes plus their direct neighbors for context
+            visibleNodes = graphData.nodes.filter(n => primaryIds.has(n.id) || graphData.links.some(l => {
+                const s = l.source.id || l.source;
+                const t = l.target.id || l.target;
+                return (s === n.id && primaryIds.has(t)) || (t === n.id && primaryIds.has(s));
+            }));
+            const visibleIds = new Set(visibleNodes.map(n => n.id));
+            visibleLinks = graphData.links.filter(l => {
+                const s = l.source.id || l.source;
+                const t = l.target.id || l.target;
+                return visibleIds.has(s) && visibleIds.has(t);
+            });
 
             // Optimize simulation
             simulation = d3.forceSimulation(visibleNodes)
@@ -239,7 +227,7 @@
                     if (cat === 'Feature') return '#ef5777'; // Pink
                     
                     if (d.layer === 'FE' || labelStr.includes('.tsx') || labelStr.includes('.html') || labelStr.includes('.css')) return '#61dafb'; // Cyan
-                    if (d.layer === 'BE' || labelStr.includes('.py') || labelStr.includes('.sh') || labelStr.includes('.js')) return '#3c873a'; // Green-ish
+                    if (d.layer === 'BE' || labelStr.includes('.py') || labelStr.includes('.sh') || labelStr.includes('.js') || labelStr.includes('.ts')) return '#3c873a'; // Green-ish
                     return '#555';
                 })
                 .style("opacity", d => primaryIds.has(d.id) ? 1 : 0.3)
